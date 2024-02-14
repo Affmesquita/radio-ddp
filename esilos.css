@@ -33,7 +33,7 @@ header {
     background-size: cover;
 }
 
-header nav {
+#header-nav {
     width: 100%;
     height: 100px;
 
@@ -45,17 +45,19 @@ header nav {
     align-items: center;
 }
 
-header h1 {
+#header-logo {
     font-family: droid;
     font-size: 4rem;
 
     text-shadow: 2px 2px 1px white;
 }
 
-header ul{
+#header-list{
     display: flex;
 }
 
-header img {
+#header-list img {
     width: 50px;
+
+    margin: 20px;
 }
