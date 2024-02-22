@@ -27,8 +27,9 @@ header {
     display: flex;
     flex-direction: row;
 
-    background-image: url(image/microphone-4272177_1280.jpg);
-    background-position: center;
+    background-color: black;
+    /*background-image: url(image/baclground-black-2.jpg);*/
+    background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -50,6 +51,9 @@ header {
     font-size: 4rem;
 
     text-shadow: 2px 2px 1px white;
+}
+#header-logo img {
+    width: 250px;
 }
 
 #header-list{
