@@ -12,26 +12,41 @@
     font-family: droid;
     src: url(fonts/droid.otf);
 }
+@font-face {
+    font-family: TT-Bold;
+    src: url(fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
+}
+@font-face {
+    font-family: TT-Medium;
+    src: url(fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
+}
 
 
 body {
     width: 100%;
     height: 100%;
+
+    background-color: #0D0D0D;
+    background-image: url(image/background-black-3.jpg);
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 
 header {
     width: 100%;
-    height: 650px;
+    height: 610px;
 
     display: flex;
     flex-direction: row;
 
     background-color: black;
-    /*background-image: url(image/baclground-black-2.jpg);*/
+    background-image: url(image/pexels-neosiam-+-595229.jpg);
     background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
+
+    border-bottom: 2px solid brown;
 }
 
 #header-nav {
@@ -46,22 +61,98 @@ header {
     align-items: center;
 }
 
-#header-logo {
-    font-family: droid;
-    font-size: 4rem;
-
-    text-shadow: 2px 2px 1px white;
-}
 #header-logo img {
     width: 250px;
+    cursor: pointer;
 }
 
 #header-list{
     display: flex;
 }
 
-#header-list img {
-    width: 50px;
+#header-list li {
+    margin: 0px 20px;
 
-    margin: 20px;
+    color: white;
+    font-family: TT-Bold;
+
+    cursor: pointer;
+
+    transition: 0.5s;
+}
+#header-list li:hover {
+    color: brown;
+}
+
+
+/*//////////////////////////////////*/
+
+main {
+    width: 100%;
+    height: 1000px;
+
+    padding: 100px;
+}
+
+/*/////////////////////////////////*/
+
+
+.subtitle-conteiner{
+    margin: 80px 80px;
+
+}
+.subtitle {
+    color: white;
+
+    font-family: TT-Medium;
+    text-shadow: 1px 1px 1px black;
+}
+hr {
+    width: 250px;
+}
+
+/*/////////////////////////////////*/
+
+.ep-card {
+    width: 700px;
+    height: 500px;
+
+    display: flex;
+    justify-content: space-between;
+
+    margin: auto;
+    margin-bottom: 30px;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    background-color: #0d0d0daf;
+}
+.img-ep-card {
+    width: 300px;
+    height: 450px;
+    border-radius: 10px;
+
+    overflow: hidden;
+    object-fit: cover;
+}
+.ep-descr {
+    width: 300px;
+
+    margin: 50px 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    color: white;
+    font-family: TT-Medium;
+}
+.ep-descr h1 {
+    font-size: 3rem;
+    cursor: pointer;
+}
+.ep-descr p {
+    font-size: 1rem;
 }
