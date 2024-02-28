@@ -83,6 +83,11 @@ header {
 #header-list li:hover {
     color: brown;
 }
+#btn-hamburger {
+    display: none;
+    width: 40px;
+    cursor: pointer;
+}
 
 
 /*//////////////////////////////////*/

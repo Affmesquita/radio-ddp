@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+* {
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1000px) {
+
+    #header-list {
+        display: none;
+        overflow: hidden;
+    }
+
+    #header-list.active {
+        display: block;
+
+        position: absolute;
+
+        margin: auto;
+
+        top: 90px;
+        left: 600px;
+
+        z-index: 1000;
+        
+        transition: 0.6s;
+    }
+    
+    #btn-hamburger {
+        display: block;
+    }
+}
+
+
+@media (max-width: 979px) {
+
+    footer {
+        padding: 90px 70px;
+        height: 300px;
+    }
+}
