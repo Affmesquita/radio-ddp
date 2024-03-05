@@ -1,0 +1,26 @@
+E:\Program Files\Python312
+
+E:\Program Files\Python312
+
+npm install radio-station
+
+npm install --python="C:\Users\Affonso\AppData\Local\Programs\Python\Python312\python.exe" radio-station
+
+C:\Users\Affonso\AppData\Local\Programs\Python\Python312\python.exe
+
+
+
+
+
+
+Parece que há um problema relacionado à reconstrução de dependências que requerem Visual Studio durante a instalação do pacote  radio-station . Aqui estão algumas sugestões para resolver esse problema: 
+ 
+1. **Instalar o Visual Studio**: O erro indica que o Node.js não consegue encontrar uma instalação válida do Visual Studio. Você pode instalar o Visual Studio com a carga de trabalho "Desenvolvimento para Desktop com C++". Certifique-se de ter a versão mais recente do Visual Studio instalada. 
+ 
+2. **Configurar o Visual Studio**: Após instalar o Visual Studio, certifique-se de que as variáveis de ambiente necessárias, como  VCINSTALLDIR , estejam configuradas corretamente. O Node.js e o  node-gyp  dependem dessas variáveis para reconstruir módulos nativos. 
+ 
+3. **Executar o npm com permissões elevadas**: Em ambientes Windows, às vezes é necessário executar o prompt de comando ou o PowerShell com permissões de administrador para instalar pacotes que exigem reconstrução de módulos nativos. 
+ 
+4. **Verificar a versão do Node.js**: Certifique-se de estar usando uma versão do Node.js compatível com as dependências do pacote  radio-station . 
+ 
+Após tentar essas soluções, execute novamente o comando  npm install  para instalar o pacote  radio-station . Se o problema persistir, verifique o arquivo de log indicado para obter mais detalhes sobre o erro específico encontrado durante a instalação. Estou à disposição para ajudar se precisar de mais orientações.

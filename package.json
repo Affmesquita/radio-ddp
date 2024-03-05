@@ -1,0 +1,24 @@
+{
+  "name": "ddp-fm",
+  "version": "1.0.0",
+  "description": "radio",
+  "main": "index.js",
+  "dependencies": {
+    "ffmpeg-static": "^4.4.1",
+    "puppeteer": "^13.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Affmesquita/ddp-fm.git"
+  },
+  "author": "Affonso Mesquita",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Affmesquita/ddp-fm/issues"
+  },
+  "homepage": "https://github.com/Affmesquita/ddp-fm#readme"
+}
