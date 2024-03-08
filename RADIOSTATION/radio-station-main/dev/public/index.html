@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <link rel="icon" type="image/svg" href="/favicon.svg"/>
+  <script src='/socket.io.js'></script>
+  <title>Radio Station</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="promo">
+    <div class="container">
+      <div class="logo">
+        <img src="default-picture.png" id="picture" alt="logo">
+      </div>
+      <div class="info">
+        <div class="title">
+          <div class="title_num">Title:</div>
+          <div class="descr" id="title">Loading...</div>
+        </div>
+        <div class="artist">
+          <div class="title_num">Artist:</div>
+          <div class="descr" id="artist">Loading...</div>
+        </div>
+        <div class="album">
+          <div class="title_num">Album:</div>
+          <div class="descr" id="album">Loading...</div>
+        </div>
+     </div>
+     <div class="btn">
+       <button id='control'></button>
+     </div>
+     <audio hidden controls disableRemotePlayback='true' x-webkit-airplay='allow' preload='none'>
+       <source src='/radio' type='audio/webm'></source>
+     </audio>
+   </div>
+  </section>
+  <footer>
+   <div class="footer">
+    Imposer: <a href="https://github.com/DarkKingston" target="_blank">@darkkingston</a>
+   </div>
+  </footer>
+  <script>
+    const socket = io()
+
+    const picture = document.querySelector('#picture')
+        , title = document.querySelector('#title')
+        , artist = document.querySelector('#artist')
+        , album = document.querySelector('#album')
+        , control = document.querySelector('#control')
+        , audio = document.querySelector('audio')
+
+    control.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play()
+        control.style.backgroundImage = `url('pause.svg')`
+      } else {
+        audio.pause()
+        control.style.backgroundImage = `url('play.svg')`
+      }
+    })
+
+    picture.addEventListener('error', () => {
+      picture.src = '/default-picture.png'
+    })
+
+    socket.on('connect', () => {
+      socket.on('onUse', async current => {
+        console.log('--> current', current)
+        title.innerText = current.name
+
+        picture.src = `/picture?id=${current.id}`
+
+        const fullCurrent = await fetch(`/info?id=${current.id}`).then(d => d.json())
+        console.log('--> fullCurrent', fullCurrent)
+
+        if (!fullCurrent.common) {
+          title.innerText = 'Not'
+          artist.innerText = 'Not'
+          album.innerText = 'Not'
+          return
+        }
+
+        title.innerText = fullCurrent.common.title || 'Not'
+        artist.innerText = fullCurrent.common.artist || 'Not'
+        album.innerText = fullCurrent.common.album || 'Not'
+      })
+    })
+  </script>
+</body>
+</html>
