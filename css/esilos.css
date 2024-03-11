@@ -10,15 +10,15 @@
 
 @font-face {
     font-family: droid;
-    src: url(fonts/droid.otf);
+    src: url(/fonts/droid.otf);
 }
 @font-face {
     font-family: TT-Bold;
-    src: url(fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
 }
 @font-face {
     font-family: TT-Medium;
-    src: url(fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
 }
 
 
@@ -27,7 +27,7 @@ body {
     height: 100%;
 
     background-color: #0D0D0D;
-    background-image: url(image/background-black-3.jpg);
+    background-image: url(/image/background-black-3.jpg);
     background-attachment: fixed;
     background-size: cover;
 }
@@ -41,7 +41,7 @@ header {
     flex-direction: row;
 
     background-color: black;
-    background-image: url(image/pexels-neosiam-+-595229.jpg);
+    background-image: url(/image/header-1.jpg);
     background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
