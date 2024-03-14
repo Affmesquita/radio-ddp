@@ -10,187 +10,29 @@ C:\Users\Affonso\AppData\Local\Programs\Python\Python312\python.exe
 
 
 
+pesquisar sobre atributos como
+
+  patchWorkDir (diretório de trabalho),
+
+  isLauncher (ativação do lançador), 
+
+  port (porta do sistema), 
+  
+  login (login para autorização no lançador), 
+
+  password (senha para autorização no lançador), 
+
+  isAutoStart (início automático), 
+
+  puppeteerLauncher (objeto do lançador puppeteer), 
+
+  debug (modo de depuração) 
+
+  e mainPort (porta principal)
 
 
+PLAYER
 
-Parece que há um problema relacionado à reconstrução de dependências que requerem Visual Studio durante a instalação do pacote  radio-station . Aqui estão algumas sugestões para resolver esse problema: 
+No contexto de um projeto de estação de rádio web utilizando a biblioteca RadioStation, o elemento responsável pelo player de áudio geralmente é a tag  <audio>  do HTML5. A tag  <audio>  é usada para incorporar arquivos de áudio em uma página web e oferece controles básicos de reprodução, como play, pause e volume. 
  
-1. **Instalar o Visual Studio**: O erro indica que o Node.js não consegue encontrar uma instalação válida do Visual Studio. Você pode instalar o Visual Studio com a carga de trabalho "Desenvolvimento para Desktop com C++". Certifique-se de ter a versão mais recente do Visual Studio instalada. 
- 
-2. **Configurar o Visual Studio**: Após instalar o Visual Studio, certifique-se de que as variáveis de ambiente necessárias, como  VCINSTALLDIR , estejam configuradas corretamente. O Node.js e o  node-gyp  dependem dessas variáveis para reconstruir módulos nativos. 
- 
-3. **Executar o npm com permissões elevadas**: Em ambientes Windows, às vezes é necessário executar o prompt de comando ou o PowerShell com permissões de administrador para instalar pacotes que exigem reconstrução de módulos nativos. 
- 
-4. **Verificar a versão do Node.js**: Certifique-se de estar usando uma versão do Node.js compatível com as dependências do pacote  radio-station . 
- 
-Após tentar essas soluções, execute novamente o comando  npm install  para instalar o pacote  radio-station . Se o problema persistir, verifique o arquivo de log indicado para obter mais detalhes sobre o erro específico encontrado durante a instalação. Estou à disposição para ajudar se precisar de mais orientações.
-
-
-
-
-LAUNCH PT-BR
-
-
-![logo](https://github.com/prohetamine/radio-launcher/blob/main/media/logo.png) 
-##### O README está disponível nos seguintes idiomas: [Russo](https://github.com/prohetamine/radio-launcher/blob/main/README/russian.md) | [Inglês](https://github.com/prohetamine/radio-launcher/blob/main/README.md) 
-# Radio Launcher 
-> radio-launcher - cliente de estação de rádio. 
-### Por quê? 
-Decidi que queria ser um apresentador de rádio, mas não tinha vontade específica de entender o software existente e criei meu próprio software, talvez um dia ele se torne um padrão, tentei alcançar um resultado melhor. 
-### Começando 
-Clone o repositório do GitHub e instale o nodejs.
-sh
-$ git clone https://github.com/prohetamine/radio-launcher.git
-$ cd radio-launcher
-$ npm install -g yarn
-$ yarn
-### Exemplos e descrição 
-Para iniciar o launcher, use o comando.
-sh
-$ yarn start
-O launcher está firmemente conectado com [radio-station](https://github.com/prohetamine/radio-station) e não pode funcionar sem ele, faça login usando os dados fornecidos pelo [radio-station](https://github.com/prohetamine/radio-station). 
-![auth](https://github.com/prohetamine/radio-launcher/blob/main/media/0.png) 
-Os detalhes de login podem ser alterados, leia a documentação do [radio-station](https://github.com/prohetamine/radio-station). 
-![auth](https://github.com/prohetamine/radio-launcher/blob/main/media/1.png) 
-Este é o menu principal e único, mas até agora não há faixas e a transmissão não começará. 
-![menu](https://github.com/prohetamine/radio-launcher/blob/main/media/2.png) 
-Estamos no ar, arrastando faixas das seções "Tracks" e "Favorites" para o ar formando uma ordem de fila. 
-![menu](https://github.com/prohetamine/radio-launcher/blob/main/media/3.png) 
-Você pode alterar a aparência [YouTube](https://youtu.be/VpjbWQkOE6Y). 
-Execute no modo de desenvolvimento, todos os métodos da API também podem ser encontrados na documentação do [radio-station](https://github.com/prohetamine/radio-station).
-sh
-$ yarn dev
-Compilar um projeto é necessário apenas se você sair do modo de desenvolvedor.
-sh
-$ yarn build
-### Contatos 
-Meu Telegram: [@prohetamine](https://t.me/prohetamine), [canal](https://t.me/prohetamines) 
-Email: prohetamine@gmail.com 
-Doe dinheiro: [patreon](https://www.patreon.com/prohetamine) 
-Se você tiver alguma pergunta e/ou sugestão, por favor, me envie um e-mail no telegram, se encontrar algum bug também me avise, ficarei muito grato.
-
-
-
-
-RADIO station
-
-
-Estação de Rádio 
-radio-station - uma maneira fácil de implantar sua estação de rádio e se tornar um apresentador de rádio online em JavaScript. 
-Por quê? 
-Decidi que queria ser um apresentador de rádio, mas não tinha vontade específica de entender o software existente, então criei meu próprio software. Talvez um dia ele se torne um padrão, tentei alcançar um resultado melhor. 
-Começando 
-Instale o módulo npm radio-station
-sh
-$ npm install radio-station
-ou
-sh
-$ yarn add radio-station
-ou
-sh
-$ npm install https://github.com/prohetamine/radio-station
-Exemplos e descrição 
-Conectando o módulo
-javascript
-const RadioStation = require('radio-station')
-Recomendo que você veja os exemplos de trabalho antes de tentar usar o módulo por conta própria. Exemplos de como iniciar sua estação de rádio sem um launcher e com um launcher podem ser encontrados nos meus repositórios do GitHub node-web-radio e launcher-web-radio. Observe que forneço opções muito mais simples na forma de contêineres Docker, que são muito fáceis de executar e usar, docker-node-web-radio e launcher-web-radio. Você deve usar arquivos mp3 porque eles contêm os metadados necessários para exibição correta, preste atenção nisso. 
- 
-RadioStation 
-O Objeto RadioStation tem apenas um método para criar, que é um construtor e retorna objetos: track, stream e funções: addListener, picture, info, onUse. 
- 
-object 
-chave 
-valor 
-valor padrão 
-obrigatório 
-informação 
-patchWorkDir 
-texto 
-./station 
-não 
-pasta de trabalho com as faixas e outros registros do sistema 
-isLauncher 
-booleano 
-true 
-não 
-ativação do launcher 
-porta 
-número 
-9933 
-não 
-a porta interna do sistema também é usada para se conectar ao launcher 
-login 
-texto 
-/* aleatório */ 
-nenhum 
-usado para autorização no launcher 
-senha 
-texto 
-/* aleatório */ 
-nenhum 
-usado para autorização no launcher 
-isAutoStart 
-booleano 
-false 
-nenhum 
-responsável pelo início automático 
-puppeteerLauncher 
-objeto 
-{ headless: true, args: ['--no-sandbox'] } 
-não 
-objeto de lançamento do puppeteer 
-depurar 
-booleano 
-true 
-nenhum 
-ativa o modo de depuração 
-mainPort 
-número 
-falso 
-não 
-exibe a porta principal no console
-javascript
-const { create } = require('radio-station')
-;(async () => {
-  const radio = await create({
-    pathWorkDir: `${__dirname}/pasta-de-dados-de-faixas`,
-    isLauncher: true,
-    porta: 9933,
-    login: 'localhost',
-    senha: 'hackme',
-  })
-  console.log(radio)
-  /*
-    {
-      track: {
-        load: [FunçãoAssíncrona: load],
-        loads: [FunçãoAssíncrona: loads],
-        unload: [FunçãoAssíncrona: unload],
-        all: [Função: all],
-        find: [Função: find],
-        info: [FunçãoAssíncrona: info],
-        picture: [FunçãoAssíncrona: picture],
-        onLoad: [Função (anônima)],
-        onUnload: [Função (anônima)]
-      },
-      stream: {
-        start: [Função: start],
-        pop: [Função: pop],
-        push: [FunçãoAssíncrona: push],
-        current: [Função: current],
-        all: [Função: all],
-        onStart: [Função (anônima)],
-        onPush: [Função (anônima)],
-        onPop: [Função (anônima)],
-        onUse: [Função (anônima)]
-      },
-      addListener: [Função: addListener],
-      picture: [FunçãoAssíncrona: picture],
-      info: [FunçãoAssíncrona: info],
-      onUse: [FunçãoAssíncrona: onUse],
-    }
-  */
-})()
-Esse é um exemplo de funcionamento completo do node-web-radio. 
- 
-Espero que essas informações sejam úteis. Se precisar de mais alguma coisa, estou à disposição.
+Ao integrar a RadioStation em sua página web, você pode usar a tag  <audio>  para reproduzir as faixas de áudio carregadas pela biblioteca, controlando a reprodução por meio de eventos e métodos fornecidos pela RadioStation. Certifique-se de configurar corretamente a tag  <audio>  para carregar e reproduzir as faixas de áudio da estação de rádio em seu projeto.
