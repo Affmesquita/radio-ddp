@@ -94,3 +94,7 @@ Para iniciar um projeto de estação de rádio online utilizando o código que v
    - Utilize o Socket.IO no frontend, se necessário, para interações em tempo real com o servidor. 
  
 Esses são os passos iniciais para começar a construir seu projeto de estação de rádio online com base no código fornecido. À medida que avançar no desenvolvimento, você poderá adicionar mais funcionalidades, personalizações e melhorias conforme necessário. Se precisar de mais orientações ou tiver dúvidas específicas ao longo do processo, estou aqui para ajudar.
+
+
+
+Olá, programador(a)! Não há problema em ter duas pastas "src" em seu projeto, desde que elas estejam em caminhos diferentes. Certifique-se de que as pastas estejam em locais distintos para evitar conflitos e confusões. Se você precisar acessar arquivos específicos de uma das pastas "src", lembre-se de especificar o caminho correto ao referenciá-los.
