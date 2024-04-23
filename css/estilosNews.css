@@ -1,0 +1,176 @@
+@charset "UTF-8";
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+
+@font-face {
+    font-family: TT-Bold;
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
+}
+@font-face {
+    font-family: TT-Medium;
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
+}
+
+
+header {
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    flex-direction: row;
+
+    background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    border-bottom: 2px solid brown;
+}
+
+#header-nav {
+    width: 100%;
+    height: 100px;
+
+    padding: 0px 100px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header-logo img {
+    width: 250px;
+    cursor: pointer;
+}
+
+#header-list{
+    display: flex;
+}
+
+#header-list li {
+    margin: 0px 20px;
+
+    color: white;
+    font-family: TT-Bold;
+
+    cursor: pointer;
+
+    transition: 0.5s;
+}
+#header-list li:hover {
+    color: brown;
+}
+#btn-hamburger {
+    display: none;
+    width: 40px;
+    cursor: pointer;
+}
+
+
+
+/*//////////////////////////////////////////////////////////*/
+
+
+
+main {
+    width: 100%;
+    height: 1500px;
+
+    background-color: #141414;
+
+    padding: 60px 200px;
+
+}
+
+#news-container {
+    width: 100%;
+    height: 100%;
+
+    background-color: grey;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+
+
+
+.news-first {
+    width: 70%;
+    height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: TT-Medium;
+    text-align: center;
+
+    background-color: red;
+}
+.news-first img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+
+
+
+
+.news-card-container {
+    width: 100%;
+    height: 800px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: aquamarine;
+}
+
+.news-card {
+    width: 70%;
+    height: 200px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-family: TT-Medium;
+
+    background-color: chartreuse;
+
+    margin-bottom: 10px;
+}
+
+.news-card img {
+    width: 250px;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.news-text {
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.news-text h2 {
+    color: white;
+}
+.description-card {
+    color: grey;
+}
