@@ -41,6 +41,10 @@
     #btn-hamburger {
         display: block;
     }
+
+    #card-4 {
+        display: none;
+    }
 }
 
 
