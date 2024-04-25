@@ -8,6 +8,9 @@
     text-decoration: none;
 }
 
+:root {
+    --black: #090B0D;
+}
 
 @font-face {
     font-family: TT-Bold;
@@ -31,7 +34,6 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
 
-    border-bottom: 2px solid brown;
 }
 
 #header-nav {
@@ -73,6 +75,9 @@ header {
     width: 40px;
     cursor: pointer;
 }
+a {
+    color: white;
+}
 
 
 
@@ -82,9 +87,9 @@ header {
 
 main {
     width: 100%;
-    height: 1500px;
+    height: 1800px;
 
-    background-color: #141414;
+    background-color: #090B0D;
 
     padding: 60px 200px;
 
@@ -94,11 +99,9 @@ main {
     width: 100%;
     height: 100%;
 
-    background-color: grey;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
 }
 
@@ -111,18 +114,32 @@ main {
     height: 600px;
 
     display: flex;
-    flex-direction: column;
     align-items: center;
 
     font-family: TT-Medium;
-    text-align: center;
+    text-align: justify;
 
-    background-color: red;
+    color: white;
+
+    margin-bottom: 100px;
+
+    border-bottom: 1px solid darkred;
+}
+.news-first-txt {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 20px;
+}
+.news-first h2 {
+    color: darkred;
 }
 .news-first img {
-    width: 100%;
+    width: 300px;
     height: 400px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 
@@ -137,7 +154,6 @@ main {
     flex-direction: column;
     align-items: center;
 
-    background-color: aquamarine;
 }
 
 .news-card {
@@ -148,8 +164,7 @@ main {
     justify-content: space-between;
 
     font-family: TT-Medium;
-
-    background-color: chartreuse;
+    text-align: justify;
 
     margin-bottom: 10px;
 }
@@ -168,9 +183,59 @@ main {
     flex-direction: column;
     justify-content: space-around;
 }
-.news-text h2 {
+.news-text h1 {
+    font-size: 1.5rem;
+    color: darkred;
+}
+.news-text p {
     color: white;
 }
 .description-card {
     color: grey;
+}
+
+
+
+/*////////////////////////////////////////////////////////*/
+
+
+
+footer {
+    width: 100%;
+    height: 350px;
+
+    display: flex;
+    justify-content: space-between;
+
+    background-color: rgb(22, 22, 22);
+
+    padding: 100px 230px;
+
+    color: brown;
+}
+
+footer img {
+    width: 190px;
+}
+
+.footer-1 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.footer-2 {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+}
+.footer-2 h1 {
+    font-size: 1.5rem;
+    font-family: TT-Bold;
+}
+.footer-2 h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    font-size: 1rem;
+
+    margin-top: 20px;
 }

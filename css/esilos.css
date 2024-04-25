@@ -8,6 +8,10 @@
     text-decoration: none;
 }
 
+:root {
+    --black: #090B0D;
+}
+
 @font-face {
     font-family: droid;
     src: url(/fonts/droid.otf);
@@ -26,7 +30,7 @@ body {
     width: 100%;
     height: 100%;
 
-    background-color: #141414;
+    background-color: #090B0D;
     background-attachment: fixed;
     background-size: cover;
 }
@@ -86,6 +90,9 @@ header {
     display: none;
     width: 40px;
     cursor: pointer;
+}
+a {
+    color: white;
 }
 
 
