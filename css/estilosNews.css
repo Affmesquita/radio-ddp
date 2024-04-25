@@ -20,6 +20,10 @@
     font-family: TT-Medium;
     src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
 }
+@font-face {
+    font-family: ArchivoBlack;
+    src: url(/fonts/ArchivoBlack-Regular.ttf);
+}
 
 
 header {
@@ -133,6 +137,9 @@ main {
     padding: 20px;
 }
 .news-first h2 {
+    font-family: ArchivoBlack;
+    text-align: left;
+    font-size: 3.5rem;
     color: darkred;
 }
 .news-first img {
