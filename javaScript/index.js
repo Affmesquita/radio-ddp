@@ -1,4 +1,4 @@
-const btnMenu = document.getElementById('btn-hamburger')
+const btnMenu = document.getElementById("btn-hamburger")
 
 function toggleMenu() {
     const nav = document.getElementById('header-list')

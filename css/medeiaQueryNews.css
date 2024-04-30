@@ -8,3 +8,39 @@
     box-sizing: border-box;
 }
 
+@media (max-width: 1000px) {
+
+    #header-list {
+        width: 750px;
+
+        position: absolute;
+        background-color: black;
+
+        margin-top: 310px;
+
+        z-index: 1000;
+
+        display: none;
+        overflow: hidden;
+    }
+
+    #header-list.active {
+        display: block;
+        z-index: 1000;
+        
+        transition: 0.6s;
+    }
+
+    #header-list.active li {
+        width: 90%;
+
+        font-size: 3rem;
+        margin: 0px;
+        text-shadow: 2px 1px 1px black;
+    }
+    
+    #btn-hamburger {
+        display: block;
+    }
+
+}

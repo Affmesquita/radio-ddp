@@ -93,8 +93,11 @@ header {
 }
 a {
     color: white;
+    transition: 0.5s;
 }
-
+a:hover {
+    color: brown;
+}
 
 /*//////////////////////////////////*/
 
