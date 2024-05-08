@@ -47,11 +47,29 @@
 @media (max-width: 1130px) {
 
     .news-card {
+        width: 70%;
         background-color: black;
         border-radius: 8px;
     }
     .news-card img {
         display: none;
+
+    }
+    .news-text {
+        width: 90%;
+    }
+
+}
+
+@media (max-width: 1017px) {
+
+    main {
+        padding: 59px;
+    }
+    .news-card {
+        width: 70%;
+    }
+    .news-first {
 
     }
 
@@ -93,4 +111,10 @@
     }
 
 
+}
+
+@media (max-width: 666px) {
+    main {
+        padding: 0px;
+    }
 }
