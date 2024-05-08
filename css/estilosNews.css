@@ -128,9 +128,13 @@ main {
     text-align: justify;
 
     color: white;
+    background-color: black;
+
+    padding: 10px;
 
     margin-bottom: 100px;
 
+    border-radius: 10px;
     border-bottom: 1px solid darkred;
 }
 .news-first-txt {
@@ -144,11 +148,15 @@ main {
     font-family: ArchivoBlack;
     text-align: left;
     font-size: 3.5rem;
-    color: darkred;
+    color: white;
 }
 .news-first img {
-    width: 300px;
+    width: 350px;
     height: 400px;
+
+    position: relative;
+    left: 30px;
+
     object-fit: cover;
     cursor: pointer;
 }
@@ -164,7 +172,6 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .news-card {
@@ -183,12 +190,15 @@ main {
 .news-card img {
     width: 250px;
     height: 100%;
+
     object-fit: cover;
     cursor: pointer;
 }
 
 .news-text {
-    width: 400px;
+    width: 80%;
+
+    padding: 10px;
 
     display: flex;
     flex-direction: column;
@@ -196,13 +206,10 @@ main {
 }
 .news-text h1 {
     font-size: 1.5rem;
-    color: darkred;
-}
-.news-text p {
     color: white;
 }
-.description-card {
-    color: grey;
+.news-text p {
+    color: gray;
 }
 
 
