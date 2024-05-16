@@ -60,6 +60,10 @@
 
 
 @media (max-width: 870px) {
+
+    main {
+        height: 2150px;
+    }
     
     .ep-card{
         width: 80%;

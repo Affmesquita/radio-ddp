@@ -73,6 +73,17 @@
 
     }
 
+    footer {
+        height: 650px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        text-align: center;
+    }
+
 }
 
 @media (max-width: 1000px) {
@@ -117,4 +128,24 @@
     main {
         padding: 0px;
     }
+}
+
+@media (max-width: 500px) {
+
+    header {
+
+        display: flex;
+        justify-content: space-between;
+
+        padding: 0px;
+        margin: 0px;
+    }
+    #header-nav {
+        padding: 0px 5px;
+    }
+
+    main {
+        width: 100%;
+    }
+
 }
