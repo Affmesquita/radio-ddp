@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+:root {
+    --black: #090B0D;
+}
+
+@font-face {
+    font-family: TT-Bold;
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
+}
+@font-face {
+    font-family: TT-Medium;
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
+}
+@font-face {
+    font-family: ArchivoBlack;
+    src: url(/fonts/ArchivoBlack-Regular.ttf);
+}
+
+
+header {
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    flex-direction: row;
+
+    background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+body {
+    background-image: url(/image/background-camp-2.jpg);
+    background-position: center;
+}
+
+main {
+    width: 100%;
+    height: 900px;
+
+    padding: 50px 250px;
+
+    font-size: 75%;
+    font-family: TT-Medium;
+    color: white;
+    background-color: #000000dc;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+main h1, h2 {
+    font-size: 1.3rem;
+    font-family: ArchivoBlack;
+    color: brown;
+}
+
+@media (max-width: 1000px) {
+    main {
+        padding: 50px 100px;
+    }
+}
+
+@media (max-width: 550px) {
+    main {
+        padding: 50px 20px;
+    }
+}
+
+
+

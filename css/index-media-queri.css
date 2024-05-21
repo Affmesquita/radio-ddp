@@ -8,13 +8,6 @@
     box-sizing: border-box;
 }
 
-@media (max-width: 1282px) {
-    
-    footer {
-        padding: 100px 50px;
-    }
-
-}
 
 @media (max-width: 1017px) {
 
@@ -78,12 +71,16 @@
         height: 300px;
         margin: 2px;
         border: 1px solid white;
+        background-image: url(/image/background-camp.jpg);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.5s;
     }
-    .plusnews img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        cursor: pointer;
+    .plusnews:hover {
+        transform: scale(1.1);
+        color: brown;
     }
 
     #card-2 {
@@ -103,5 +100,42 @@
     }
 
     
+}
+
+
+@media (max-width: 500px) {
+
+    main {
+        height: 1800px;
+    }
+
+    .noticie-conteiner {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #card-1 {
+        display: none;
+    }
+
+    .plusnews {
+        width: 200px;
+        align-self: center;
+        background-image: url(/image/background-camp-2.jpg);
+        background-position: center ;
+        background-size: cover;
+        margin-top: 20px;
+    }
+
+    .subtitle-conteiner {
+        font-size: 70%;
+        margin: auto;
+    }
+
+    .subtitle-conteiner hr {
+        width: 100%;
+    }
+
 }
 
