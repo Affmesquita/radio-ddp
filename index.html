@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/index-media-queri.css">
-    <link rel="stylesheet" href="/css/swiper.css">
+    <link rel="stylesheet" href="/css/slider.css">
     <link rel="stylesheet" href="css/header-nav-style.css">
     <link rel="shortcut icon" href="image/icons/ballfav.png" type="image/x-icon">
     <script src="javaScript/index.js" defer></script>
+    <script src="/javaScript/slider.js" defer></script>
     <title>RADIO DDP</title>
 </head>
 <body>
@@ -23,8 +24,38 @@
             </ul>
             <img src="image/hamburger-menu-icon-png-17.jpg" alt="" id="btn-hamburger">
         </nav>
+
+        <div class="slider-header">
+
+            <div class="slide-conteiner">
+
+                <div class="slider-input">
+
+                    <input type="radio" name="slider-input" id="slide1" class="slider">
+                    <input type="radio" name="slider-input" id="slide2" class="slider">
+
+                </div>
+                <div class="slider-image">
+
+                    <img src="image/card1.jpg" alt="slide 1" class="slider-picture s1" id="img-slide1">
+                    <img src="image/background-black-4.jpg" alt="slide 2" class="slider-picture" id="img-slide2">
+                    
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="navegation">
+
+            <label for="slide1" class="navegation-bar"></label>
+
+            <label for="slide2" class="navegation-bar"></label>
+
+        </div>
         
     </header>
+    
 
     <main>
 

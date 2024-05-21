@@ -41,7 +41,7 @@ header {
     height: 610px;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     background-color: black;
     background-image: url(/image/background-black-2.jpg);
