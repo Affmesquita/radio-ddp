@@ -8,70 +8,56 @@
     text-decoration: none;
 }
 
-
-.slider-header {
-    width: 935px;
-    height: 398px;
-
-    display: flex;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    
-    transform: translate(-50%,-50%);
+@font-face {
+    font-family: droid;
+    src: url(/fonts/droid.otf);
+}
+@font-face {
+    font-family: TT-Bold;
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
+}
+@font-face {
+    font-family: TT-Medium;
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
 }
 
-
-.navegation {
-    display: flex;
-    position: absolute;
-    bottom: 8%;
-    left: 50%;
+.slider-container {
+    padding: 100px 200px;
 }
 
-.navegation-bar {
-    width: 15px;
-    height: 15px;
-    border: 2px solid brown;
-    border-radius: 8px;
-    margin: 6px;
+.img-slide {
+    width: 200px;
+}
+
+.content {
+    width: 900px;
+    height: 700px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 50px ;
+
+    background-color: rgba(0, 255, 255, 0.315);
+
+    color: white;
+}
+
+.content h1 {
+    font-size: 4rem;
+    font-family: TT-Bold;
+    margin-bottom: 30px;
+}
+
+.content p {
+    width: 400px;
+    font-family: TT-Medium;
+    margin-bottom: 20px;
+}
+
+.content button {
+    width: 180px;
+    height: 50px;
     cursor: pointer;
-    transition: .5s ease;
+    
 }
-
-.navegation-bar:hover {
-    background-color: brown;
-}
-
-.slider-input {
-    display: none;
-}
-
-.slider-image {
-    display: flex;
-    width: 200%;
-    height: 100%;
-}
-
-.slide-conteiner {
-    width: 200%;
-    height: 100%;
-    object-fit: cover;
-    transition: .6s;
-}
-
-#img-slide1:checked ~ .s1 {
-    margin-left: 0px;
-}
-#img-slide2:checked ~ .s1 {
-    margin-left: -1000px;
-}
-
-
-
-
