@@ -1,0 +1,16 @@
+const divImagem = document.querySelector('.sua-div');
+
+function verificarTamanhoTela() {
+  if (window.innerWidth >= 1130) {
+    const imagem = divImagem.querySelector('img');
+    divImagem.style.backgroundImage = `url('${imagem.src}')`;
+    imagem.style.display = 'none';
+  } else {
+    divImagem.style.backgroundImage = 'none';
+    divImagem.querySelector('img').style.display = 'block';
+  }
+}
+
+verificarTamanhoTela();
+
+window.addEventListener('resize', verificarTamanhoTela);

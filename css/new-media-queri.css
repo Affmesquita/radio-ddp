@@ -15,7 +15,7 @@
     }
 
     main {
-        height: 1600px;
+        height: 1550px;
     }
 
     .news-first {
@@ -59,7 +59,6 @@
 
     .news-card {
         width: 70%;
-        background-color: black;
         border-radius: 8px;
     }
     .news-card img {

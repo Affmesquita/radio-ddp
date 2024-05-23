@@ -47,9 +47,9 @@ header {
 
 main {
     width: 100%;
-    height: 1750px;
+    height: 1700px;
 
-    background-color: #090B0D;
+    background-color: #090b0d;
 
     padding: 60px 200px;
 
@@ -148,8 +148,9 @@ main {
 
 .news-card img {
     width: 250px;
-    height: 100%;
+    height: 150px;
 
+    overflow: hidden;
     object-fit: cover;
     cursor: pointer;
 }
@@ -163,17 +164,30 @@ main {
     flex-direction: column;
     justify-content: space-around;
 }
+
 .news-text h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: white;
-}
-.news-text p {
-    color: gray;
+    text-shadow: 1px 1px 2px black;
 }
 
 .description-card {
     font-size:80%;
 }
+
+.news-date {
+    color: brown;
+}
+
+.btn-news {
+    width: 100px;
+    height: 80px;
+
+    border-radius: 12px;
+    color: brown;
+    background-color: transparent;
+}
+
 
 
 

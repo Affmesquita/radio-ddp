@@ -131,6 +131,7 @@ main {
     height: 300px;
     flex: 2;
 }
+
 .plusnews{
     display: none;
 }
@@ -191,7 +192,7 @@ footer {
 
     background-color: rgb(22, 22, 22);
 
-    padding: 100px 230px;
+    padding: 100px 100px;
 
     color: brown;
 }
