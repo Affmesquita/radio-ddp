@@ -21,3 +21,50 @@
     src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
 }
 
+.content {
+    display: none;
+}
+.content.active {
+    display: block;
+}
+
+.slider-container { 
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 100px 200px;
+    color: white;
+} 
+
+.slider-container h1 {
+    font-family: TT-Bold;
+    font-size: 4rem;
+    text-shadow: 1px 1px 1px black;
+    margin-bottom: 30px;
+}
+.slider-container p {
+    font-family: TT-Medium;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 1px black;
+    margin-bottom: 50px;
+}
+.slider-container a {
+    padding: 20px 20px;
+    border: 1px solid red;
+}
+
+.header-input {
+    position: absolute;
+
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 83%;
+}
+.header-input input {
+    margin: 5px;
+}

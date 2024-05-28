@@ -77,3 +77,44 @@
     height: 300px;
     flex: 2;
 }
+
+
+
+export function sliderFunction() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const radios = document.querySelectorAll('input[type="radio"]');
+        const divs = document.querySelectorAll('.content');
+        const header = document.querySelector('header');
+        let currentIndex = 0; // Índice atual do slide
+        const intervalTime = 5000; // Tempo em milissegundos (5 segundos)
+
+        function changeSlide() {
+            divs.forEach(div => {
+                div.classList.remove('active');
+            });
+            radios[currentIndex].checked = true;
+            const selectedDiv = document.getElementById('div' + radios[currentIndex].id.replace('radio', ''));
+            selectedDiv.classList.add('active');
+            
+            if (selectedDiv.id === 'div1') {
+                header.style.backgroundImage = "url('image/microfone-1.jpg')";
+            } else if (selectedDiv.id === 'div2') {
+                header.style.backgroundImage = "url('image/background-black-3.jpg')";
+            }
+
+            currentIndex = (currentIndex + 1) % radios.length; // Avança para o próximo slide
+        }
+
+        let slideInterval = setInterval(changeSlide, intervalTime); // Inicia o intervalo de mudança
+
+        // Pausa a mudança de slide quando o mouse estiver sobre o slider
+        divs.forEach(div => {
+            div.addEventListener('mouseover', () => {
+                clearInterval(slideInterval);
+            });
+            div.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(changeSlide, intervalTime);
+            });
+        });
+    });
+}
