@@ -44,8 +44,6 @@ header {
     flex-direction: column;
 
     background-color: black;
-    background-image: url(/image/background-black-2.jpg);
-    background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
 

@@ -118,3 +118,44 @@ export function sliderFunction() {
         });
     });
 }
+
+
+
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQUI
+
+COM MUDANÇA, TEM PAUSA
+
+Para fazer com que a função  sliderFunction()  seja executada assim que o site for carregado, você pode remover o event listener 'change' e chamar a função diretamente dentro do evento 'DOMContentLoaded'. Além disso, para adicionar um tempo de mudança de 10 segundos entre as divs, você pode utilizar o método  setInterval  para alternar automaticamente as divs a cada intervalo de tempo. Aqui está o código modificado:
+javascript
+export function sliderFunction() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const radios = document.querySelectorAll('input[type="radio"]');
+        const divs = document.querySelectorAll('.content');
+        const header = document.querySelector('header');
+        
+        let currentIndex = 0;
+        const intervalTime = 10000; // 10 segundos
+        
+        const changeDiv = () => {
+            divs.forEach(div => {
+                div.classList.remove('active');
+            });
+            divs[currentIndex].classList.add('active');
+            
+            if (divs[currentIndex].id === 'div1') {
+                header.style.backgroundImage = "url('image/microfone-1.jpg')";
+            } else if (divs[currentIndex].id === 'div2') {
+                header.style.backgroundImage = "url('image/slide/IMG_7677.jpg')";
+            }
+            
+            currentIndex = (currentIndex + 1) % divs.length;
+        };
+        
+        // Chamar a função changeDiv inicialmente
+        changeDiv();
+        
+        // Iniciar o intervalo de mudança das divs
+        setInterval(changeDiv, intervalTime);
+    });
+}
