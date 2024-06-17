@@ -170,7 +170,9 @@ main {
     color: white;
     text-shadow: 1px 1px 2px black;
 }
-
+.news-card p {
+    color: white;
+}
 .description-card {
     font-size:80%;
 }
