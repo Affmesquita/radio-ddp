@@ -1,0 +1,45 @@
+#insta-icon {
+    width: 50px;
+    position: fixed;
+    bottom: 7%;
+    left: 92%;
+    cursor: pointer;
+}
+#link-insta {
+    border: none;
+}
+
+
+@media (max-width: 1024px) {
+    #insta-icon {
+        left: 92%;
+    }
+}
+@media (max-width: 1017px) {
+    #insta-icon {
+        left: 85%;
+    }
+}
+@media (max-width: 853px) {
+    #insta-icon {
+        left: 90%;
+    }
+}
+@media (max-width: 540px) {
+    #insta-icon{
+        left: 85%;
+        bottom: 5%;
+    }
+}
+@media (max-width: 500px) {
+    #insta-icon{
+        left: 80%;
+        bottom: 10%;
+    }
+}
+@media (max-width: 360px) {
+    #insta-icon{
+        left: 80%;
+        bottom: 5%;
+    }
+}

@@ -8,6 +8,11 @@
     box-sizing: border-box;
 }
 
+@media (max-width: 1024px) {
+    #insta-icon {
+        left: 92%;
+    }
+}
 
 @media (max-width: 1017px) {
 
@@ -30,8 +35,11 @@
         text-align: center;
     }
 
-}
+    #insta-icon {
+        left: 85%;
+    }
 
+}
 
 
 @media (max-width: 870px) {
@@ -135,6 +143,11 @@
 
     .subtitle-conteiner hr {
         width: 100%;
+    }
+
+    #insta-icon{
+        left: 80%;
+        bottom: 10%;
     }
 
 }
