@@ -15,7 +15,7 @@
 
 @media (max-width: 1024px) {
     #insta-icon {
-        left: 93%;
+        left: 90%;
     }
 }
 @media (max-width: 540px) {
@@ -25,7 +25,8 @@
 }
 @media (max-width: 500px) {
     #insta-icon{
-        bottom: 10%;
+        left: 80%;
+        bottom: 35%;
     }
 }
 @media (max-width: 360px) {

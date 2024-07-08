@@ -38,6 +38,7 @@
 
     color: white;
     font-family: TT-Bold;
+    font-size: 100%;
 
     cursor: pointer;
 
@@ -66,7 +67,12 @@ a:hover {
         z-index: 1000;
     }
 
+    .inactive{
+        display: none;
+    }
+
     #header-list {
+        
         display: none;
         overflow: hidden;
         width: 100vw;
@@ -76,7 +82,7 @@ a:hover {
         top: 0px;
         left: 0px;        
 
-        background-color: rgba(0, 0, 0, 0.747);
+        background-color: rgba(0, 0, 0, 0.836);
 
         z-index: 999;
     }
@@ -87,7 +93,6 @@ a:hover {
     }
 
     #header-list.active {
-        display: block;
 
         padding: 40px 0px;
         display: flex;

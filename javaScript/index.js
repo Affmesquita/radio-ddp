@@ -7,4 +7,4 @@ import { showLinkInsta } from './link-insta.js';
 window.addEventListener('scroll', showLinkInsta);
 sliderFunction();
 handleNewsCardMediaQuery();
-toggleMenu();
+btnMenu.addEventListener('click', toggleMenu)
