@@ -98,3 +98,16 @@ Esses são os passos iniciais para começar a construir seu projeto de estação
 
 
 Olá, programador(a)! Não há problema em ter duas pastas "src" em seu projeto, desde que elas estejam em caminhos diferentes. Certifique-se de que as pastas estejam em locais distintos para evitar conflitos e confusões. Se você precisar acessar arquivos específicos de uma das pastas "src", lembre-se de especificar o caminho correto ao referenciá-los.
+
+
+
+o que é o puppeteerLauncher?
+
+O  puppeteerLauncher  é uma ferramenta que faz parte do Puppeteer, que é uma biblioteca Node.js que fornece uma API de alto nível para controlar o Chrome ou o Chromium por meio do protocolo DevTools. O  puppeteerLauncher  é responsável por iniciar uma instância do navegador para que você possa automatizar interações com páginas da web, como fazer capturas de tela, preencher formulários, clicar em botões, entre outras ações.
+
+
+
+
+o que é o socket.io?
+
+O Socket.IO é uma biblioteca JavaScript que permite a comunicação em tempo real entre clientes e servidores web. Ele fornece uma API simples e poderosa para facilitar a troca de dados bidirecional em tempo real. O Socket.IO suporta vários tipos de transporte, como WebSockets, AJAX long polling, entre outros, garantindo a melhor conexão possível entre clientes e servidores, independentemente das limitações da rede. É frequentemente utilizado em aplicações web que exigem atualizações em tempo real, como salas de bate-papo, jogos online e aplicativos de colaboração em tempo real.
