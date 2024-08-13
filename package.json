@@ -1,24 +1,30 @@
 {
-  "name": "ddp-fm",
+  "name": "radio-ddp",
   "version": "1.0.0",
   "description": "radio",
-  "main": "index.js",
+  "main": "javaScript/index.js",
   "dependencies": {
     "ffmpeg-static": "^4.4.1",
     "puppeteer": "^13.7.0"
   },
   "devDependencies": {},
   "scripts": {
+    "start": "node javaScript/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Affmesquita/ddp-fm.git"
+    "url": "https://github.com/Affmesquita/radio-ddp"
   },
   "author": "Affonso Mesquita",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Affmesquita/ddp-fm/issues"
+    "url": "https://github.com/Affmesquita/radio-ddp/issues"
   },
-  "homepage": "https://github.com/Affmesquita/ddp-fm#readme"
+  "homepage": "https://github.com/Affmesquita/radio-ddp",
+  "keywords": [
+    "package.json",
+    "node.js",
+    "javascript"
+  ]
 }

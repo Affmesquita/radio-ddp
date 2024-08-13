@@ -1,0 +1,67 @@
+Para definir o arquivo principal do seu projeto JavaScript no  package.json , você deve adicionar ou alterar a propriedade  main . O valor dessa propriedade deve ser o caminho relativo do arquivo principal em relação ao diretório do seu projeto. 
+ 
+No seu caso, você pode definir o arquivo principal ( index.js ) assim:
+json
+
+
+{
+  "name": "seu-nome-do-projeto",
+  "version": "1.0.0",
+  "main": "javaScript/index.js",
+  "scripts": {
+    "start": "node javaScript/index.js"
+  },
+  "author": "seu-nome",
+  "license": "ISC"
+}
+Aqui, a propriedade  main  foi definida como  "javaScript/index.js" , que é o caminho relativo a partir do diretório onde o  package.json  está localizado.  
+ 
+Se você também quiser adicionar um script para iniciar seu aplicativo, você pode incluir a seção  scripts  como mostrado acima. Assim, você pode iniciar seu projeto com o comando:
+bash
+
+
+npm start
+Certifique-se de que o caminho esteja correto e que o arquivo  index.js  exista nesse local.
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+quais são as 4 dependencias que pode ter no packahe.json
+
+
+No  package.json , as dependências são geralmente categorizadas em quatro tipos principais: 
+ 
+1. **Dependências (dependencies)**: São as bibliotecas necessárias para que a aplicação funcione em produção. Elas são instaladas quando você executa  npm install  e são essenciais para o funcionamento do seu aplicativo. Exemplo:
+json
+
+
+"dependencies": {
+     "express": "^4.17.1"
+   }
+2. **Dependências de Desenvolvimento (devDependencies)**: São as bibliotecas necessárias apenas durante o desenvolvimento, como ferramentas de teste, linters, ou compilers. Elas não são necessárias em produção. Para instalá-las, você pode usar  npm install --save-dev . Exemplo:
+json
+
+
+"devDependencies": {
+     "jest": "^26.6.0"
+   }
+3. **Dependências Opcionais (optionalDependencies)**: São bibliotecas que podem ser utilizadas, mas não são essenciais para o funcionamento do seu aplicativo. Se a instalação de uma dependência opcional falhar, isso não causará uma falha na instalação do pacote. Exemplo:
+json
+
+
+"optionalDependencies": {
+     "fsevents": "^2.1.3"
+   }
+4. **Peer Dependencies**: São dependências que um pacote espera que o consumidor instale, mas que não são instaladas automaticamente. Elas são usadas principalmente para garantir que uma versão específica de uma biblioteca seja usada em conjunto com outra. Exemplo:
+json
+
+
+"peerDependencies": {
+     "react": "^17.0.0"
+   }
+Essas categorias ajudam a gerenciar as dependências de um projeto de forma organizada e a garantir que o ambiente de desenvolvimento e produção esteja configurado corretamente.
