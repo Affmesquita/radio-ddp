@@ -1,0 +1,37 @@
+Question :
+
+o EJS faz HTML dinamico ou seja eu posso peghar o template e atraves de variaveis eu posso abrir uma pagina e la vai estar o titulo dinamico e tudo mais (me corrija se eu estiver errado) existe outro tipo de template views (ja que eu vou usar o MVC) que eu possa usar um HTML dinamico tambem ?
+Answer :
+
+
+Share icon
+Você está absolutamente correto! O EJS (Embedded JavaScript) é um mecanismo de template que permite criar HTML dinâmico, onde você pode usar variáveis e lógica JavaScript diretamente no seu HTML. Isso facilita a geração de páginas web dinâmicas com dados que podem mudar conforme a interação do usuário ou a resposta de um servidor. 
+ 
+### Outras Opções de Template Views 
+ 
+Existem várias outras opções de mecanismo de template que você pode usar para criar HTML dinâmico em uma aplicação MVC. Aqui estão algumas das mais populares: 
+ 
+1. **Pug (anteriormente Jade)**: 
+   - Um mecanismo de template que usa uma sintaxe indentada e limpa, permitindo que você escreva HTML de forma mais concisa. Assim como o EJS, você pode usar variáveis e lógica para gerar conteúdo dinâmico. 
+ 
+2. **Handlebars**: 
+   - Um mecanismo de template que é um pouco mais restrito em termos de lógica, mas permite a criação de templates limpos e legíveis. Ele usa uma sintaxe de chaves ( {{ }} ) para interpolação de dados e é ideal para separar a lógica da apresentação. 
+ 
+3. **Mustache**: 
+   - Um mecanismo de template que é semelhante ao Handlebars, mas ainda mais simples. Ele não tem lógica de controle, o que o torna fácil de usar e entender. É ideal para situações onde você quer manter a lógica fora do template. 
+ 
+4. **Nunjucks**: 
+   - Um mecanismo de template desenvolvido pela Mozilla que é muito poderoso e flexível. Ele suporta herança de templates, o que pode ser útil para criar layouts complexos. 
+ 
+5. **Twig**: 
+   - Um mecanismo de template popular em aplicações PHP, mas que pode ser usado em outras linguagens também. Ele possui uma sintaxe clara e é bastante poderoso. 
+ 
+### Considerações 
+ 
+A escolha do mecanismo de template pode depender de vários fatores, incluindo: 
+ 
+- **Facilidade de uso**: Alguns mecanismos têm uma curva de aprendizado mais suave do que outros. 
+- **Recursos**: Verifique se o mecanismo que você escolher oferece os recursos que você precisa, como herança de templates, filtros, etc. 
+- **Performance**: Alguns mecanismos podem ser mais rápidos que outros, dependendo do uso e da complexidade dos templates. 
+ 
+No geral, todos esses mecanismos são capazes de gerar HTML dinâmico e podem ser usados em uma arquitetura MVC. A escolha vai depender das suas preferências e dos requisitos do seu projeto. Se precisar de mais informações sobre algum deles, é só avisar!

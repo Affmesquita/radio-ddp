@@ -39,3 +39,85 @@ radio-ddp/
 - Mantenha um arquivo  README.md  atualizado para descrever o propósito do projeto e como configurá-lo. 
  
 Essa estrutura ajuda a manter o código organizado e facilita a colaboração com outros desenvolvedores.
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fazer um site para transmissões ao vivo e vídeos sob demanda é uma ótima ideia! Usar a arquitetura MVC (Model-View-Controller) pode ser uma boa escolha para o seu projeto, pois ela ajuda a organizar o código e a separar as responsabilidades, facilitando a manutenção e a escalabilidade. 
+ 
+### Organização do MVC 
+ 
+1. **Model (Modelo)**: 
+   - **Responsabilidade**: Gerenciar a lógica de dados e interagir com o banco de dados. 
+   - **Exemplo**: Classes que representam usuários, vídeos, comentários, etc. Aqui você pode ter métodos para criar, ler, atualizar e deletar (CRUD) esses dados. 
+ 
+2. **View (Visão)**: 
+   - **Responsabilidade**: Exibir os dados ao usuário e apresentar a interface do usuário. 
+   - **Exemplo**: Arquivos HTML, templates ou componentes que mostram a lista de vídeos, detalhes de um vídeo, formulário de upload, etc. 
+ 
+3. **Controller (Controlador)**: 
+   - **Responsabilidade**: Receber as entradas do usuário, processar as solicitações, interagir com o modelo e escolher a visão a ser exibida. 
+   - **Exemplo**: Classes ou funções que lidam com as requisições, como iniciar uma live, carregar vídeos sob demanda, etc. 
+ 
+### Estrutura de Diretórios 
+ 
+Uma possível estrutura de diretórios para o seu projeto pode ser:
+
+
+/meu-site
+│
+├── /models              # Contém os modelos
+│   ├── usuario.js
+│   ├── video.js
+│   └── comentario.js
+│
+├── /views               # Contém as views
+│   ├── index.html
+│   ├── video.html
+│   └── upload.html
+│
+├── /controllers         # Contém os controladores
+│   ├── usuarioController.js
+│   ├── videoController.js
+│   └── comentarioController.js
+│
+├── /public              # Arquivos públicos (CSS, JS, imagens)
+│   ├── /css
+│   ├── /js
+│   └── /images
+│
+└── app.js              # Arquivo principal da aplicação
+### Outras Arquiteturas 
+ 
+Além do MVC, você pode considerar outras arquiteturas, dependendo das suas necessidades: 
+ 
+1. **MVVM (Model-View-ViewModel)**: Útil se você estiver usando frameworks JavaScript modernos como Angular ou Vue.js, onde a ligação de dados é uma prioridade. 
+ 
+2. **Microserviços**: Se você pretende escalar sua aplicação e dividir funcionalidades em serviços independentes, essa pode ser uma boa opção. 
+ 
+3. **Serverless**: Usar funções como serviço (FaaS) pode ser uma alternativa interessante, especialmente para manipulação de vídeos e eventos de live. 
+ 
+4. **MVP (Model-View-Presenter)**: Semelhante ao MVC, mas o Presenter tem mais controle sobre a lógica de apresentação. 
+ 
+A escolha da arquitetura depende muito dos requisitos do seu projeto, da equipe envolvida e das tecnologias que você pretende usar. Se precisar de mais detalhes sobre alguma dessas opções, é só avisar!
