@@ -121,3 +121,213 @@ Além do MVC, você pode considerar outras arquiteturas, dependendo das suas nec
 4. **MVP (Model-View-Presenter)**: Semelhante ao MVC, mas o Presenter tem mais controle sobre a lógica de apresentação. 
  
 A escolha da arquitetura depende muito dos requisitos do seu projeto, da equipe envolvida e das tecnologias que você pretende usar. Se precisar de mais detalhes sobre alguma dessas opções, é só avisar!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Question :
+
+com base no grafico anterior as paginas que não são ejs ficariam junto com as ejs?
+Answer :
+
+
+Share icon
+Sim, em um projeto que utiliza o padrão MVC e que faz uso de arquivos EJS (Embedded JavaScript) para renderização de views, você pode organizar as páginas que não são EJS (como arquivos HTML) junto com as páginas EJS, dependendo de como você planeja estruturar sua aplicação. 
+ 
+### Estrutura Sugerida 
+ 
+Se você está utilizando EJS como seu mecanismo de template, é comum ter uma estrutura de diretórios que separe as views EJS das views HTML, mas também é aceitável mantê-las juntas, especialmente se elas servem a propósitos semelhantes ou se você está apenas começando. Aqui está um exemplo de como você pode organizá-las:
+plaintext
+
+
+/app
+│
+├── /views
+│   ├── /partials
+│   │   ├── header.ejs
+│   │   ├── footer.ejs
+│   │   └── ...
+│   ├── index.ejs
+│   ├── user.ejs
+│   ├── product.ejs
+│   ├── about.html      // Página HTML
+│   └── contact.ejs
+### Considerações 
+ 
+1. **Manutenção e Clareza**: Se você tem muitas páginas HTML que não precisam de renderização dinâmica, pode ser interessante mantê-las separadas em uma pasta específica (por exemplo,  /views/html ). Isso pode ajudar na organização e na clareza do projeto. 
+ 
+2. **Uso de EJS**: Se você planeja que algumas páginas HTML sejam eventualmente convertidas para EJS (para permitir a inserção de dados dinâmicos), pode ser mais prático mantê-las na mesma pasta para facilitar a migração. 
+ 
+3. **Roteamento**: Lembre-se de que a forma como você organiza suas views pode afetar o roteamento da sua aplicação. Certifique-se de que suas rotas estão configuradas corretamente para servir tanto arquivos EJS quanto HTML. 
+ 
+### Exemplo de Estrutura com Separação
+plaintext
+
+
+/app
+│
+├── /views
+│   ├── /ejs
+│   │   ├── index.ejs
+│   │   ├── user.ejs
+│   │   ├── product.ejs
+│   │   └── ...
+│   ├── /html
+│   │   ├── about.html
+│   │   └── contact.html
+│   └── /partials
+│       ├── header.ejs
+│       └── footer.ejs
+### Conclusão 
+ 
+A decisão de manter as páginas EJS e HTML juntas ou separadas depende das necessidades do seu projeto e da sua preferência por organização. O importante é que a estrutura seja lógica e facilite a manutenção e o desenvolvimento da aplicação. Se você tiver mais dúvidas ou precisar de mais esclarecimentos, estou à disposição!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Para renderizar arquivos EJS e HTML usando Express, você pode seguir os passos abaixo. Vou explicar como configurar suas rotas para renderizar arquivos EJS e como servir arquivos HTML estáticos. 
+ 
+### 1. Configuração Básica do Express 
+ 
+Primeiro, certifique-se de que você tenha o Express e o EJS instalados no seu projeto:
+bash
+
+
+npm install express ejs
+### 2. Estrutura do Projeto 
+ 
+Baseando-se na estrutura que você forneceu:
+
+
+/app
+│
+├── /views
+│   ├── /ejs
+│   │   ├── index.ejs
+│   │   ├── user.ejs
+│   │   ├── product.ejs
+│   │   └── ...
+│   ├── /html
+│   │   ├── about.html
+│   │   └── contact.html
+│   └── /partials
+│       ├── header.ejs
+│       └── footer.ejs
+│
+└── server.js
+### 3. Configuração do  server.js  
+ 
+Aqui está um exemplo de como configurar o  server.js  para renderizar arquivos EJS e servir arquivos HTML:
+javascript
+
+
+const express = require('express');
+const path = require('path');
+
+const app = express();
+const PORT = 3000;
+
+// Configura o diretório das views
+app.set('views', path.join(__dirname, 'views/ejs')); // Define o diretório para EJS
+app.set('view engine', 'ejs'); // Define o motor de visualização como EJS
+
+// Serve arquivos estáticos da pasta html
+app.use(express.static(path.join(__dirname, 'views/html'))); // Serve arquivos HTML estáticos
+
+// Rota para renderizar o arquivo index.ejs
+app.get('/', (req, res) => {
+    res.render('index'); // Renderiza views/ejs/index.ejs
+});
+
+// Rota para renderizar o arquivo user.ejs
+app.get('/user', (req, res) => {
+    res.render('user'); // Renderiza views/ejs/user.ejs
+});
+
+// Rota para servir o arquivo HTML about.html
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/html', 'about.html')); // Envia views/html/about.html
+});
+
+// Rota para servir o arquivo HTML contact.html
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/html', 'contact.html')); // Envia views/html/contact.html
+});
+
+// Inicializa o servidor
+app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+### 4. Explicação do Código 
+ 
+- **Configuração do EJS**: Usamos  app.set('views', path.join(__dirname, 'views/ejs'))  para definir onde estão os arquivos EJS e  app.set('view engine', 'ejs')  para configurar o EJS como motor de visualização. 
+ 
+- **Servindo Arquivos Estáticos**: Usamos  app.use(express.static(path.join(__dirname, 'views/html')))  para servir arquivos HTML estáticos. Isso significa que você pode acessar  http://localhost:3000/about.html  diretamente. 
+ 
+- **Rotas**: 
+  - Para renderizar arquivos EJS, usamos  res.render('nome_do_arquivo') . 
+  - Para servir arquivos HTML, usamos  res.sendFile() . 
+ 
+### 5. Testando 
+ 
+1. Inicie o servidor com  node server.js . 
+2. Acesse  http://localhost:3000/ para ver a página renderizada de  index.ejs . 
+3. Acesse  http://localhost:3000/user para ver a página renderizada de  user.ejs . 
+4. Acesse  http://localhost:3000/about.html  e  http://localhost:3000/contact.html  para ver as páginas HTML. 
+ 
+Com isso, você deve conseguir renderizar arquivos EJS e servir arquivos HTML estáticos usando Express. Se tiver mais perguntas ou precisar de mais ajuda, estou à disposição!

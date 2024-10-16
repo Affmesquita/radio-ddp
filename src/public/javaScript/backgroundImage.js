@@ -1,27 +1,27 @@
 export function handleNewsCardMediaQuery() {
 
-    const imageContainers = document.querySelectorAll('.news-card');
+    const imageContainers = document.querySelectorAll('.news-card')
 
     imageContainers.forEach(imageContainer => {
-        const image = imageContainer.querySelector('img');
+        const image = imageContainer.querySelector('img')
 
-        const mediaQuery = window.matchMedia('(max-width: 1223px)');
+        const mediaQuery = window.matchMedia('(max-width: 1223px)')
 
         function handleMediaQuery(mediaQuery) {
 
             if (mediaQuery.matches) {
-                imageContainer.style.backgroundImage = `url(${image.src})`;
-                image.style.display = 'none';
-                imageContainer.style.backgroundPosition = 'center';
+                imageContainer.style.backgroundImage = `url(${image.src})`
+                image.style.display = 'none'
+                imageContainer.style.backgroundPosition = 'center'
             } else {
-                imageContainer.style.backgroundImage = 'none';
-                image.style.display = 'block';
+                imageContainer.style.backgroundImage = 'none'
+                image.style.display = 'block'
             }
 
         }
 
-        handleMediaQuery(mediaQuery);
-        mediaQuery.addListener(handleMediaQuery);
+        handleMediaQuery(mediaQuery)
+        mediaQuery.addEventListener(handleMediaQuery)
     });
 }
 

@@ -14,15 +14,15 @@
 
 @font-face {
     font-family: TT-Bold;
-    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
+    src: url(/src/public/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
 }
 @font-face {
     font-family: TT-Medium;
-    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
+    src: url(/src/public/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
 }
 @font-face {
     font-family: ArchivoBlack;
-    src: url(/fonts/ArchivoBlack-Regular.ttf);
+    src: url(/src/public/fonts/ArchivoBlack-Regular.ttf);
 }
 
 
@@ -41,7 +41,7 @@ header {
 }
 
 body {
-    background-image: url(/image/background-camp-2.jpg);
+    background-image: url(/src/public/image/background-camp-2.jpg);
     background-position: center;
 }
 

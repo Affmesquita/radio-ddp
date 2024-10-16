@@ -79,7 +79,7 @@
         height: 300px;
         margin: 2px;
         border: 1px solid white;
-        background-image: url(/image/background-camp.jpg);
+        background-image: url(/src/public/image/background-camp.jpg);
 
         display: flex;
         align-items: center;
@@ -130,7 +130,7 @@
     .plusnews {
         width: 200px;
         align-self: center;
-        background-image: url(/image/background-camp-2.jpg);
+        background-image: url(/src/public/image/background-camp-2.jpg);
         background-position: center ;
         background-size: cover;
         margin-top: 20px;
