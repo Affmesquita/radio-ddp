@@ -21,7 +21,7 @@ export function handleNewsCardMediaQuery() {
         }
 
         handleMediaQuery(mediaQuery)
-        mediaQuery.addEventListener(handleMediaQuery)
+        mediaQuery.addEventListener('change', handleMediaQuery)
     });
 }
 
