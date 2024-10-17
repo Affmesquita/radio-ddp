@@ -14,15 +14,15 @@
 
 @font-face {
     font-family: TT-Bold;
-    src: url(/src/public/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
+    src: url(/public/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
 }
 @font-face {
     font-family: TT-Medium;
-    src: url(/src/public/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
+    src: url(/public/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
 }
 @font-face {
     font-family: ArchivoBlack;
-    src: url(/src/public/fonts/ArchivoBlack-Regular.ttf);
+    src: url(/public/fonts/ArchivoBlack-Regular.ttf);
 }
 
 

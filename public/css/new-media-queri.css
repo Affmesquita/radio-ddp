@@ -21,7 +21,7 @@
     .news-first {
         height: 400px;
 
-        background-image: url(/src/public/image/noticias-imagem/jeffrey-f-lin-6k0VD3xNw6U-unsplash.jpg);
+        background-image: url(/public/image/noticias-imagem/jeffrey-f-lin-6k0VD3xNw6U-unsplash.jpg);
         background-size: cover;
 
         flex-direction: column;
