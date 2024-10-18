@@ -1,0 +1,6 @@
+router.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'))
+})
+
+
+não estou conseguindo arrumar o caimho para o arquivo que desejo renderizar, esse router esta na pasta src/routes mas o arquivo estatico esta em public/html como posso concertar esse problema?
