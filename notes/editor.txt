@@ -1,0 +1,340 @@
+Sim, é possível criar uma página de editor onde você pode inserir um título, texto e fotos, e, ao submeter o formulário, gerar um post na página principal de notícias usando EJS. Vou te dar um guia passo a passo de como você pode implementar isso.
+
+Estrutura do Projeto
+Vamos assumir que você tem a seguinte estrutura de diretórios:
+
+
+
+C:\Users\Affonso\Documents\GitHub\radio-ddp\
+├── public\
+│   ├── css\
+│   ├── js\
+├── src\
+│   ├── routers\
+│   │   ├── staticRoutes.js
+│   ├── views\
+│   │   ├── editor.ejs
+│   │   ├── noticias.ejs
+│   ├── server.js
+Passo a Passo
+Instalar Dependências:
+Certifique-se de ter o Express e o EJS instalados. Se ainda não os tem, use:
+bash
+
+
+npm install express ejs body-parser
+Configurar o Servidor ( server.js ):
+
+
+Aqui está uma configuração básica do servidor com rotas para o editor e a página de notícias:
+
+
+javascript
+
+
+const express = require('express');
+   const path = require('path');
+   const bodyParser = require('body-parser');
+
+   const app = express();
+   const PORT = 3000;
+
+   app.set('view engine', 'ejs');
+   app.set('views', path.join(__dirname, 'views'));
+
+   app.use(express.static(path.join(__dirname, 'public')));
+   app.use(bodyParser.urlencoded({ extended: true }));
+
+   let posts = []; // Array para armazenar os posts
+
+   app.get('/editor', (req, res) => {
+       res.render('editor');
+   });
+
+   app.post('/submit', (req, res) => {
+       const { titulo, texto, foto } = req.body;
+       const novoPost = { titulo, texto, foto };
+       posts.push(novoPost); // Adiciona o novo post ao array
+       res.redirect('/noticias'); // Redireciona para a página de notícias
+   });
+
+   app.get('/noticias', (req, res) => {
+       res.render('noticias', { posts }); // Passa os posts para a página de notícias
+   });
+
+   app.listen(PORT, () => {
+       console.log(`Servidor rodando em http://localhost:${PORT}`);
+   });
+Criar a Página do Editor ( editor.ejs ):
+
+
+Nesta página, você terá um formulário para inserir os dados do post:
+
+
+html
+
+
+<!DOCTYPE html>
+   <html lang="pt-BR">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Editor de Notícias</title>
+   </head>
+   <body>
+       <h1>Editor de Notícias</h1>
+       <form action="/submit" method="POST">
+           <input type="text" name="titulo" placeholder="Título" required>
+           <textarea name="texto" placeholder="Texto da notícia" required></textarea>
+           <input type="text" name="foto" placeholder="URL da foto" required>
+           <button type="submit">Enviar</button>
+       </form>
+       <a href="/noticias">Ver Notícias</a>
+   </body>
+   </html>
+Criar a Página de Notícias ( noticias.ejs ):
+
+
+Esta página exibirá todos os posts que foram enviados pelo editor:
+
+
+html
+
+
+<!DOCTYPE html>
+   <html lang="pt-BR">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Página de Notícias</title>
+   </head>
+   <body>
+       <h1>Notícias</h1>
+       <a href="/editor">Criar Nova Notícia</a>
+       <div>
+           <% posts.forEach(post => { %>
+               <div>
+                   <h2><%= post.titulo %></h2>
+                   <p><%= post.texto %></p>
+                   <img src="<%= post.foto %>" alt="Imagem da notícia" style="max-width: 300px;">
+               </div>
+           <% }); %>
+       </div>
+   </body>
+   </html>
+Como Funciona
+Acessar o Editor: Quando você acessar  http://localhost:3000/editor , verá um formulário onde pode inserir o título, texto e URL da foto.
+
+
+Submeter o Formulário: Ao submeter o formulário, os dados são enviados para a rota  /submit , que adiciona o novo post ao array  posts  e redireciona para a página de notícias.
+
+
+Exibir Notícias: Na página  noticias , todos os posts armazenados são exibidos.
+
+
+Considerações Finais
+O exemplo acima usa um array em memória para armazenar os posts. Isso significa que os dados serão perdidos quando o servidor for reiniciado. Para persistência, você pode considerar o uso de um banco de dados.
+Você pode melhorar a validação e a manipulação de arquivos (como o upload de imagens) usando bibliotecas adicionais, como  multer .
+Certifique-se de lidar com a segurança e a validação de entradas para evitar problemas como injeção de HTML.
+Se você precisar de mais ajuda ou tiver dúvidas, fique à vontade para perguntar!
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Para implementar uma estrutura de Model-View-Controller (MVC) em sua aplicação Node.js com EJS, você precisará organizar seu código em pastas separadas para modelos, controladores e visualizações. Aqui está como você pode fazer isso:
+
+Estrutura do Projeto
+Vamos considerar a seguinte estrutura de diretórios:
+
+
+
+C:\Users\Affonso\Documents\GitHub\radio-ddp\
+├── public\
+│   ├── css\
+│   ├── js\
+├── src\
+│   ├── controllers\
+│   │   ├── newsController.js
+│   ├── models\
+│   │   ├── post.js
+│   ├── views\
+│   │   ├── editor.ejs
+│   │   ├── noticias.ejs
+│   ├── server.js
+Passo a Passo
+Criar o Modelo ( models/post.js ):
+
+
+O modelo representa a estrutura de dados da sua aplicação. Neste caso, você pode criar um modelo simples para os posts.
+
+
+javascript
+
+
+// src/models/post.js
+   class Post {
+       constructor(titulo, texto, foto) {
+           this.titulo = titulo;
+           this.texto = texto;
+           this.foto = foto;
+       }
+   }
+
+   module.exports = Post;
+Criar o Controlador ( controllers/newsController.js ):
+
+
+O controlador gerencia a lógica de negócios e a interação entre o modelo e a visualização.
+
+
+javascript
+
+
+// src/controllers/newsController.js
+   const Post = require('../models/post');
+
+   let posts = []; // Array para armazenar os posts
+
+   const getEditor = (req, res) => {
+       res.render('editor');
+   };
+
+   const submitPost = (req, res) => {
+       const { titulo, texto, foto } = req.body;
+       const novoPost = new Post(titulo, texto, foto);
+       posts.push(novoPost); // Adiciona o novo post ao array
+       res.redirect('/noticias'); // Redireciona para a página de notícias
+   };
+
+   const getNoticias = (req, res) => {
+       res.render('noticias', { posts }); // Passa os posts para a página de notícias
+   };
+
+   module.exports = {
+       getEditor,
+       submitPost,
+       getNoticias,
+   };
+Configurar o Servidor ( server.js ):
+
+
+No arquivo do servidor, você irá importar o controlador e definir as rotas.
+
+
+javascript
+
+
+// src/server.js
+   const express = require('express');
+   const path = require('path');
+   const bodyParser = require('body-parser');
+   const newsController = require('./controllers/newsController');
+
+   const app = express();
+   const PORT = 3000;
+
+   app.set('view engine', 'ejs');
+   app.set('views', path.join(__dirname, 'views'));
+
+   app.use(express.static(path.join(__dirname, 'public')));
+   app.use(bodyParser.urlencoded({ extended: true }));
+
+   // Definindo as rotas
+   app.get('/editor', newsController.getEditor);
+   app.post('/submit', newsController.submitPost);
+   app.get('/noticias', newsController.getNoticias);
+
+   app.listen(PORT, () => {
+       console.log(`Servidor rodando em http://localhost:${PORT}`);
+   });
+Criar a Página do Editor ( views/editor.ejs ):
+
+
+A página do editor permanece a mesma.
+
+
+html
+
+
+<!DOCTYPE html>
+   <html lang="pt-BR">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Editor de Notícias</title>
+   </head>
+   <body>
+       <h1>Editor de Notícias</h1>
+       <form action="/submit" method="POST">
+           <input type="text" name="titulo" placeholder="Título" required>
+           <textarea name="texto" placeholder="Texto da notícia" required></textarea>
+           <input type="text" name="foto" placeholder="URL da foto" required>
+           <button type="submit">Enviar</button>
+       </form>
+       <a href="/noticias">Ver Notícias</a>
+   </body>
+   </html>
+Criar a Página de Notícias ( views/noticias.ejs ):
+
+
+A página de notícias também permanece a mesma.
+
+
+html
+
+
+<!DOCTYPE html>
+   <html lang="pt-BR">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Página de Notícias</title>
+   </head>
+   <body>
+       <h1>Notícias</h1>
+       <a href="/editor">Criar Nova Notícia</a>
+       <div>
+           <% posts.forEach(post => { %>
+               <div>
+                   <h2><%= post.titulo %></h2>
+                   <p><%= post.texto %></p>
+                   <img src="<%= post.foto %>" alt="Imagem da notícia" style="max-width: 300px;">
+               </div>
+           <% }); %>
+       </div>
+   </body>
+   </html>
+Como Funciona
+Modelo: O modelo  Post  define a estrutura dos dados que você está manipulando.
+Controlador: O controlador gerencia a lógica de negócios, como a criação de novos posts e a renderização das páginas.
+Servidor: O servidor configura as rotas e utiliza o controlador para processar as requisições.
+Visualizações: As visualizações (EJS) são responsáveis por apresentar os dados ao usuário.
+Considerações Finais
+Essa estrutura MVC ajuda a manter seu código organizado e facilita a manutenção e escalabilidade da aplicação.
+Você pode expandir essa estrutura para incluir mais funcionalidades, como validação de entrada, persistência em um banco de dados, autenticação de usuários, etc.
+Se você decidir usar um banco de dados, considere usar um ORM (Object-Relational Mapping) como Sequelize ou Mongoose para facilitar a interação com o banco de dados.
+Se você tiver mais perguntas ou precisar de mais detalhes, fique à vontade para perguntar!
