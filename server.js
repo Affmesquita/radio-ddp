@@ -16,5 +16,5 @@ app.use(express.static(path.join('public')))
 app.use(route)
 
 const PORT = 3000
-app.listen(PORT, console.log('SERVER DDP ON http://localhost:3000'))
+app.listen(PORT, console.log('SERVER DDP ON http://localhost:3000/home'))
 //        node server.js        // 

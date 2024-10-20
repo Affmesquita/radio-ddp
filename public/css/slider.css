@@ -10,15 +10,15 @@
 
 @font-face {
     font-family: droid;
-    src: url(/public/fonts/droid.otf);
+    src: url(/fonts/droid.otf);
 }
 @font-face {
     font-family: TT-Bold;
-    src: url(/public/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
 }
 @font-face {
     font-family: TT-Medium;
-    src: url(/public/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Medium.ttf);
 }
 
 .content {
