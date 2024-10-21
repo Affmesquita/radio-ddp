@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OBS Recording Button</title>
+</head>
+<body>
+<button id="recordButton">Start Recording</button>
+<script>
+// Create a new WebSocket connection to OBS with the server password
+const obsSocket = new WebSocket('ws://192.168.1.10:4455', 'XXX');
+// When the connection is established
+obsSocket.onopen = () => {
+console.log('Connected to OBS WebSocket');
+// Retrieve the record button element
+const recordButton = document.getElementById('recordButton');
+// Add click event listener to the record button
+recordButton.addEventListener('click', () => {
+// Send the command to start recording using the "RTR" profile
+obsSocket.send(JSON.stringify({
+"request-type": "StartRecording",
+"message-id": "start-recording",
+"profile": "RTR"
+}));
+console.log('Recording started');
+});
+};
+// When a message is received from OBS
+obsSocket.onmessage = (event) => {
+const message = JSON.parse(event.data);
+console.log('Received message from OBS:', message);
+};
+// When an error occurs
+obsSocket.onerror = (error) => {
+console.error('OBS WebSocket error:', error);
+};
+// When the connection is closed
+obsSocket.onclose = () => {
+console.log('Disconnected from OBS WebSocket');
+};
+</script>
+</body>
+</html>
