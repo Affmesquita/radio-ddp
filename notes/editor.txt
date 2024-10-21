@@ -338,3 +338,226 @@ Essa estrutura MVC ajuda a manter seu código organizado e facilita a manutenç�
 Você pode expandir essa estrutura para incluir mais funcionalidades, como validação de entrada, persistência em um banco de dados, autenticação de usuários, etc.
 Se você decidir usar um banco de dados, considere usar um ORM (Object-Relational Mapping) como Sequelize ou Mongoose para facilitar a interação com o banco de dados.
 Se você tiver mais perguntas ou precisar de mais detalhes, fique à vontade para perguntar!
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Entendi o que você deseja fazer. Vamos criar um formulário HTML para a página do editor de notícias, que enviará os dados para uma rota específica ( /edit ). Em seguida, esses dados serão processados e armazenados em um modelo, incluindo a data de criação ( createdAt ). Finalmente, vamos renderizar esses dados em uma nova página usando EJS e partials.
+
+Estrutura do Projeto
+Para facilitar, vamos considerar a seguinte estrutura de diretórios:
+
+
+
+C:\Users\Affonso\Documents\GitHub\radio-ddp\
+├── public\
+│   ├── css\
+│   ├── js\
+├── src\
+│   ├── controllers\
+│   │   ├── newsController.js
+│   ├── models\
+│   │   ├── post.js
+│   ├── views\
+│   │   ├── editor.ejs
+│   │   ├── noticias.ejs
+│   │   ├── partials\
+│   │   │   ├── post.ejs
+│   ├── server.js
+Passo a Passo
+Criar o Modelo ( models/post.js ):
+
+
+Vamos modificar nosso modelo  Post  para incluir a data de criação.
+
+
+javascript
+
+
+// src/models/post.js
+   class Post {
+       constructor(titulo, texto, foto) {
+           this.titulo = titulo;
+           this.texto = texto;
+           this.foto = foto;
+           this.createdAt = new Date(); // Adiciona a data de criação
+       }
+   }
+
+   module.exports = Post;
+Criar o Controlador ( controllers/newsController.js ):
+
+
+O controlador irá lidar com a rota  /edit  e renderizar a página de notícias após a criação do post.
+
+
+javascript
+
+
+// src/controllers/newsController.js
+   const Post = require('../models/post');
+
+   let posts = []; // Array para armazenar os posts
+
+   const getEditor = (req, res) => {
+       res.render('editor');
+   };
+
+   const submitPost = (req, res) => {
+       const { titulo, texto, foto } = req.body;
+       const novoPost = new Post(titulo, texto, foto);
+       posts.push(novoPost); // Adiciona o novo post ao array
+       res.redirect('/noticias'); // Redireciona para a página de notícias
+   };
+
+   const getNoticias = (req, res) => {
+       res.render('noticias', { posts }); // Passa os posts para a página de notícias
+   };
+
+   module.exports = {
+       getEditor,
+       submitPost,
+       getNoticias,
+   };
+Configurar o Servidor ( server.js ):
+
+
+Certifique-se de que as rotas estão configuradas corretamente.
+
+
+javascript
+
+
+// src/server.js
+   const express = require('express');
+   const path = require('path');
+   const bodyParser = require('body-parser');
+   const newsController = require('./controllers/newsController');
+
+   const app = express();
+   const PORT = 3000;
+
+   app.set('view engine', 'ejs');
+   app.set('views', path.join(__dirname, 'views'));
+
+   app.use(express.static(path.join(__dirname, 'public')));
+   app.use(bodyParser.urlencoded({ extended: true }));
+
+   // Definindo as rotas
+   app.get('/editor', newsController.getEditor);
+   app.post('/edit', newsController.submitPost); // Rota para o formulário
+   app.get('/noticias', newsController.getNoticias);
+
+   app.listen(PORT, () => {
+       console.log(`Servidor rodando em http://localhost:${PORT}`);
+   });
+Criar a Página do Editor ( views/editor.ejs ):
+
+
+Aqui está o formulário que você solicitou.
+
+
+html
+
+
+<!DOCTYPE html>
+   <html lang="pt-BR">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Editor de Notícias</title>
+   </head>
+   <body>
+       <h1>Editor de Notícias</h1>
+       <form action="/edit" method="POST">
+           <input type="text" name="titulo" placeholder="Título" required>
+           <textarea name="texto" placeholder="Conteúdo da notícia" required></textarea>
+           <input type="text" name="foto" placeholder="URL da foto" required>
+           <button type="submit">Enviar</button>
+       </form>
+       <a href="/noticias">Ver Notícias</a>
+   </body>
+   </html>
+Criar a Página de Notícias ( views/noticias.ejs ):
+
+
+Aqui você irá renderizar os posts, utilizando partials para exibir cada post.
+
+
+html
+
+
+   <!DOCTYPE html>
+   <html lang="pt-BR">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Página de Notícias</title>
+   </head>
+   <body>
+       <h1>Notícias</h1>
+       <a href="/editor">Criar Nova Notícia</a>
+       <div>
+           <% posts.forEach(post => { %>
+               <% include partials/post.ejs %> <!-- Inclui o partial para cada post -->
+           <% }); %>
+       </div>
+   </body>
+   </html>
+  
+Criar o Partial para o Post ( views/partials/post.ejs ):
+
+
+Este arquivo irá definir como cada post será exibido.
+
+
+html
+
+
+   <div>
+       <h2><%= post.titulo %></h2>
+       <p><%= post.texto %></p>
+       <img src="<%= post.foto %>" alt="Imagem da notícia" style="max-width: 300px;">
+       <p>Publicado em: <%= post.createdAt.toLocaleDateString() %></p> <!-- Exibe a data de criação -->
+   </div>
+  
+Resumo do Fluxo
+O usuário acessa a página do editor ( /editor ).
+O usuário preenche o formulário e envia os dados para a rota  /edit .
+O controlador processa os dados, cria um novo post e adiciona ao array  posts .
+O usuário é redirecionado para a página de notícias ( /noticias ), que renderiza todos os posts, utilizando o partial para cada um deles.
+Considerações Finais
+O exemplo acima usa um array em memória para armazenar os posts. Para persistência real, você deve considerar o uso de um banco de dados.
+As URLs das fotos devem ser acessíveis publicamente, ou você pode implementar um upload de arquivos se desejar.
+Certifique-se de lidar com a segurança e validação de entradas para evitar problemas como injeção de HTML.
+Se você tiver mais perguntas ou precisar de mais detalhes, fique à vontade para perguntar!

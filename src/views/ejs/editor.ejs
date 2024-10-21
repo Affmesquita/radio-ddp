@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+   <html lang="pt-BR">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Editor de Notícias</title>
+   </head>
+   <body>
+       <h1>Editor de Notícias</h1>
+       <form action="/edit" method="POST">
+           <input type="text" name="titulo" placeholder="Título" required>
+           <textarea name="texto" placeholder="Conteúdo da notícia" required></textarea>
+           <input type="text" name="foto" placeholder="URL da foto" required>
+           <button type="submit">Enviar</button>
+       </form>
+       <a href="/noticias">Ver Notícias</a>
+   </body>
+   </html>
