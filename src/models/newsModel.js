@@ -1,0 +1,5 @@
+const posts = []
+
+const newsPost = {
+    
+}
