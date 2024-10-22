@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('node:path')
 const staticRoutes = require('./src/routers/staticRoutes')
+
 const app = express()
 
 
@@ -15,6 +16,7 @@ app.use(express.static(path.join('public')))
 
 app.use(staticRoutes)
 
+
 const PORT = 3000
-app.listen(PORT, console.log('SERVER DDP ON http://localhost:3000/home'))
-//        node server.js        // 
+app.listen(PORT, console.log(`SERVER DDP ON http://localhost:3000/home ${obsServer}`))
+//        node server.js        //  

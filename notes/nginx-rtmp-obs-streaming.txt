@@ -1,0 +1,181 @@
+Para configurar um servidor Node.js que utiliza o Nginx com o módulo RTMP para transmitir vídeos do OBS e exibir esses vídeos em uma página HTML, você pode seguir os passos abaixo. Vou descrever como você pode configurar o Nginx, o OBS e o Node.js para servir a sua página de live.
+
+Passo 1: Instalação do Nginx com Módulo RTMP
+Primeiro, você precisa instalar o Nginx com o módulo RTMP. Se você já seguiu os passos anteriores para instalar o Nginx com o módulo RTMP, você pode pular esta parte. Caso contrário, aqui está um resumo:
+
+Instalar Dependências:
+bash
+
+
+sudo apt update
+   sudo apt install build-essential libpcre3 libpcre3-dev libssl-dev zlib1g zlib1g-dev
+Baixar o Nginx e o Módulo RTMP:
+bash
+
+
+cd /tmp
+   wget http://nginx.org/download/nginx-1.23.1.tar.gz
+   git clone https://github.com/arut/nginx-rtmp-module.git
+Compilar o Nginx com o Módulo RTMP:
+bash
+
+
+tar -zxvf nginx-1.23.1.tar.gz
+   cd nginx-1.23.1
+   ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module
+   make
+   sudo make install
+Configurar o Nginx:
+
+
+Edite o arquivo de configuração do Nginx ( /usr/local/nginx/conf/nginx.conf ) e adicione o seguinte:
+
+
+
+
+nginx
+   rtmp {
+       server {
+           listen 1935; # Porta padrão RTMP
+           chunk_size 4096;
+
+           application live {
+               live on;
+               record off; # Não gravar o stream
+           }
+       }
+   }
+
+   http {
+       server {
+           listen 8080; # Porta HTTP para streaming
+
+           location / {
+               root html; # Caminho para o diretório HTML
+               index index.html;
+           }
+
+           location /live {
+               types {
+                   application/vnd.apple.mpegurl m3u8;
+                   video/mp2t ts;
+               }
+               add_header Cache-Control no-cache;
+               add_header Access-Control-Allow-Origin *; # Permitir CORS
+               # HLS
+               hls on;
+               hls_path /tmp/; # Caminho para armazenar arquivos HLS
+               hls_fragment 5s; # Duração do fragmento
+               hls_playlist_length 60s; # Duração da playlist
+           }
+       }
+   }
+Iniciar o Nginx:
+bash
+
+
+sudo /usr/local/nginx/sbin/nginx
+Passo 2: Configurar o OBS
+Abra o OBS e vá para  Configurações .
+Selecione a aba  Stream .
+Configure o  Serviço  para  Custom... .
+Em  URL do servidor , insira  rtmp://localhost/live .
+Defina a  Chave de Stream  como  minhalive  (ou qualquer nome que você escolher).
+Clique em OK para salvar as configurações.
+Passo 3: Criar o Servidor Node.js
+Agora, você pode criar um servidor Node.js que servirá a sua página HTML.
+
+Criar um Novo Projeto Node.js:
+bash
+
+
+mkdir live-stream
+   cd live-stream
+   npm init -y
+   npm install express
+**Criar o Servidor em  server.js **:
+
+
+Crie um arquivo chamado  server.js  e adicione o seguinte código:
+
+
+javascript
+
+
+const express = require('express');
+   const path = require('path');
+
+   const app = express();
+   const port = 3000;
+
+   // Serve arquivos estáticos da pasta 'public'
+   app.use(express.static('public'));
+
+   app.listen(port, () => {
+       console.log(`Servidor rodando em http://localhost:${port}`);
+   });
+Criar a Estrutura do Projeto:
+
+
+Crie uma pasta chamada  public  e dentro dela um arquivo  index.html :
+
+
+
+
+live-stream/
+   ├── public/
+   │   └── index.html
+   └── server.js
+**Criar o Arquivo  index.html **:
+
+
+No arquivo  public/index.html , adicione o seguinte conteúdo:
+
+
+html
+
+
+<!DOCTYPE html>
+   <html lang="pt-BR">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Transmissão ao Vivo</title>
+       <style>
+           body {
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               height: 100vh;
+               background-color: #f0f0f0;
+           }
+           video {
+               width: 80%;
+               height: auto;
+               border: 2px solid #333;
+           }
+       </style>
+   </head>
+   <body>
+       <h1>Transmissão ao Vivo</h1>
+       <video id="video" controls autoplay>
+           <source src="http://localhost:8080/live/minhalive.m3u8" type="application/x-mpegURL">
+           Seu navegador não suporta o elemento video.
+       </video>
+   </body>
+   </html>
+Passo 4: Executar o Servidor Node.js
+Agora você pode iniciar o servidor Node.js:
+
+bash
+
+
+node server.js
+Passo 5: Testar a Transmissão
+Inicie a transmissão no OBS.
+Abra seu navegador e vá para  http://localhost:3000 . Você deve ver a sua página de live com o vídeo sendo transmitido.
+Considerações Finais
+Firewall: Se você estiver acessando o servidor de uma máquina diferente, certifique-se de que as portas 1935 e 8080 estão abertas no firewall.
+CORS: A configuração do Nginx já inclui cabeçalhos CORS, mas verifique se não há problemas de acesso de outros domínios.
+Segurança: Para ambientes de produção, considere adicionar autenticação e segurança ao seu servidor.
+Com esses passos, você deve ser capaz de configurar uma transmissão ao vivo usando o OBS, Nginx e Node.js. Se você tiver mais perguntas ou precisar de mais assistência, sinta-se à vontade para perguntar!
