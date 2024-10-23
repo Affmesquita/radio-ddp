@@ -1,3 +1,21 @@
+codigo corrigido
+http {
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types {
+        application/octet-stream flv;
+        video/mp4 mp4;
+    }
+}
+
+
+
+
+
+
+
 
 Para instalar o Nginx no seu sistema, você pode seguir os passos abaixo. O processo varia dependendo do sistema operacional que você está usando. Vou fornecer instruções para os sistemas operacionais mais comuns: Windows, Ubuntu (Linux) e macOS.
 
@@ -31,48 +49,7 @@ start nginx
 Verificar se o Nginx está Funcionando:
 Abra um navegador e acesse  http://localhost . Você deve ver uma página padrão do Nginx.
 
-Instalando o Nginx no Ubuntu (Linux)
-Atualizar o Sistema:
-bash
 
-
-   sudo apt update
-   sudo apt upgrade
-Instalar o Nginx:
-bash
-
-
-sudo apt install nginx
-Iniciar o Nginx:
-bash
-
-
-sudo systemctl start nginx
-Verificar se o Nginx está Funcionando:
-
-
-Abra um navegador e acesse  http://localhost . Você deve ver uma página padrão do Nginx.
-
-Habilitar o Nginx para Iniciar no Boot:
-
-
-bash
-
-
-sudo systemctl enable nginx
-Instalando o Nginx no macOS
-Usando Homebrew (caso você tenha o Homebrew instalado):
-bash
-
-
-brew install nginx
-Iniciar o Nginx:
-bash
-
-
-brew services start nginx
-Verificar se o Nginx está Funcionando:
-Abra um navegador e acesse  http://localhost:8080 . Por padrão, o Nginx no Homebrew escuta na porta 8080.
 
 Configurando o Nginx para RTMP
 Após instalar o Nginx, você pode precisar compilar o Nginx com o módulo RTMP, já que a versão padrão do Nginx não inclui esse módulo. Isso pode ser feito usando o código-fonte ou usando uma imagem Docker que já tenha o RTMP.

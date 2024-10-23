@@ -1,0 +1,103 @@
+vou no http://localhost e o nginx esta funcinando, mas o OBS diz que não conseguiu conectar ao server
+aqui vai o nginx.conf
+nginx
+# Configuração do Nginx
+worker_processes auto;
+events {
+    worker_connections 1024;
+}
+http {
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types {
+        application/octet-stream flv;
+        video/mp4 mp4;
+    }
+}
+rtmp {
+    server {
+        listen 1935;  # Porta padrão para RTMP
+        chunk_size 4096;
+        application live {
+            live on;
+            record off;  # Desativa a gravação
+        }
+    }
+}
+tem algum erro? como saber se o nginx esta com o module rtmp?
+
+
+
+
+
+
+
+rtmp://localhost/live 
+
+
+
+
+
+
+
+
+
+A configuração do seu nginx.conf parece estar correta para um servidor RTMP básico. No entanto, se o OBS não consegue se conectar, aqui estão algumas coisas que você pode verificar:
+
+Verifique se o Nginx está rodando: Use o comando nginx -t para testar a configuração e systemctl status nginx ou service nginx status para verificar se o Nginx está ativo.
+
+Verifique a porta: O OBS deve estar configurado para se conectar à porta 1935, que é a porta padrão para RTMP. Certifique-se de que o endereço do servidor no OBS esteja correto, por exemplo, rtmp://localhost/live.
+
+Firewall: Verifique se o firewall do seu sistema está permitindo conexões na porta 1935. Você pode usar comandos como ufw allow 1935 (no Ubuntu) para permitir o tráfego.
+
+Módulo RTMP: Para saber se o Nginx está compilado com o módulo RTMP, você pode executar nginx -V no terminal. Isso mostrará as opções de compilação e você deve ver --with-http_ssl_module e --add-module=... para o módulo RTMP.
+
+Logs do Nginx: Verifique os logs de erro do Nginx (geralmente em /var/log/nginx/error.log) para ver se há mensagens que possam indicar o que está errado.
+
+Se tudo estiver configurado corretamente e ainda assim não funcionar, pode ser útil reiniciar o Nginx com sudo systemctl restart nginx e tentar novamente. Se precisar de mais ajuda, é só avisar! 🚀🔧
+
+
+
+
+
+Após executar o comando  start nginx , o Nginx deve estar em execução. Aqui estão os próximos passos que você pode seguir:
+
+Verifique se o Nginx está funcionando:
+
+
+Abra um navegador da web e digite  http://localhost  na barra de endereços. Se tudo estiver funcionando corretamente, você deve ver a página padrão do Nginx.
+
+Verifique os logs:
+
+
+Se você deseja verificar se houve algum erro ao iniciar o Nginx, você pode olhar os arquivos de log. Por padrão, eles estão localizados na pasta  logs  dentro do diretório de instalação do Nginx (por exemplo,  C:\nginx\logs\error.log ).
+
+Configuração do Nginx:
+
+
+Se você precisar configurar o Nginx, edite o arquivo de configuração que geralmente está localizado em  C:\nginx\conf\nginx.conf . Após fazer alterações, você precisará reiniciar o Nginx para que as mudanças tenham efeito. Você pode fazer isso com os comandos:
+
+bash
+
+
+     nginx -s reload
+Parar o Nginx:
+Se você precisar parar o Nginx, você pode usar o comando:
+
+bash
+
+
+nginx -s stop
+
+
+
+Testar a configuração:
+Antes de recarregar as configurações, é uma boa prática testar se a configuração está correta. Você pode fazer isso com o comando:
+
+bash
+
+
+     nginx -t
+Esses passos devem ajudá-lo a gerenciar o Nginx após iniciá-lo. Se você tiver alguma dúvida específica ou precisar de mais assistência, sinta-se à vontade para perguntar!
