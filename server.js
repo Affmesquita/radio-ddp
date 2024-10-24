@@ -22,3 +22,8 @@ app.use(staticRoutes)
 const PORT = process.env.PORT || 3000
 app.listen(PORT, console.log(`SERVER DDP ON http://localhost:3000/home`))
 //        node server.js        //  
+
+
+PERGUNTA PARA FAZER AMANHA
+
+O VLC não é capaz de abrir o MRL 'rtmp://localhost/live/stream'. Verifique o registro de erros para maiores detalhes.
