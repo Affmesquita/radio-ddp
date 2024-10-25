@@ -1,3 +1,8 @@
+@font-face {
+    font-family: TT-Bold;
+    src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
+}
+
 footer {
     width: 100%;
     height: 350px;

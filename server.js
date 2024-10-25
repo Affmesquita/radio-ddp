@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('node:path')
 const staticRoutes = require('./src/routers/staticRoutes')
 const liveRoutes = require('./src/routers/liveRoutes')
+const videoRouter = require('./src/routers/videoRoutes')
+
 
 const app = express()
 
@@ -17,13 +19,10 @@ app.use(express.static(path.join('public')))
 // ROTAS
 app.use(liveRoutes)
 app.use(staticRoutes)
+app.use(videoRouter)
+
 
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, console.log(`SERVER DDP ON http://localhost:3000/home`))
 //        node server.js        //  
-
-
-PERGUNTA PARA FAZER AMANHA
-
-O VLC não é capaz de abrir o MRL 'rtmp://localhost/live/stream'. Verifique o registro de erros para maiores detalhes.

@@ -3,22 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header-nav-style.css">
+    <link rel="stylesheet" href="/css/live.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <script src="/javaScript/index.js" type="module" defer></script>
     <title>Streaming de Vídeo</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: black;
-        }
-    </style>
+   
 </head>
 <body>
-    <video id="meu-video" controls autoplay>
-        <source src="rtmp://localhost/live/stream" type="video/mp4">
-        <p>Seu navegador não suporta o elemento de vídeo.</p>
-    </video>
+
+    <header>
+
+        <nav id="header-nav">
+
+            <a href="/html/index.html">
+                <h1 id="header-logo"><img src="/image/logo/radio-ddp-2.png" alt=""></h1>
+            </a>
+
+            <ul id="header-list">
+                <li><a href="">Episódios</a></li>
+                <li><a href="/sobre.html" target="">Sobre</a></li>
+            </ul>
+
+            <img src="/image/hamburger-menu-icon-png-17.jpg" alt="" id="btn-hamburger">
+            
+        </nav>
+        
+    </header>
+
+    <div id="live-content">
+        <video id="meu-video" controls autoplay>
+            <source src="rtmp://localhost/live/stream" type="video/mp4">
+            <p>Seu navegador não suporta o elemento de vídeo.</p>
+        </video>
+    </div>
+
+    <footer>
+        
+        <div class="footer-1">
+        <img src="/image/logo/radio-ddp-2.png" alt="">
+        <p>© 2010 Diabos do Planalto <br>
+            Todos os direitos reservados
+        </p>
+        </div>
+
+        <div class="footer-2">
+            <h1>Programas</h1>
+            <h2>14 Cast</h2>
+            <h2>Radio DDP</h2>
+        </div>
+
+        <div class="footer-2">
+            <h1>Contatos</h1>
+            <h2>Instagram</h2>
+        </div>
+
+        <div class="footer-2">
+            <h1>Noticias</h1>
+        </div>
+
+        <div class="footer-2">
+            <h1>Sobre</h1>
+        </div>
+
+    </footer>
 </body>
 </html>

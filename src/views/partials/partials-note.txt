@@ -1,0 +1,5 @@
+"header-nav-style.css"
+<%- include('partials/header')
+
+"footer.css"
+<%- include('partials/footer')

@@ -4,8 +4,8 @@ import { sliderFunction } from './slider.js';
 import { showLinkInsta } from './link-insta.js';
 import { fetchStreamUrl } from "./stream.js";
 
-window.addEventListener('scroll', showLinkInsta);
-sliderFunction();
+window.addEventListener('scroll', showLinkInsta)
+sliderFunction()
 handleNewsCardMediaQuery();
 btnMenu.addEventListener('click', toggleMenu)
 fetchStreamUrl()
