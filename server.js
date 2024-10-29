@@ -3,6 +3,7 @@ const path = require('node:path')
 const staticRoutes = require('./src/routers/staticRoutes')
 const liveRoutes = require('./src/routers/liveRoutes')
 const videoRouter = require('./src/routers/videoRoutes')
+const { connectToDatabase } = require('./src/config/db')
 
 
 const app = express()
@@ -23,6 +24,20 @@ app.use(videoRouter)
 
 
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, console.log(`SERVER DDP ON http://localhost:3000/home`))
+// Função para iniciar o servidor
+async function startServer() {
+    await connectToDatabase(); // Conecta ao MongoDB
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`SERVER DDP ON http://localhost:3000/home`);
+    });
+  }
+  
+  // Inicia o servidor
+  startServer().catch(console.error);
+
+
 //        node server.js        //  
+//const PORT = process.env.PORT || 3000
+//app.listen(PORT, console.log(`SERVER DDP ON http://localhost:3000/home`))
+// afônicosquita

@@ -1,7 +1,5 @@
-const multer = require('multer')
 const Video = require('../models/videoModel')
-
-
+const path = require('node:path')
 
 
 const episodesController = {
@@ -12,7 +10,7 @@ const episodesController = {
     },
 
     getAdminPage: (req, res) => {
-        res.render('admin')
+        res.sendFile(path.join(__dirname, '../../public/html/admin-video.html'))
     },
 
     postVideo: async (req, res) => {
@@ -28,6 +26,14 @@ const episodesController = {
             console.error('Erro ao salvar o vídeo:', error)
             res.status(500).send('Erro ao salvar o vídeo.')
         }
+    },
+
+    getEpisode: async (req, res) => {
+        const episodio = await Video.findById(req.params.id)
+        if (!episodio) {
+            return res.status(404).send('Episódio não encontrado')
+        }
+        res.render('episodio', { episodio })
     },
 }
 
