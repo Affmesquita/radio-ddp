@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin-post.css">
+    <link rel="stylesheet" href="/css/header-nav-style.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <title>Admin - Postar Episódio</title>
+</head>
+<body>
+
+    <header>
+
+        <nav id="header-nav">
+
+            <a href="/home">
+                <h1 id="header-logo"><img src="/image/logo/radio-ddp-2.png" alt=""></h1>
+            </a>
+
+            <ul id="header-list">
+                <li><a href="/episodios">Episódios</a></li>
+                <li><a href="/sobre.html" target="">Sobre</a></li>
+            </ul>
+
+            <img src="/image/hamburger-menu-icon-png-17.jpg" alt="" id="btn-hamburger">
+
+        </nav>
+
+    </header>
+
+    <div class="post-content">
+
+        <h1>Postar Novo Episódio</h1>
+
+        <form action="/admin/postar" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="video">Vídeo:</label>
+                <input type="file" id="video" name="video" accept="video/mp4" required>
+            </div>
+            <div>
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+            </div>
+            <div>
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" required></textarea>
+            </div>
+            <div>
+                <label for="img">Imagem:</label>
+                <input type="file" id="img" name="img" accept="image/*">
+            </div>
+            <button type="submit">Postar Episódio</button>
+            
+        </form>
+
+        <h2>Lista de Episódios</h2>
+        <ul id="episodios-list">
+            <!-- Aqui você deve gerar a lista de episódios com base nos dados do banco -->
+            <% episodios.forEach(function(episodio) { %>
+                <li>
+                    <h3><%= episodio.titulo %></h3>
+                    <p><%= episodio.descricao %></p>
+                    <form action="/episodio/<%= episodio._id %>?_method=DELETE" method="POST">
+                        <button type="submit">Deletar</button>
+                    </form>
+                    <form action="/episodio/<%= episodio._id %>" method="GET">
+                        <button type="submit">Editar</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+
+</body>
+</html>

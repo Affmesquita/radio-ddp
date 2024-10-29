@@ -1,0 +1,69 @@
+O Mongoose é uma biblioteca do Node.js que facilita a interação com o MongoDB, um banco de dados NoSQL. A seguir, explicarei como os códigos que você forneceu funcionam e como eles se encaixam na sua aplicação Node.js.
+
+Estrutura do Código
+Conexão com o MongoDB (db.js):
+javascript
+
+
+const mongoose = require('mongoose')
+   const uri = "mongodb+srv://affonsomesquita:c5VhoKyNCuz3hNZA@cluster0.abvyc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+   async function connectToDatabase() {
+     try {
+       await mongoose.connect(uri) // Conecta ao MongoDB usando a URI fornecida
+       console.log("Conectado ao MongoDB com Mongoose!")
+     } catch (error) {
+       console.error("Erro ao conectar ao MongoDB:", error)
+     }
+   }
+
+   module.exports = { connectToDatabase }
+** mongoose.connect(uri) **: Esta linha estabelece a conexão com o banco de dados MongoDB utilizando a URI fornecida. O  await  indica que a função deve esperar até que a conexão seja estabelecida antes de continuar.
+Tratamento de Erros: Se a conexão falhar, um erro será capturado e exibido no console.
+Exportação da Função: A função  connectToDatabase  é exportada para que possa ser utilizada em outros arquivos.
+
+Definição do Modelo (model.js):
+javascript
+
+
+const mongoose = require('mongoose')
+
+   const videoSchema = new mongoose.Schema({
+       titulo: { type: String, required: true },
+       descricao: { type: String, required: true },
+       videoUrl: { type: String, required: true },
+       dataCriacao: { type: Date, default: Date.now },
+   })
+
+   const Video = mongoose.model('Video', videoSchema)
+   module.exports = Video
+** mongoose.Schema **: Aqui, você define um esquema para um documento que representa um vídeo. Cada campo do esquema possui um tipo e algumas propriedades (como  required  para indicar que o campo é obrigatório).
+**Modelo  Video **: O modelo é criado a partir do esquema, permitindo que você interaja com a coleção de vídeos no MongoDB. O nome da coleção será "videos" (plural).
+Exportação do Modelo: O modelo  Video  é exportado para que possa ser utilizado em outras partes da aplicação.
+
+Uso do Modelo nas Páginas EJS:
+Para usar o modelo  Video  nas suas páginas EJS, você deve importá-lo e utilizá-lo para realizar operações de CRUD (Create, Read, Update, Delete). Por exemplo:
+javascript
+
+
+const Video = require('./model') // Importando o modelo
+
+   // Exemplo de criação de um novo vídeo
+   const novoVideo = new Video({
+       titulo: "Título do Vídeo",
+       descricao: "Descrição do vídeo",
+       videoUrl: "http://url-do-video.com"
+   });
+
+   novoVideo.save()
+       .then(() => console.log("Vídeo salvo com sucesso!"))
+       .catch(error => console.error("Erro ao salvar vídeo:", error));
+Resumo do Funcionamento
+Conexão: Você estabelece uma conexão com o MongoDB usando o Mongoose.
+Definição do Modelo: Você define um esquema que representa a estrutura dos dados que deseja armazenar (neste caso, vídeos).
+Operações com o Modelo: Você pode criar, ler, atualizar e deletar documentos na coleção "videos" usando o modelo  Video .
+Considerações Finais
+Estrutura de Pastas: É uma boa prática organizar seu código em pastas, como  models ,  routes , etc.
+Tratamento de Erros: Sempre trate erros ao interagir com o banco de dados para garantir que sua aplicação seja robusta.
+Variáveis de Ambiente: Considere usar variáveis de ambiente para armazenar informações sensíveis, como a URI do banco de dados, em vez de deixá-las hardcoded no código.
+Se você tiver mais perguntas ou precisar de ajuda com partes específicas do seu código, fique à vontade para perguntar!

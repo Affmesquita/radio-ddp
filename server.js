@@ -4,6 +4,7 @@ const staticRoutes = require('./src/routers/staticRoutes')
 const liveRoutes = require('./src/routers/liveRoutes')
 const videoRouter = require('./src/routers/videoRoutes')
 const { connectToDatabase } = require('./src/config/db')
+const methodOverride = require('method-override')
 
 
 const app = express()
@@ -14,7 +15,7 @@ app.set('views', path.join(__dirname, 'src/views'))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
+app.use(methodOverride('_method'))
 app.use(express.static(path.join('public')))
 
 // ROTAS
@@ -26,15 +27,15 @@ app.use(videoRouter)
 
 // Função para iniciar o servidor
 async function startServer() {
-    await connectToDatabase(); // Conecta ao MongoDB
-    const PORT = process.env.PORT || 3000;
+    await connectToDatabase() // Conecta ao MongoDB
+    const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
-      console.log(`SERVER DDP ON http://localhost:3000/home`);
-    });
-  }
+      console.log(`SERVER DDP ON http://localhost:3000/home`)
+    })
+}
   
   // Inicia o servidor
-  startServer().catch(console.error);
+  startServer().catch(console.error)
 
 
 //        node server.js        //  

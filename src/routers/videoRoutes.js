@@ -18,6 +18,12 @@ videoRouter.get('/admin', episodesController.getAdminPage)
 // Rota para postar um novo vídeo
 videoRouter.post('/admin/postar', upload.single('video'), episodesController.postVideo)
 
+// Rota para modificar o post
+videoRouter.put('/episodio/:id', episodesController.updateEpisode)
+
+// Rota para deletar o post
+videoRouter.delete('/episodio/:id', episodesController.deleteEpisode)
+
 
 
 module.exports = videoRouter

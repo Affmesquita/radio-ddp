@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/episodios.css">
+    <link rel="stylesheet" href="/css/header-nav-style.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <script src="/javaScript/index.js" type="module" defer></script>
     <title>Episódios</title>
 </head>
 <body>
     <%- include('partials/header') %>
 
     <div class="container">
-        <h1>Episódios</h1>
+        <h1 id="titulo">Episódios</h1>
         <div class="episodios">
             <% episodios.forEach(function(episodio) { %>
                 <div class="card">
                     <h2><%= episodio.titulo %></h2>
                     <p><%= episodio.descricao %></p>
+                    <img src="<%= episodio.imgUrl %>" alt="Imagem do episódio" style="max-width: 100%; height: auto;">
                     <a href="/episodio/<%= episodio._id %>">Assistir Episódio</a>
                 </div>
             <% }) %>
