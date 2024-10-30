@@ -17,10 +17,14 @@
         <div class="episodios">
             <% episodios.forEach(function(episodio) { %>
                 <div class="card">
-                    <h2><%= episodio.titulo %></h2>
-                    <p><%= episodio.descricao %></p>
-                    <img src="<%= episodio.imgUrl %>" alt="Imagem do episódio" style="max-width: 100%; height: auto;">
-                    <a href="/episodio/<%= episodio._id %>">Assistir Episódio</a>
+                    <div class="card-text">
+                        <h2><%= episodio.titulo %></h2>
+                        <p><%= episodio.descricao %></p>
+                    </div>
+                    <div class="card-img-link">
+                        <img src="<%= episodio.imgUrl %>" alt="Imagem do episódio" style="max-width: 100%; height: auto;">
+                        <a href="/episodio/<%= episodio._id %>">Assistir Episódio</a>
+                    </div>
                 </div>
             <% }) %>
         </div>

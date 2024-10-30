@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/css/admin-post.css">
     <link rel="stylesheet" href="/css/header-nav-style.css">
     <link rel="stylesheet" href="/css/footer.css">
+    <script src="/javaScript/index.js" defer></script>
+    <script src="/javaScript/deleteEpisode.js" defer></script>
     <title>Admin - Postar Episódio</title>
 </head>
 <body>
@@ -20,7 +22,7 @@
 
             <ul id="header-list">
                 <li><a href="/episodios">Episódios</a></li>
-                <li><a href="/sobre.html" target="">Sobre</a></li>
+                <li><a href="/sobre.html">Sobre</a></li>
             </ul>
 
             <img src="/image/hamburger-menu-icon-png-17.jpg" alt="" id="btn-hamburger">
@@ -50,20 +52,16 @@
                 <label for="img">Imagem:</label>
                 <input type="file" id="img" name="img" accept="image/*">
             </div>
-            <button type="submit">Postar Episódio</button>
-            
+            <button id="post" type="submit">Postar Episódio</button>
         </form>
 
         <h2>Lista de Episódios</h2>
         <ul id="episodios-list">
-            <!-- Aqui você deve gerar a lista de episódios com base nos dados do banco -->
             <% episodios.forEach(function(episodio) { %>
-                <li>
+                <li id="episodio-<%= episodio._id %>"> <!-- Adicionando um ID para facilitar a remoção -->
                     <h3><%= episodio.titulo %></h3>
                     <p><%= episodio.descricao %></p>
-                    <form action="/episodio/<%= episodio._id %>?_method=DELETE" method="POST">
-                        <button type="submit">Deletar</button>
-                    </form>
+                    <button onclick="deleteEpisode('<%= episodio._id %>')">Deletar</button>
                     <form action="/episodio/<%= episodio._id %>" method="GET">
                         <button type="submit">Editar</button>
                     </form>

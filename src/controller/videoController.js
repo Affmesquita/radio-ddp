@@ -19,7 +19,8 @@ const episodesController = {
             const novoVideo = new Video({
                 titulo: req.body.titulo,
                 descricao: req.body.descricao,
-                videoUrl: req.file.path // Caminho do vídeo
+                videoUrl: req.files['video'][0].path, // Caminho do vídeo
+                imgUrl: req.files['img'] ? req.files['img'][0].path : null // Caminho da imagem (opcional)
             })
             await novoVideo.save() // Salva o novo vídeo no banco de dados
             res.redirect('/episodios') // Redireciona para a página de episódios

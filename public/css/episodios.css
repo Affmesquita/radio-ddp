@@ -39,8 +39,34 @@ body {
     color: white;
     margin: auto;
     font-size: 3rem;
+    padding: 30px 0px;
 }
 
 .episodios {
+    width: 500px;
+    height: 200px;
+}
 
+.card {
+    width: 500px;
+    height: 200px;
+
+    border: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.card-text {
+    width: 400px;
+    height: 100px;
+
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+}
+.card-img-link {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
 }

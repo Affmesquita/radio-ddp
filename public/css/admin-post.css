@@ -36,7 +36,26 @@ form {
 
 textarea {
     width: 400px;
-    height: 400px;
+    height: 200px;
 
     padding: 20px 0px;
+}
+
+button {
+    width: 50px;
+
+}
+
+#post {
+    width: 100px;
+
+    color: white;
+    background-color: brown;
+
+    padding: 8px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border: 0px;
+    border-radius: 12px;
 }

@@ -1,9 +1,8 @@
 const express = require('express')
 const episodesController = require('../controller/videoController')
 const videoRouter = express.Router()
-const storage = require("../middleware/multerConfig")
-const multer = require('multer')
-const upload = multer({ storage: storage })
+const upload = require("../middleware/multerConfig")
+
 
 
 // Rota para exibir a página de episódios
@@ -16,7 +15,10 @@ videoRouter.get('/episodio/:id', episodesController.getEpisode)
 videoRouter.get('/admin', episodesController.getAdminPage)
 
 // Rota para postar um novo vídeo
-videoRouter.post('/admin/postar', upload.single('video'), episodesController.postVideo)
+videoRouter.post('/admin/postar', upload.fields([
+    { name: 'video', maxCount: 1 }, // Um vídeo
+    { name: 'img', maxCount: 1 }     // Uma imagem
+]), episodesController.postVideo)
 
 // Rota para modificar o post
 videoRouter.put('/episodio/:id', episodesController.updateEpisode)
