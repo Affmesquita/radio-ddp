@@ -21,11 +21,16 @@ videoRouter.post('/admin/postar', upload.fields([
 ]), episodesController.postVideo)
 
 // Rota para modificar o post
-videoRouter.put('/episodio/:id', episodesController.updateEpisode)
+videoRouter.put('/episodio/:id', upload.fields([
+    { name: 'video', maxCount: 1 }, // Um vídeo
+    { name: 'img', maxCount: 1 }     // Uma imagem
+]), episodesController.updateEpisode)
 
 // Rota para deletar o post
 videoRouter.delete('/episodio/:id', episodesController.deleteEpisode)
 
+//Rota para editar o episódio
+videoRouter.get('/episodio/:id/editar', episodesController.getEditEpisode)
 
 
 module.exports = videoRouter

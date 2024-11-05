@@ -1,0 +1,10 @@
+Um ObjectId é um tipo de dado usado pelo MongoDB para identificar documentos de forma única. Ele é gerado automaticamente pelo MongoDB quando um novo documento é criado e possui 12 bytes, que são representados como uma string hexadecimal de 24 caracteres.
+
+Estrutura do ObjectId:
+Timestamp: Os primeiros 4 bytes representam o timestamp (data e hora) em que o documento foi criado.
+Machine Identifier: Os próximos 3 bytes são um identificador único da máquina onde o MongoDB está rodando.
+Process Identifier: Os próximos 2 bytes são um identificador do processo que gerou o ObjectId.
+Counter: Os últimos 3 bytes são um contador que garante a unicidade do ObjectId gerado no mesmo segundo.
+Vantagens do ObjectId:
+Unicidade: Garante que cada documento tenha um identificador único, mesmo em diferentes servidores.
+Ordenação: O timestamp permite que os documentos sejam ordenados pela data de criação.

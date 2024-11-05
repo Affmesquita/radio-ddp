@@ -62,7 +62,7 @@
                     <h3><%= episodio.titulo %></h3>
                     <p><%= episodio.descricao %></p>
                     <button onclick="deleteEpisode('<%= episodio._id %>')">Deletar</button>
-                    <form action="/episodio/<%= episodio._id %>" method="GET">
+                    <form action="/episodio/<%= episodio._id %>/editar" method="GET">
                         <button type="submit">Editar</button>
                     </form>
                 </li>

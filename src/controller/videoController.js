@@ -31,27 +31,53 @@ const episodesController = {
     },
 
     getEpisode: async (req, res) => {
-        const episodio = await Video.findById(req.params.id)
-        if (!episodio) {
-            return res.status(404).send('Episódio não encontrado')
+        const episodioId = req.params.id // Obtém o ID do episódio a partir da URL
+        try {
+            const episodio = await Video.findById(episodioId)
+            if (!episodio) {
+                return res.status(404).send('Episódio não encontrado')
+            }
+            res.render('episodio', { episodio })
+        } catch (error) {
+            console.error('Erro ao buscar episódio:', error)
+            res.status(500).send('Erro ao buscar episódio.')
         }
-        res.render('episodio', { episodio })
     },
 
     updateEpisode: async (req, res) => {
         const episodioId = req.params.id // Obtém o ID do episódio a partir da URL
-        const { titulo, descricao, videoUrl, imgUrl } = req.body // Obtém os novos dados do corpo da requisição
+    
+        // Obtém os novos dados do corpo da requisição
+        const { titulo, descricao } = req.body
+    
+        // Cria um objeto para atualizar
+        const updateData = {}
+    
+        // Adiciona os campos que foram enviados
+        if (titulo) {
+            updateData.titulo = titulo // Atualiza o título se foi enviado
+        }
+        if (descricao) {
+            updateData.descricao = descricao // Atualiza a descrição se foi enviada
+        }
+        if (req.files) {
+            if (req.files['video'] && req.files['video'][0]) {
+                updateData.videoUrl = req.files['video'][0].path // Atualiza o vídeo se foi enviado
+            }
+            if (req.files['img'] && req.files['img'][0]) {
+                updateData.imgUrl = req.files['img'][0].path // Atualiza a imagem se foi enviada
+            }
+        }
     
         try {
             const episodioAtualizado = await Video.findByIdAndUpdate(
                 episodioId,
-                { titulo, descricao, videoUrl, imgUrl }, // Atualiza os campos desejados
-                { new: true } // Retorna o documento atualizado
+                updateData, // Usa o objeto de atualização
+                { new: true }
             )
     
             if (episodioAtualizado) {
-                // Redireciona para a página de administração após a atualização
-                res.redirect('/admin/video') // Certifique-se de que esta rota está correta
+                res.redirect(`/episodio/${episodioId}`) // Redireciona para a página do episódio atualizado
             } else {
                 res.status(404).send({ message: 'Episódio não encontrado.' })
             }
@@ -74,9 +100,23 @@ const episodesController = {
             console.error('Erro ao deletar episódio:', error)
             res.status(500).send({ message: 'Erro ao deletar episódio.' })
         }
+    },
+
+    getEditEpisode: async (req, res) => {
+        const episodioId = req.params.id // Obtém o ID do episódio a partir da URL
+        try {
+            const episodio = await Video.findById(episodioId)
+            if (!episodio) {
+                return res.status(404).send('Episódio não encontrado')
+            }
+            res.render('edit-episode', { episodio }) // Renderiza a página de edição
+        } catch (error) {
+            console.error('Erro ao buscar episódio:', error)
+            res.status(500).send('Erro ao buscar episódio.')
+        }
+
+            
     }
 }
 
 module.exports = episodesController
-
-

@@ -1,7 +1,7 @@
 async function deleteEpisode(episodioId) {
     if (confirm('Tem certeza que deseja deletar este episódio?')) {
         try {
-            const response = await fetch(`/api/episodios/${episodioId}`, {
+            const response = await fetch(`/episodios/${episodioId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
