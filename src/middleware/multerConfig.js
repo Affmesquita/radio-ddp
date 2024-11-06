@@ -4,11 +4,13 @@ const path = require('node:path')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         if (file.mimetype.startsWith('video/')) {
-            cb(null, path.join(__dirname, '../videos')) // Diretório para vídeos
+            // Diretório para vídeos
+            cb(null, path.join(__dirname, '../../public/videos')); 
         } else if (file.mimetype.startsWith('image/')) {
-            cb(null, path.join(__dirname, '../../public/image')) // Diretório para imagens
+            // Diretório para imagens
+            cb(null, path.join(__dirname, '../../public/updateImg')); 
         } else {
-            cb(new Error('Tipo de arquivo não suportado'), false)
+            cb(new Error('Tipo de arquivo não suportado'), false);
         }
     },
     filename: (req, file, cb) => {

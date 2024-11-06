@@ -16,12 +16,19 @@ const episodesController = {
 
     postVideo: async (req, res) => {
         try {
+
+            const videoPath = req.files['video'][0].path; // Caminho absoluto do vídeo
+            const imgPath = req.files['img'] ? `/updateImg/${req.files['img'][0].filename}` : null; // Caminho relativo da imagem
+
             const novoVideo = new Video({
                 titulo: req.body.titulo,
                 descricao: req.body.descricao,
-                videoUrl: req.files['video'][0].path, // Caminho do vídeo
-                imgUrl: req.files['img'] ? req.files['img'][0].path : null // Caminho da imagem (opcional)
+                videoUrl: videoPath, // Caminho absoluto do vídeo
+                imgUrl: imgPath // Caminho relativo da imagem 
             })
+
+            console.log('Caminho da imagem:', novoVideo.imgUrl); // Verifique o caminho da imagem
+
             await novoVideo.save() // Salva o novo vídeo no banco de dados
             res.redirect('/episodios') // Redireciona para a página de episódios
         } catch (error) {
