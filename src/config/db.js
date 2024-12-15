@@ -1,7 +1,8 @@
 // db.js
 const mongoose = require('mongoose')
 
-const uri = "mongodb+srv://affonsomesquita:c5VhoKyNCuz3hNZA@cluster0.abvyc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const uri = "mongodb+srv://affonsomesquita:c5VhoKyNCuz3hNZA@ddp.abvyc.mongodb.net/?retryWrites=true&w=majority&appName=DDP"
+
 
 // Função para conectar ao banco de dados
 async function connectToDatabase() {
