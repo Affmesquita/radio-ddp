@@ -5,9 +5,11 @@ const liveRoutes = require('./src/routers/liveRoutes')
 const videoRouter = require('./src/routers/videoRoutes')
 const { connectToDatabase } = require('./src/config/db')
 const methodOverride = require('method-override')
+const loginRouter = require('./src/routers/loginRoutes')
 
 
 const app = express()
+
 
 // SETTINGS
 app.set('view engine', 'ejs')
@@ -22,6 +24,7 @@ app.use(express.static(path.join('public')))
 app.use(liveRoutes)
 app.use(staticRoutes)
 app.use(videoRouter)
+app.use(loginRouter)
 
 
 
