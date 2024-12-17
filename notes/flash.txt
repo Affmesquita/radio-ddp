@@ -1,0 +1,67 @@
+connect-flash é uma middleware para Express que permite armazenar mensagens temporárias (flash messages) na sessão do usuário. Essas mensagens são úteis para exibir feedback ao usuário após ações, como tentativas de login falhadas ou confirmações de ações.
+
+Como Funciona
+Armazenamento Temporário: As mensagens são armazenadas na sessão e estão disponíveis apenas na próxima requisição. Depois que a mensagem é lida, ela é removida da sessão.
+
+
+Uso Comum: É frequentemente usado para exibir mensagens de erro ou sucesso após redirecionamentos, como quando um usuário tenta fazer login e falha.
+
+
+Como Usar
+Para usar connect-flash, você precisa instalá-lo e configurá-lo em sua aplicação Express. Aqui estão os passos básicos:
+
+Instalação:
+bash
+
+
+npm install connect-flash
+Importação e Configuração:
+
+
+Você deve importar connect-flash e configurá-lo em sua aplicação. Além disso, você precisará de uma sessão para armazenar as mensagens. Isso geralmente é feito com express-session.
+
+
+javascript
+
+
+const express = require('express');
+   const session = require('express-session');
+   const flash = require('connect-flash');
+
+   const app = express();
+
+   // Configuração da sessão
+   app.use(session({
+       secret: 'seuSegredoAqui', // Substitua pelo seu segredo
+       resave: false,
+       saveUninitialized: true
+   }));
+
+   // Inicializa o connect-flash
+   app.use(flash());
+
+   // Middleware para tornar as mensagens flash disponíveis
+   app.use((req, res, next) => {
+       res.locals.error = req.flash('error'); // Mensagens de erro
+       res.locals.success = req.flash('success'); // Mensagens de sucesso
+       next();
+   });
+Uso nas Rotas:
+
+
+Agora você pode usar req.flash para definir mensagens e acessá-las nas views.
+
+
+javascript
+
+
+app.post('/login', (req, res) => {
+       // Se as credenciais forem inválidas
+       req.flash('error', 'Credenciais inválidas');
+       res.redirect('/login');
+   });
+Resumo
+Importação: Sim, você deve importar connect-flash com require.
+Configuração: É necessário configurar express-session antes de usar connect-flash.
+Uso: Você pode definir mensagens com req.flash e acessá-las nas views.
+Se você tiver mais perguntas ou precisar de mais detalhes, fique à vontade para perguntar!
