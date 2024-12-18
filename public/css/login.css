@@ -16,15 +16,14 @@ body {
 
     color: white;
     background-color: black;
-
+}
+.container {
+    height: 450px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.container {
-    height: 450px;
 
     padding: 40px;
     padding-top: 70px;
