@@ -16,8 +16,8 @@ const loginController = {
         if (username === USERNAME && password === PASSWORD_HASH) {
             // Cria um token
             const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' }) // O token expira em 1 hora
-            res.json({ token })
             res.redirect('edit-episode')
+            res.json({ token })
         } else {
             // Redireciona para a página de login com uma mensagem de erro
             return res.redirect('/login?error=Credenciais inválidas')
