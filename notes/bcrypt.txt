@@ -60,3 +60,33 @@ bcrypt.hash(password, saltRounds, (err, hash) => {
 });
 Conclusão
 Portanto, para responder à sua pergunta: sim, você deve usar uma biblioteca como bcrypt para gerar hashes de senhas em vez de armazenar senhas em texto simples. Isso aumenta a segurança da sua aplicação.
+
+
+
+
+
+
+
+
+
+
+
+Um "hash de uma senha" refere-se ao processo de transformar uma senha em uma representação fixa e única, que não pode ser revertida para a senha original. Esse processo é realizado através de algoritmos de hashing, como o bcrypt. 
+
+Quando você aplica um hash a uma senha, o resultado é uma sequência de caracteres que representa a senha de forma segura. O objetivo principal de usar hashing em senhas é proteger informações sensíveis. Mesmo que alguém consiga acessar o banco de dados onde os hashes estão armazenados, eles não poderão facilmente recuperar a senha original a partir do hash.
+
+Aqui estão alguns pontos importantes sobre hashing de senhas:
+
+Irreversibilidade: Um hash é projetado para ser uma função unidirecional, ou seja, não é possível "desfazer" o hash para obter a senha original.
+
+
+Determinístico: Para uma mesma entrada (senha), o hash gerado será sempre o mesmo. Isso significa que, se você hashear a mesma senha várias vezes, obterá o mesmo hash.
+
+
+Salt: Para aumentar a segurança, um "salt" (um valor aleatório) é frequentemente adicionado à senha antes do hashing. Isso garante que senhas idênticas gerem hashes diferentes.
+
+
+Segurança: Algoritmos como bcrypt são projetados para serem lentos, o que dificulta ataques de força bruta, onde um invasor tenta várias combinações de senhas para encontrar a correta.
+
+
+Em resumo, o hashing de senhas é uma técnica fundamental para proteger a confidencialidade das senhas dos usuários em sistemas e aplicações.
