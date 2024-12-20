@@ -8,4 +8,6 @@ loginRouter.get('/login', loginController.showLoginForm)
 
 loginRouter.post('/login', loginController.login)
 
+loginRouter.get('/logout', loginController.logout)
+
 module.exports = loginRouter

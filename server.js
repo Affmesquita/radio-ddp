@@ -6,7 +6,7 @@ const videoRouter = require('./src/routers/videoRoutes')
 const { connectToDatabase } = require('./src/config/db')
 const methodOverride = require('method-override')
 const loginRouter = require('./src/routers/loginRoutes')
-
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
@@ -19,6 +19,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(express.static(path.join('public')))
+app.use(cookieParser())
 
 // ROTAS
 app.use(liveRoutes)

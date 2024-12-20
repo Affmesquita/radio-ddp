@@ -55,6 +55,10 @@
             <button id="post" type="submit">Postar Episódio</button>
         </form>
 
+        <form class="btn" action="/logout" method="GET">
+            <button type="submit">Logout</button>
+        </form>
+
         <h2>Lista de Episódios</h2>
         <ul id="episodios-list">
             <% episodios.forEach(function(episodio) { %>

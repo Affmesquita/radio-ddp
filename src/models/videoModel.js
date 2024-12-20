@@ -13,6 +13,10 @@ const videoSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    imgUrl: { 
+        type: String,
+        required: true, 
+    },
     dataCriacao: {
         type: Date,
         default: Date.now,
