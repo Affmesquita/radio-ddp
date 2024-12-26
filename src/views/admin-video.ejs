@@ -31,7 +31,10 @@
 
     </header>
 
+
     <div class="post-content">
+        
+        <h1>Painel de comando</h1>
 
         <h1>Postar Novo Episódio</h1>
 
@@ -50,25 +53,25 @@
             </div>
             <div>
                 <label for="img">Imagem:</label>
-                <input type="file" id="img" name="img" accept="image/*">
+                <input type="file" id="img" name="img" accept="image/*" required>
             </div>
             <button id="post" type="submit">Postar Episódio</button>
         </form>
 
-        <form class="btn" action="/logout" method="GET">
-            <button type="submit">Logout</button>
+        <form  action="/logout" method="GET">
+            <button type="submit" class="btn">Logout</button>
         </form>
 
         <h2>Lista de Episódios</h2>
         <ul id="episodios-list">
             <% episodios.forEach(function(episodio) { %>
-                <li id="episodio-<%= episodio._id %>"> <!-- Adicionando um ID para facilitar a remoção -->
+                <li id="episodio-<%= episodio._id %>" class="ep-card"> <!-- Adicionando um ID para facilitar a remoção -->
                     <h3><%= episodio.titulo %></h3>
                     <p><%= episodio.descricao %></p>
-                    <button onclick="deleteEpisode('<%= episodio._id %>')">Deletar</button>
                     <form action="/episodio/<%= episodio._id %>/editar" method="GET">
                         <button type="submit">Editar</button>
                     </form>
+                    <button onclick="deleteEpisode('<%= episodio._id %>')">Deletar</button>
                 </li>
             <% }) %>
         </ul>

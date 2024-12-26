@@ -14,13 +14,16 @@
     <%- include('partials/header') %>
 
     <div class="container">
-        <h1><%= episodio.titulo %></h1>
-        <video width="640" height="480" controls>
-            <source src="<%= episodio.videoUrl %>" type="video/mp4">
-            Seu navegador não suporta o elemento de vídeo.
-        </video>
-        <p><%= episodio.descricao %></p>
-        <a href="/episodios">Voltar para Episódios</a>
+        <div class="card-ep">
+            <h1><%= episodio.titulo %></h1>
+            <video width="640" height="480" controls>
+                <source src="<%= episodio.videoUrl %>" type="video/mp4">
+                Seu navegador não suporta o elemento de vídeo.
+            </video>
+
+            <p><%= episodio.descricao %></p>
+            <a href="/episodios">Voltar para Episódios</a>
+        </div>
     </div>
 
     <%- include('partials/footer') %>

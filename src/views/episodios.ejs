@@ -16,13 +16,13 @@
         <h1 id="titulo">Episódios</h1>
         <div class="episodios">
             <% episodios.forEach(function(episodio) { %>
-                <div class="card">
+                <div class="card" style="background-image: url('<%= episodio.imgUrl %>');">
                     <div class="card-text">
                         <h2><%= episodio.titulo %></h2>
                         <p><%= episodio.descricao %></p>
                     </div>
                     <div class="card-img-link">
-                        <img src="<%= episodio.imgUrl %>" alt="Imagem do episódio" style="max-width: 100%; height: auto;">
+                        <img class="img" src="<%= episodio.imgUrl %>" style="display: none;" alt="Imagem do episódio">
                         <a href="/episodio/<%= episodio._id %>">Assistir Episódio</a>
                     </div>
                 </div>
@@ -34,3 +34,4 @@
 </body>
 </html>
   
+

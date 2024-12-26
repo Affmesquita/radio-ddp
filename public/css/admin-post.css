@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 @font-face {
     font-family: TT-Bold;
     src: url(/fonts/TT\ Hoves\ Pro\ Trial\ Expanded\ Bold.ttf);
@@ -16,9 +18,13 @@ body {
     color: white;
 }
 
+header{
+    margin-bottom: 5px;
+}
+
 .post-content {
     width: 100%;
-    height: 700px;
+    height: 100%;
 
     display: flex;
     justify-content: center;
@@ -59,3 +65,70 @@ button {
     border: 0px;
     border-radius: 12px;
 }
+.btn {
+    width: 100px;
+
+    color: white;
+    background-color: brown;
+
+    padding: 8px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border: 0px;
+    border-radius: 12px;
+}
+
+.ep-card {
+    width: 800px;
+    height: 200px;
+
+    border-bottom: solid 2px brown;
+
+    margin-bottom: 20px;
+}
+
+.ep-card h3 {
+    margin-bottom: 5px;
+}
+
+.ep-card p {
+    margin-bottom: 10px;
+}
+
+.ep-card button {
+    width: 70px;
+
+    color: white;
+
+    background-color: transparent;
+
+    padding: 5px;
+}
+
+@media (max-width: 840px) {
+
+    .ep-card{
+
+        width: 80%;
+
+        margin: auto;
+
+        margin-bottom: 40px;
+
+    }
+
+
+}
+
+/*  CSS DO UPDATE  */
+
+.container-edit-post {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 100px;
+}
+

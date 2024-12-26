@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/admin-post.css">
@@ -10,27 +9,34 @@
     <link rel="stylesheet" href="/css/footer.css">
     <script src="/javaScript/index.js" defer></script>
     <title>Document</title>
+    
 </head>
 <body>
-    h1>Editar Episódio</h1>
-<form action="/episodio/<%= episodio._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-    <div>
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" value="<%= episodio.titulo %>" required>
+
+    <div class="container-edit-post">
+
+        <h1>Editar Episódio</h1>
+        
+        <form action="/episodio/<%= episodio._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" value="<%= episodio.titulo %>" required>
+            </div>
+            <div>
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" required><%= episodio.descricao %></textarea>
+            </div>
+            <div>
+                <label for="video">Vídeo:</label>
+                <input type="file" id="video" name="video" accept="video/mp4">
+            </div>
+            <div>
+                <label for="img">Imagem:</label>
+                <input type="file" id="img" name="img" accept="image/*">
+            </div>
+            <button type="submit">Atualizar Episódio</button>
+        </form>
+        
     </div>
-    <div>
-        <label for="descricao">Descrição:</label>
-        <textarea id="descricao" name="descricao" required><%= episodio.descricao %></textarea>
-    </div>
-    <div>
-        <label for="video">Vídeo:</label>
-        <input type="file" id="video" name="video" accept="video/mp4">
-    </div>
-    <div>
-        <label for="img">Imagem:</label>
-        <input type="file" id="img" name="img" accept="image/*">
-    </div>
-    <button type="submit">Atualizar Episódio</button>
-</form>
 </body>
 </html>

@@ -20,12 +20,13 @@ html, body {
 
     margin: 0;
 
-    background-color: rgb(70, 17, 17);
+    background-color: black;
     
 }
 
 .container {
     width: 100%;
+
 
     flex: 1;
     padding: 70px;
@@ -41,13 +42,14 @@ html, body {
     color: white;
     text-shadow: 1px 2px black;
     font-size: 3rem;
+
 }
 
 .episodios {
     width: 500px;
-    height: 100%;
 
     display: flex;
+    flex-direction: column-reverse;
     flex-wrap: wrap;
     justify-content: space-between;
 
@@ -58,7 +60,14 @@ html, body {
     border: 1px solid #dddddd3f;
     border-radius: 8px;
 
+    display: flex;
+    flex-direction: column ;
+    justify-content: space-between;
+
     background-color: rgba(0, 0, 0, 0.288);
+    background-position: center;
+
+    color: white;
 
     margin: 10px;
 
@@ -81,14 +90,17 @@ html, body {
     margin: auto;
     margin-top: 10px;
 }
+.card-text p {
+    font-size: 75%;
+}
 .card-img-link {
     display: flex;
     justify-content: space-around;
     align-items: baseline;
 }
 
-.card-img-link img {
-    max-width: 100%;
+.img {
+    max-width: 500px;
     height: auto;
 
     border-top-left-radius: 8px; 
@@ -101,5 +113,42 @@ footer {
     clear: both;
 
     margin-top: 20px;
+}
+
+
+
+/* CSS EPISÓDIO UNICO  */
+
+.card-ep {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+}
+
+.card-ep p {
+    width: 800px;
+
+    margin: 20px 0px;
+}
+
+
+@media (max-width:  836px) {
+    .card-ep {
+        width: 80%;
+    }
+
+    .card-ep p {
+        width: 80%;
+        text-align: justify;
+    }
+
+    video {
+        width: 90%;
+    }
+
+    
 }
 

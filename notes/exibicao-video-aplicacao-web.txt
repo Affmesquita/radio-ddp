@@ -1,0 +1,50 @@
+Título: Solucionando Problemas de Exibição de Vídeos em Aplicações Web com Node.js e EJS
+
+Introdução
+
+Ao desenvolver uma aplicação web que permite o upload e a exibição de vídeos, é comum encontrar desafios relacionados à forma como os caminhos dos arquivos são gerenciados. Neste estudo de caso, abordaremos um problema específico em que um vídeo, embora corretamente salvo no servidor, não estava sendo exibido na página web. Vamos explorar as causas do problema e a solução encontrada.
+
+Descrição do Problema
+
+Durante o desenvolvimento da aplicação, foi implementada uma funcionalidade que permitia aos usuários enviar vídeos e imagens. Após o upload, os arquivos eram salvos em diretórios específicos dentro da pasta public da aplicação. No entanto, ao tentar exibir o vídeo na página usando um elemento <video>, o vídeo não aparecia, apesar de estar presente na pasta correta.
+
+Análise do Código
+
+O trecho de código responsável por definir os caminhos dos arquivos era o seguinte:
+
+javascript
+
+
+const videoUrl = `/update-videos/${req.files['video'][0].filename}`; // Caminho relativo do vídeo
+const imgUrl = req.files['img'] ? `/update-images/${req.files['img'][0].filename}` : null; // Caminho relativo da imagem
+O caminho do vídeo era passado para a visualização EJS da seguinte forma:
+
+html
+
+
+<video width="640" height="480" controls>
+    <source src="<%= episodio.videoUrl %>" type="video/mp4">
+    Seu navegador não suporta o elemento de vídeo.
+</video>
+Identificação do Problema
+
+Ao inspecionar o elemento <source> no navegador, foi constatado que o caminho do vídeo estava sendo exibido como um caminho absoluto do sistema de arquivos:
+
+
+
+C:\Users\MESQUITA\Documents\GitHub\radio-ddp\public\update-videos\nome-do-video.mp4
+Esse tipo de caminho não é acessível pelo navegador, pois ele não pode acessar arquivos diretamente do sistema de arquivos local. Em vez disso, o caminho deve ser um URL que o servidor possa servir, começando com uma barra (/) que indica a raiz do servidor.
+
+Solução Encontrada
+
+A solução para o problema foi garantir que o caminho do vídeo fosse um caminho relativo acessível via URL. O código foi ajustado da seguinte forma:
+
+javascript
+
+
+const videoUrl = `/update-videos/${req.files['video'][0].filename}`; // Caminho relativo do vídeo
+Dessa forma, ao renderizar a página EJS, o valor de episodio.videoUrl se tornaria algo como /update-videos/nome-do-video.mp4, que é um caminho que o navegador pode acessar.
+
+Conclusão
+
+A correção do problema de exibição do vídeo foi alcançada ao garantir que os caminhos dos arquivos fossem configurados como caminhos relativos acessíveis via URL. É fundamental lembrar que, ao trabalhar com uploads de arquivos em aplicações web, os caminhos devem ser sempre estruturados de maneira que sejam acessíveis pelo servidor e pelo navegador. Essa experiência reforça a importância de compreender como o sistema de arquivos e os servidores web interagem, especialmente ao desenvolver aplicações que lidam com uploads e exibições de mídia.
