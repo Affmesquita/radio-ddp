@@ -17,7 +17,11 @@
 @media (max-width: 1017px) {
 
     main {
-        height: 2000px;
+        height: 1450px;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 
     .subtitle-conteiner {
@@ -42,14 +46,15 @@
 }
 
 
-@media (max-width: 870px) {
+@media (max-width: 882px) {
 
     main {
-        height: 2150px;
+        height: 2000px;
     }
     
     .ep-card{
         width: 80%;
+        height: 600px;
 
         display: flex;
         flex-direction: column;
@@ -61,6 +66,7 @@
 
     .img-ep-card {
         width: 90%;
+        height: 50%;
         margin: auto;
         
     }
@@ -127,14 +133,16 @@
         display: none;
     }
 
-    .plusnews {
-        width: 200px;
-        align-self: center;
-        background-image: url(public/image/background-camp-2.jpg);
-        background-position: center ;
-        background-size: cover;
-        margin-top: 20px;
+    .img-ep-card {
+        display: none;
+        
     }
+
+    .ep-card {
+        width: 100%;
+        height: 200px;
+    }
+
 
     .subtitle-conteiner {
         font-size: 70%;

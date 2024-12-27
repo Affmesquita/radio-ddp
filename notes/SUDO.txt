@@ -1,0 +1,23 @@
+O sudo é um comando utilizado em sistemas operacionais baseados em Unix, como Linux e macOS, que permite que um usuário execute comandos com os privilégios de outro usuário, geralmente o usuário root (administrador do sistema). A palavra "sudo" é uma abreviação de "superuser do", que significa "fazer como superusuário".
+
+Principais características do sudo:
+Elevação de Privilégios: O sudo permite que usuários comuns executem comandos que normalmente requerem permissões de administrador, sem precisar fazer login como root.
+
+
+Segurança: O uso do sudo é considerado mais seguro do que fazer login como root, pois reduz o risco de executar acidentalmente comandos prejudiciais ao sistema.
+
+
+Registro de Comandos: O sudo registra os comandos executados, permitindo que administradores revisem o histórico de ações realizadas com privilégios elevados.
+
+
+Configuração Personalizada: O comportamento do sudo pode ser configurado através do arquivo /etc/sudoers, onde se pode definir quais usuários ou grupos têm permissão para executar quais comandos.
+
+
+Exemplo de uso:
+Para instalar um pacote no Ubuntu, por exemplo, você usaria o seguinte comando:
+
+bash
+
+
+sudo apt install nome-do-pacote
+Ao executar esse comando, o sistema solicitará a senha do usuário atual (se não estiver em uma sessão de root) e, se a senha estiver correta, o comando será executado com privilégios de administrador.

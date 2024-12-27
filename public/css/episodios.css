@@ -117,7 +117,7 @@ footer {
 
 
 
-/* CSS EPISÓDIO UNICO  */
+/*/////////////////////////////////  CSS EPISÓDIO UNICO  \\\\\\\\\\\\\\\*/ 
 
 .card-ep {
     display: flex;
@@ -130,6 +130,7 @@ footer {
 
 .card-ep p {
     width: 800px;
+    text-align: justify;
 
     margin: 20px 0px;
 }
