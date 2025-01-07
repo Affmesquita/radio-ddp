@@ -280,9 +280,12 @@ sudo systemctl start nginx
 
 sudo systemctl status nginx
 
-sudo systemctl enable nginx (Esse comando garante que o Nginx seja iniciado automaticamente toda vez que o sistema for reiniciado.)
+sudo systemctl enable nginx 
+(Esse comando garante que o Nginx seja iniciado automaticamente toda vez que o sistema for reiniciado.)
 
 sudo systemctl stop nginx
+
+sudo nano /etc/nginx/nginx.conf
 
 
 

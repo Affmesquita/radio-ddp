@@ -1,0 +1,50 @@
+Question :
+
+explique mais sobre esse arquivo .m3u8 
+segunda pergunta da 404 quando acesso o http://localhost:8080/live/stream.m3u8 
+terceira pergunta o que significa application/x=mpegURL 
+quarta pergunta /vnd.aple.mpegurl m3u8
+Answer :
+
+
+
+Vamos responder suas perguntas uma por uma:
+
+1. O que é um arquivo .m3u8?
+Um arquivo .m3u8 é uma lista de reprodução em formato HLS (HTTP Live Streaming). Ele é usado para transmitir vídeo e áudio pela internet. O arquivo contém informações sobre os segmentos de mídia que compõem o stream, como URLs para os arquivos de vídeo ou áudio, e informações sobre a duração de cada segmento. O formato .m3u8 é uma versão UTF-8 do formato .m3u, que é uma lista de reprodução simples.
+
+Estrutura do arquivo .m3u8:
+Um arquivo .m3u8 pode conter linhas como estas:
+
+
+
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:10
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10.0,
+http://localhost:8080/live/stream0.ts
+#EXTINF:10.0,
+http://localhost:8080/live/stream1.ts
+#EXTM3U: Indica que é um arquivo de lista de reprodução.
+#EXT-X-VERSION: Versão do protocolo HLS.
+#EXT-X-TARGETDURATION: Duração máxima dos segmentos de mídia.
+#EXT-X-MEDIA-SEQUENCE: Número do primeiro segmento na lista.
+#EXTINF: Duração do segmento em segundos, seguido pela URL do segmento.
+2. Erro 404 ao acessar http://localhost:8080/live/stream.m3u8
+O erro 404 indica que o arquivo solicitado não foi encontrado. Isso pode acontecer por alguns motivos:
+
+O stream não está sendo gerado: Certifique-se de que o OBS está transmitindo corretamente para o Nginx. O Nginx deve estar configurado para gerar o stream HLS.
+O nome do stream está incorreto: Se você nomeou seu stream de forma diferente no OBS, substitua stream na URL pelo nome correto.
+O diretório de saída está incorreto: Verifique se o Nginx está configurado para salvar os arquivos HLS no diretório correto (/tmp/hls, por exemplo) e que o Nginx tem permissão para acessar esse diretório.
+3. O que significa application/x-mpegURL?
+application/x-mpegURL é o tipo MIME (Multipurpose Internet Mail Extensions) associado a arquivos de lista de reprodução HLS (.m3u8). Esse tipo MIME informa ao navegador ou ao player de vídeo que o conteúdo que está sendo carregado é uma lista de reprodução HLS e que ele deve ser tratado como tal. Isso é importante para que o player saiba como processar o arquivo corretamente.
+
+4. O que significa application/vnd.apple.mpegurl?
+application/vnd.apple.mpegurl é outro tipo MIME associado a arquivos HLS (.m3u8). A diferença entre application/x-mpegURL e application/vnd.apple.mpegurl é sutil, mas ambos são usados para indicar que o conteúdo é uma lista de reprodução HLS. O prefixo vnd indica que é um tipo MIME definido por um fornecedor (neste caso, a Apple), que é a criadora do HLS.
+
+Resumo
+Arquivo .m3u8: Lista de reprodução para streaming HLS.
+Erro 404: Indica que o arquivo não foi encontrado; verifique o nome do stream e a configuração do Nginx.
+application/x-mpegURL e application/vnd.apple.mpegurl: Tipos MIME usados para arquivos HLS.
+Se você tiver mais perguntas ou precisar de mais esclarecimentos, fique à vontade para perguntar!

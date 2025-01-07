@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/header-nav-style.css">
     <link rel="stylesheet" href="/css/live.css">
     <link rel="stylesheet" href="/css/footer.css">
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <script src="/javaScript/index.js" type="module" defer></script>
     <title>LIVE</title>
    
@@ -34,7 +35,7 @@
 
     <div id="live-content">
         <video id="meu-video" controls autoplay>
-            <source src="rtmp://localhost/live/stream" type="video/mp4">
+            <source src="http://localhost:8080/live/stream.m3u8" type="application/x-mpegURL"/>
             <p>Seu navegador não suporta o elemento de vídeo.</p>
         </video>
     </div>
