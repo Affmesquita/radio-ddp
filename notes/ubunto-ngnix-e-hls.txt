@@ -143,3 +143,168 @@ http {
 
 
    rtmp://localhost/live
+
+   iniciar p NGINX:: ////////////////////////////////////////////////
+
+   sudo systemctl start nginx
+
+
+
+CONFIGURAÇÃO DO NGINX NO UBUNTO
+
+
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+error_log /var/log/nginx/error.log;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+        worker_connections 768;
+        # multi_accept on;
+}
+
+rtmp {
+        server {
+        listen 1935;
+        chunk_size 4096;
+
+        application live {
+            live on;
+            interleave on;
+            record off;
+
+            hls on;
+            hls_path /tmp/hls;
+            hls_fragment 15s;
+        }
+    }
+}
+
+
+http {
+        server {
+                listen 8080;
+
+        location / {
+            root /home/usuario/GitHub/radio-ddp/public;
+            index index.html index.htm;
+        }
+
+        location /live {
+
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            root /tmp/hls;
+       }
+
+        ##
+        # Basic Settings
+        ##
+
+        sendfile on;
+        tcp_nopush on;
+        types_hash_max_size 2048;
+        # server_tokens off;
+
+        # server_names_hash_bucket_size 64;
+        # server_name_in_redirect off;
+
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        ##
+        # SSL Settings
+        ##
+
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
+        ssl_prefer_server_ciphers on;
+
+        ##
+        # Logging Settings
+        ##
+
+        access_log /var/log/nginx/access.log;
+
+        ##
+        # Gzip Settings
+        ##
+
+        gzip on;
+
+        # gzip_proxied any;
+        # gzip_comp_level 6;
+        # gzip_buffers 16 8k;
+        # gzip_http_version 1.1;
+        # gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/x>
+
+        ##
+        # Virtual Host Configs
+        ##
+
+        include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/sites-enabled/*;
+}
+
+
+#mail {
+#       # See sample authentication script at:
+#       # http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript
+#
+#       # auth_http localhost/auth.php;
+#       # pop3_capabilities "TOP" "USER";
+#       # imap_capabilities "IMAP4rev1" "UIDPLUS";
+#
+#       server {
+#               listen     localhost:110;
+#               protocol   pop3;
+#               proxy      on;
+#       }
+#
+#       server {
+#               listen     localhost:143;
+#               protocol   imap;
+#               proxy      on;
+#       }
+#}
+
+
+
+
+
+COMANDOs NGINX/////////////// ///////////////// /////////////// ///////////// ///////
+
+sudo systemctl start nginx 
+
+sudo systemctl status nginx
+
+sudo systemctl enable nginx (Esse comando garante que o Nginx seja iniciado automaticamente toda vez que o sistema for reiniciado.)
+
+sudo systemctl stop nginx
+
+
+
+A mensagem "lines 1-15/15 (END)" indica que você está dentro de um visualizador de texto, como o less ou more, que é usado para mostrar a saída de comandos que geram mais texto do que pode ser exibido de uma só vez.
+
+Para sair desse modo e voltar ao terminal, você pode pressionar a tecla q. Isso deve fechar o visualizador e permitir que você digite novos comandos no terminal.
+
+Resumo dos Comandos:
+Pressione q: Para sair do visualizador e voltar ao terminal.
+Se você estiver usando um comando que gera muita saída e deseja visualizar a saída de uma forma que não entre em um visualizador, você pode redirecionar a saída para um arquivo ou usar grep para filtrar a saída. Por exemplo:
+
+bash
+sudo systemctl status nginx | less
+
+Ou, se você quiser ver apenas algumas linhas, pode usar head ou tail:
+
+bash
+sudo systemctl status nginx | head -n 10
+
+Isso mostrará apenas as primeiras 10 linhas da saída. Se precisar de mais ajuda, é só avisar!
+
+
+
+
+rtmp://localhost/live
