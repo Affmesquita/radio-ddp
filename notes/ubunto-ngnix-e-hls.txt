@@ -1,0 +1,145 @@
+rtmp {
+    server {
+        listen 1935;
+        chunk_size 4096;  # Tamanho do chunk para RTMP
+
+        application live {
+            live on;
+            interleave on;  # Intercalar áudio e vídeo
+            record off;     # Desativar gravação
+
+            # Configurações HLS
+            hls on;
+            hls_path /tmp/hls;  # Caminho para os arquivos HLS
+            hls_fragment 15s;   # Duração do fragmento HLS
+        }
+    }
+}
+
+http { 
+    server {
+        listen 8080;  # Porta HTTP
+
+        location / {
+            root html;
+            index index.html index.htm;
+        }
+
+        location /live {
+        
+        }
+    }
+}
+
+
+HLS é a sigla para HTTP Live Streaming, um protocolo de streaming de vídeo que permite transmitir conteúdo de alta qualidade: 
+
+
+
+O HLS é um protocolo adaptável, ou seja, a qualidade do vídeo pode aumentar ou diminuir dependendo da condição da rede. 
+
+O HLS é compatível com dispositivos móveis, como Android e iOS, e com navegadores da web. 
+
+O HLS é amplamente adotado por ser confiável, escalável e compatível. 
+O HLS foi desenvolvido pela Apple, mas atualmente é usado em uma ampla variedade de dispositivos.
+
+O HLS funciona dividindo o fluxo de vídeo em pequenos downloads de arquivos baseados em HTTP. Os dispositivos clientes carregam esses arquivos HTTP e os reproduzem em forma de vídeo. 
+
+O HLS usa a codificação H.264 ou H.265 para reformatar os dados de vídeo, de modo que outros dispositivos possam reconhecer e interpretá-los. 
+
+O HLS é um dos protocolos de transmissão de vídeo mais amplamente utilizados. Ele oferece capacidades de transmissão a pedido e em direto. 
+
+fonte: google
+
+
+CODIGO 2v
+
+rtmp {
+    server {
+        listen 1935;  # Porta para RTMP
+        chunk_size 4096;  # Tamanho do chunk para RTMP
+
+        application live {
+            live on;  # Habilita o streaming ao vivo
+            interleave on;  # Intercalar áudio e vídeo
+            record off;  # Desativar gravação
+
+            # Configurações HLS
+            hls on;  # Habilita HLS (HTTP Live Streaming)
+            hls_path /tmp/hls;  # Caminho para os arquivos HLS
+            hls_fragment 15s;  # Duração do fragmento HLS
+        }
+    }
+}
+
+http {
+    server {
+        listen 8080;  # Porta HTTP
+
+        location / {
+            root /home/usuario/GitHub/radio-ddp/public;
+
+            index index.html index.htm;  # Arquivos padrão a serem carregados
+        }
+
+        location /live {
+            # Serve os streams ao vivo
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            root /tmp/hls;  # Caminho onde os arquivos HLS são armazenados
+        }
+    }
+}
+
+
+COMANDO NO UBUNTO PARA A CONF DO NGINX //////////////////////////////////
+sudo nano /etc/nginx/nginx.conf
+
+
+
+
+
+CODIGO VF
+
+rtmp {
+    server {
+        listen 1935;  
+        chunk_size 4096;  
+
+        application live {
+            live on;  
+            interleave on;  
+            record off; 
+
+            # Configurações HLS
+            hls on; 
+            hls_path /tmp/hls; 
+            hls_fragment 15s; 
+        }
+    }
+}
+
+http {
+    server {
+        listen 8080;  
+
+        location / {
+            root /home/usuario/GitHub/radio-ddp/public;
+            index index.html index.htm; 
+        }
+
+        location /live {
+            
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            root /tmp/hls;  
+        }
+    }
+}
+
+
+   rtmp://localhost/live
