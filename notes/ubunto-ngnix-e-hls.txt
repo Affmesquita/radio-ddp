@@ -165,7 +165,7 @@ events {
 }
 
 rtmp {
-        server {
+ server {
         listen 1935;
         chunk_size 4096;
 
@@ -173,7 +173,6 @@ rtmp {
             live on;
             interleave on;
             record off;
-
             hls on;
             hls_path /tmp/hls;
             hls_fragment 15s;
@@ -183,22 +182,22 @@ rtmp {
 
 
 http {
-        server {
-                listen 8080;
+        server{
+        listen 8080;
 
         location / {
-            root /home/usuario/GitHub/radio-ddp/public;
+            root /home/usuario/GitHub/radio-ddp/public/html;
             index index.html index.htm;
         }
 
         location /live {
-
             types {
                 application/vnd.apple.mpegurl m3u8;
                 video/mp2t ts;
             }
             root /tmp/hls;
-       }
+        }
+        }
 
         ##
         # Basic Settings
@@ -274,6 +273,19 @@ http {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 COMANDOs NGINX/////////////// ///////////////// /////////////// ///////////// ///////
 
 sudo systemctl start nginx 
@@ -287,6 +299,12 @@ sudo systemctl stop nginx
 
 sudo nano /etc/nginx/nginx.conf
 
+sudo chmod -R 755 /tmp/hls
+(Verificação de Permissões: Certifique-se de que o Nginx tem permissão para escrever na pasta /tmp/hls. Você pode fazer isso executando um comando como)
+
+sudo systemctl restart nginx
+
+ls /tmp/hls
 
 
 A mensagem "lines 1-15/15 (END)" indica que você está dentro de um visualizador de texto, como o less ou more, que é usado para mostrar a saída de comandos que geram mais texto do que pode ser exibido de uma só vez.
@@ -311,3 +329,57 @@ Isso mostrará apenas as primeiras 10 linhas da saída. Se precisar de mais ajud
 
 
 rtmp://localhost/live
+
+
+
+404 Not Found
+nginx/1.24.0 (Ubuntu)
+
+
+
+
+
+
+
+
+
+O fluxo HLS seria o próprio vídeo?
+Sim, o fluxo HLS (HTTP Live Streaming) é uma forma de transmitir vídeo pela internet. Quando você transmite um vídeo usando o OBS para um servidor RTMP, o servidor gera arquivos HLS (como .m3u8 e .ts) que podem ser acessados via HTTP. Esses arquivos representam o próprio vídeo que está sendo transmitido.
+
+
+
+
+
+
+server {
+           listen 8080;
+
+           location / {
+               root /usr/share/nginx/html;  
+               index index.html index.htm;
+           }
+
+           location /live {
+               types {
+                   application/vnd.apple.mpegurl m3u8; arquivos .m3u8
+                   video/mp2t ts; 
+               }
+               alias /tmp/hls;  # Use alias para apontar diretamente para /tmp/hls
+               add_header Cache-Control no-cache; 
+           }
+       }
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+       http://localhost:8080/live/radio_ddp.m3u8 abri o link e ele fez um download de um arquivo radio_ddp.m3u8, o que sera que acontreceu?
