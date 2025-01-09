@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/header-nav-style.css">
@@ -10,60 +9,61 @@
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <script src="/javaScript/index.js" type="module" defer></script>
     <title>LIVE</title>
-   
 </head>
 <body>
-
     <header>
-
         <nav id="header-nav">
-
             <a href="/home">
                 <h1 id="header-logo"><img src="/image/logo/radio-ddp-2.png" alt=""></h1>
             </a>
-
             <ul id="header-list">
                 <li><a href="/episodios">Episódios</a></li>
-                <li><a href="/sobre" target="">Sobre</a></li>
+                <li><a href="/sobre">Sobre</a></li>
             </ul>
-
             <img src="/image/hamburger-menu-icon-png-17.jpg" alt="" id="btn-hamburger">
-            
         </nav>
-        
     </header>
-
+    
     <div id="live-content">
-        <video id="meu-video" controls autoplay>
+        <video
+            id="meu-video"
+            class="video-js"
+            controls
+            preload="auto"
+            width="640"
+            height="264"
+            data-setup="{}"
+        >
             <source src="http://localhost:8080/live/radio_ddp.m3u8" type="application/x-mpegURL"/>
-            <p>Seu navegador não suporta o elemento de vídeo.</p>
+            <p class="vjs-no-js">
+                Para ver este vídeo, ative o JavaScript e considere atualizar para um navegador que
+                <a href="https://videojs.com/html5-video-support/" target="_blank">suporte vídeo HTML5</a>.
+            </p>
         </video>
     </div>
-
+    
     <footer>
-        
         <div class="footer-1">
-        <img src="/image/logo/radio-ddp-2.png" alt="">
-        <p>© 2010 Diabos do Planalto <br>
-            Todos os direitos reservados
-        </p>
+            <img src="/image/logo/radio-ddp-2.png" alt="">
+            <p>© 2010 Diabos do Planalto <br>
+                Todos os direitos reservados
+            </p>
         </div>
-
         <div class="footer-2">
             <h1>Programas</h1>
             <h2>14 Cast</h2>
             <h2>Radio DDP</h2>
         </div>
-
         <div class="footer-2">
             <h1>Contatos</h1>
             <h2>Instagram</h2>
         </div>
-
         <div class="footer-2">
             <h1>Sobre</h1>
         </div>
-
     </footer>
+
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
 </body>
 </html>
+  
