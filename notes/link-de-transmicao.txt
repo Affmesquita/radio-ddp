@@ -19,3 +19,69 @@ Experiência Anterior: Se você já trabalhou com streaming ou configurações d
 
 
 Essas dicas podem ajudar a identificar links de transmissão, mas em muitos casos, a ajuda externa ou documentação específica é necessária para garantir que você esteja acessando o conteúdo correto.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Question :
+
+com base nas perguntas e respostas crie uma relação dos links e aonde eles tem que ir junto com uma explicação
+Answer :
+
+
+
+Claro! Aqui está uma relação dos links mencionados, juntamente com suas respectivas funções e onde eles devem ser usados:
+
+Relação de Links e Funções
+Link RTMP para Transmissão
+
+
+Link: rtmp://localhost:1935/live/radio_ddp
+Uso: Este link é utilizado no software de transmissão, como o OBS (Open Broadcaster Software).
+Função: Enviar o stream (áudio ou vídeo) para o servidor RTMP. O nome da transmissão (radio_ddp) identifica o stream específico que está sendo enviado.
+
+Link RTMP Genérico
+
+
+Link: rtmp://localhost/live
+Uso: Este link pode ser usado se o servidor estiver configurado para aceitar streams sem um nome específico.
+Função: Enviar um stream, mas não é recomendado, pois pode causar confusão ao não identificar o stream corretamente.
+
+Link HLS para Reprodução
+
+
+Link: http://localhost:8080/live/radio_ddp.m3u8
+Uso: Este link deve ser usado em um player de mídia que suporte HLS (como um navegador ou um player como VLC).
+Função: Permitir que os espectadores assistam ao stream ao vivo. O arquivo .m3u8 contém a lista de reprodução HLS que o player utiliza para reproduzir o conteúdo.
+
+Resumo de Uso
+Para Transmitir: No OBS, configure o URL do servidor como rtmp://localhost:1935/live/radio_ddp e a chave de transmissão como radio_ddp. Isso garante que você está enviando o conteúdo para o servidor corretamente.
+
+
+Para Reproduzir: Use o link http://localhost:8080/live/radio_ddp.m3u8 em um player compatível para assistir ao stream que você está transmitindo.
+
+
+Observações
+Verifique a Configuração: Sempre que mudar o nome da transmissão ou a chave no OBS, certifique-se de que o servidor RTMP está configurado para aceitar essa nova chave.
+Logs e Erros: Se você encontrar erros, verifique os logs do servidor RTMP para entender o que pode estar dando errado.
+Essa relação deve ajudá-lo a entender melhor como usar os links e onde cada um deles se encaixa no processo de transmissão e reprodução. Se precisar de mais informações ou esclarecimentos, sinta-se à vontade para perguntar!
