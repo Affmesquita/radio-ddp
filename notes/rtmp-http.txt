@@ -1,0 +1,19 @@
+
+
+Transmissão e Recepção
+RTMP (Real-Time Messaging Protocol):
+
+
+Transmite: O RTMP é um protocolo que é usado principalmente para enviar streams de áudio e vídeo em tempo real para um servidor. Quando você usa um software como o OBS (Open Broadcaster Software) para transmitir, você está enviando o conteúdo para o servidor usando RTMP.
+Exemplo: O link rtmp://localhost:1935/live/radio_ddp é usado para transmitir o conteúdo do OBS para o servidor.
+
+HTTP (Hypertext Transfer Protocol):
+
+
+Escuta/Reproduz: O HTTP é um protocolo que é usado para transferir dados na web. Quando você acessa um stream HLS (HTTP Live Streaming) em um navegador ou em um player de mídia, você está "ouvindo" ou reproduzindo o conteúdo que foi transmitido. O servidor HTTP fornece o stream HLS para o cliente (navegador ou player).
+Exemplo: O link http://localhost:8080/live/radio_ddp.m3u8 é usado para acessar e reproduzir o stream HLS que foi enviado anteriormente para o servidor via RTMP.
+
+Resumo
+RTMP: Usado para transmitir (enviar) o stream para o servidor.
+HTTP: Usado para acessar (ouvir) e reproduzir o stream que foi enviado para o servidor.
+Se você tiver mais perguntas ou precisar de mais esclarecimentos, fique à vontade para perguntar!

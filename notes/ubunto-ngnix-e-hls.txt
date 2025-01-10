@@ -383,3 +383,16 @@ server {
 
 
        http://localhost:8080/live/radio_ddp.m3u8 abri o link e ele fez um download de um arquivo radio_ddp.m3u8, o que sera que acontreceu?
+
+
+
+
+
+
+       root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.24.0# /usr/local/nginx/sbin/nginx -V
+nginx version: nginx/1.24.0
+built by gcc 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04)
+built with OpenSSL 3.0.13 30 Jan 2024
+TLS SNI support enabled
+configure arguments: --with-http_ssl_module --add-module=../nginx-rtmp-module
+root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.24.0#
