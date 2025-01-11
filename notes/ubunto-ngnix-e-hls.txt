@@ -396,3 +396,21 @@ built with OpenSSL 3.0.13 30 Jan 2024
 TLS SNI support enabled
 configure arguments: --with-http_ssl_module --add-module=../nginx-rtmp-module
 root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.24.0#
+
+
+
+
+
+
+
+
+NOVOS COMANDOs
+////////////////////////////////////////// ///////////  ///////////////////////////
+
+
+Iniciar o Nginx:
+Para iniciar o Nginx, você deve usar o comando que aponta diretamente para o executável do Nginx:
+bash
+
+
+sudo /usr/local/nginx/sbin/nginx
