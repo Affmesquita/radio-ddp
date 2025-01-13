@@ -286,6 +286,26 @@ http {
 
 
 
+
+
+
+
+
+////////   /
+/          /
+/          /
+/          /
+/          
+////////   /
+
+
+
+
+
+
+
+
+
 COMANDOs NGINX/////////////// ///////////////// /////////////// ///////////// ///////
 
 sudo systemctl start nginx 
@@ -414,3 +434,62 @@ bash
 
 
 sudo /usr/local/nginx/sbin/nginx
+
+cd /usr/local/src
+sudo wget http://nginx.org/download/nginx-1.27.1.tar.gz  # Substitua pela versão mais recente
+sudo tar -zxvf nginx-1.27.1.tar.gz
+
+cd nginx-1.27.1 
+sudo ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module
+sudo make
+sudo make install
+
+
+
+hostname -I
+172.28.180.183
+
+
+
+
+
+
+
+
+
+
+
+
+root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1# sudo killall nginx
+nginx: no process found
+Passo 2: Verificar se o Nginx foi Parado
+Depois de executar o comando acima, verifique se não há mais processos do Nginx em execução:
+bash
+ps aux | grep nginx
+root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1# ps aux | grep nginx
+root        4978  0.0  0.0  14144  6836 pts/0    T    15:09   0:00 sudo systemctl status nginx
+root        4979  0.0  0.0  14144  1196 pts/2    Ss   15:09   0:00 sudo systemctl status nginx
+root        4980  0.0  0.0  14772  6228 pts/2    T+   15:09   0:00 systemctl status nginx
+root        5143  0.0  0.0   4088  2056 pts/0    S+   16:19   0:00 grep --color=auto nginx
+root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1# o erro não esta em ":/usr/local/src/nginx-1.27.1?"
+sudo systemctl status nginx 
+root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1# sudo systemctl status nginx
+× nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/etc/systemd/system/nginx.service; disabled; preset: enabled)
+     Active: failed (Result: exit-code) since Mon 2025-01-13 16:18:37 -03; 2min 30s ago
+   Duration: 54min 57.789s
+    Process: 5058 ExecStart=/usr/local/nginx/sbin/nginx (code=exited, status=0/SUCCESS)
+    Process: 5137 ExecStop=/bin/kill -s TERM $MAINPID (code=exited, status=1/FAILURE)
+   Main PID: 5059 (code=exited, status=0/SUCCESS)
+Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -<signal>, -s, --signal <signal>
+Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:                         specify the <signal> to be sent
+Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -q, --queue <value>    integer value to be sent with the signal
+Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -l, --list=[<signal>]  list all signal names, or convert one to a name
+Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -L, --table            list all signal names in a nice table
+Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -h, --help     display this help and exit
+Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -V, --version  output version information and exit
+Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]: For more details see kill(1).
+Jan 13 16:18:37 DESKTOP-MESQUITA systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
+Jan 13 16:18:37 DESKTOP-MESQUITA systemd[1]: nginx.service: Failed with result 'exit-code'.
+root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1#
+outra pergunta, se ja esta tendo o nginx me mande comandos para usar o nginx
