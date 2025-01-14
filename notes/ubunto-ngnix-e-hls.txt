@@ -319,12 +319,16 @@ sudo systemctl stop nginx
 
 sudo nano /etc/nginx/nginx.conf
 
+sudo nano /usr/local/nginx/conf/nginx.conf
+
 sudo chmod -R 755 /tmp/hls
 (Verificação de Permissões: Certifique-se de que o Nginx tem permissão para escrever na pasta /tmp/hls. Você pode fazer isso executando um comando como)
 
 sudo systemctl restart nginx
 
 ls /tmp/hls
+
+/usr/local/nginx/sbin/nginx -V
 
 
 A mensagem "lines 1-15/15 (END)" indica que você está dentro de um visualizador de texto, como o less ou more, que é usado para mostrar a saída de comandos que geram mais texto do que pode ser exibido de uma só vez.
@@ -365,6 +369,7 @@ nginx/1.24.0 (Ubuntu)
 
 O fluxo HLS seria o próprio vídeo?
 Sim, o fluxo HLS (HTTP Live Streaming) é uma forma de transmitir vídeo pela internet. Quando você transmite um vídeo usando o OBS para um servidor RTMP, o servidor gera arquivos HLS (como .m3u8 e .ts) que podem ser acessados via HTTP. Esses arquivos representam o próprio vídeo que está sendo transmitido.
+
 
 
 
@@ -460,36 +465,101 @@ hostname -I
 
 
 
-root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1# sudo killall nginx
-nginx: no process found
-Passo 2: Verificar se o Nginx foi Parado
-Depois de executar o comando acima, verifique se não há mais processos do Nginx em execução:
+
+
+
+
+
+
+
+
+140125
+
+/usr/local/nginx/conf/nginx.conf ou /etc/nginx/nginx.conf
+
+/etc/nginx/nginx.conf: Este é o arquivo de configuração padrão para o Nginx quando ele é instalado usando um gerenciador de pacotes (como apt no Ubuntu). Ele geralmente é a versão que está sendo gerenciada pelo sistema, e pode estar rodando como um serviço do sistema.
+
+
+/usr/local/nginx/conf/nginx.conf: Este é o arquivo de configuração para a versão do Nginx que você compilou a partir do código-fonte. Quando você compila o Nginx manualmente, ele é instalado nesse diretório por padrão.
+
+
+
+The media could not be loaded, either because the server or network failed or because the format is not supported.
+
+
+
+
+
+
+
+Parece que você já tem uma configuração de servidor Nginx que está escutando na porta 8080 e tem uma localização configurada para /live, que é onde os arquivos HLS estão sendo servidos. Vamos analisar a configuração e ver como você pode ajustá-la para garantir que o streaming HLS funcione conforme esperado.
+
+Análise da Configuração Atual
+Escuta na Porta 8080:
+
+
+Seu servidor está configurado para escutar na porta 8080. Isso significa que você deve acessar o stream usando http://localhost:8080/live/radio_ddp.m3u8 (ou o IP do servidor se estiver acessando de outro dispositivo).
+
+Localização /live:
+
+
+Você tem uma localização configurada para /live, que define os tipos MIME para arquivos .m3u8 e .ts.
+O comando alias /tmp/hls; indica que os arquivos HLS estão localizados na pasta /tmp/hls.
+
+Ajustes Sugeridos
+Se tudo está funcionando conforme esperado, você pode não precisar fazer alterações. No entanto, aqui estão algumas sugestões para garantir que tudo funcione corretamente:
+
+Verifique se os Arquivos HLS Estão Acessíveis:
+Tente acessar diretamente o arquivo .m3u8 pelo navegador usando a URL http://localhost:8080/live/radio_ddp.m3u8. Você deve ver o conteúdo do arquivo M3U8.
+Se você não conseguir acessar, verifique os logs do Nginx para mensagens de erro:
+
 bash
-ps aux | grep nginx
-root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1# ps aux | grep nginx
-root        4978  0.0  0.0  14144  6836 pts/0    T    15:09   0:00 sudo systemctl status nginx
-root        4979  0.0  0.0  14144  1196 pts/2    Ss   15:09   0:00 sudo systemctl status nginx
-root        4980  0.0  0.0  14772  6228 pts/2    T+   15:09   0:00 systemctl status nginx
-root        5143  0.0  0.0   4088  2056 pts/0    S+   16:19   0:00 grep --color=auto nginx
-root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1# o erro não esta em ":/usr/local/src/nginx-1.27.1?"
-sudo systemctl status nginx 
-root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1# sudo systemctl status nginx
-× nginx.service - A high performance web server and a reverse proxy server
-     Loaded: loaded (/etc/systemd/system/nginx.service; disabled; preset: enabled)
-     Active: failed (Result: exit-code) since Mon 2025-01-13 16:18:37 -03; 2min 30s ago
-   Duration: 54min 57.789s
-    Process: 5058 ExecStart=/usr/local/nginx/sbin/nginx (code=exited, status=0/SUCCESS)
-    Process: 5137 ExecStop=/bin/kill -s TERM $MAINPID (code=exited, status=1/FAILURE)
-   Main PID: 5059 (code=exited, status=0/SUCCESS)
-Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -<signal>, -s, --signal <signal>
-Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:                         specify the <signal> to be sent
-Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -q, --queue <value>    integer value to be sent with the signal
-Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -l, --list=[<signal>]  list all signal names, or convert one to a name
-Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -L, --table            list all signal names in a nice table
-Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -h, --help     display this help and exit
-Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]:  -V, --version  output version information and exit
-Jan 13 16:18:37 DESKTOP-MESQUITA kill[5137]: For more details see kill(1).
-Jan 13 16:18:37 DESKTOP-MESQUITA systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
-Jan 13 16:18:37 DESKTOP-MESQUITA systemd[1]: nginx.service: Failed with result 'exit-code'.
-root@DESKTOP-MESQUITA:/usr/local/src/nginx-1.27.1#
-outra pergunta, se ja esta tendo o nginx me mande comandos para usar o nginx
+
+
+sudo tail -f /var/log/nginx/error.log
+Verifique o Caminho dos Arquivos:
+
+
+Certifique-se de que os arquivos .ts e o arquivo .m3u8 estão realmente no diretório /tmp/hls e que o Nginx tem permissões para acessá-los.
+
+Ajuste a Configuração, se Necessário:
+
+
+Se você quiser mudar o caminho de /live para /hls, você pode ajustar a configuração da seguinte forma:
+
+
+
+nginx
+   http {
+       server {
+           listen 8080;
+           location / {
+               root /usr/share/nginx/html;
+               index index.html index.htm;
+           }
+           location /hls {
+               types {
+                   application/vnd.apple.mpegurl m3u8;
+                   video/mp2t ts;
+               }
+               alias /tmp/hls;  # Diretório onde os arquivos HLS estão localizados
+               add_header Cache-Control no-cache;
+           }
+       }
+   }
+Reinicie o Nginx:
+Após fazer alterações na configuração, não se esqueça de reiniciar o Nginx para que as mudanças tenham efeito:
+
+bash
+
+
+sudo /usr/local/nginx/sbin/nginx -s reload
+Conclusão
+Com a configuração atual, você deve ser capaz de acessar seus arquivos HLS através da URL http://localhost:8080/live/radio_ddp.m3u8. Se você tiver mais perguntas ou precisar de mais assistência, sinta-se à vontade para perguntar!
+
+
+
+
+rtmp://localhost:1935/live chave radio_ddp
+
+http://localhost:8080/live/radio_ddp.m3u8

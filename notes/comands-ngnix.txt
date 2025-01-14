@@ -6,3 +6,23 @@ sudo systemctl enable nginx
 (Esse comando garante que o Nginx seja iniciado automaticamente toda vez que o sistema for reiniciado.)
 
 sudo systemctl stop nginx
+
+sudo nano /etc/nginx/nginx.conf
+
+sudo nano /usr/local/nginx/conf/nginx.conf
+
+sudo chmod -R 755 /tmp/hls
+(Verificação de Permissões: Certifique-se de que o Nginx tem permissão para escrever na pasta /tmp/hls. Você pode fazer isso executando um comando como)
+
+sudo systemctl restart nginx
+
+ls /tmp/hls
+
+/usr/local/nginx/sbin/nginx -V
+
+
+LINKS
+
+rtmp://localhost:1935/live chave radio_ddp
+
+http://localhost:8080/live/radio_ddp.m3u8

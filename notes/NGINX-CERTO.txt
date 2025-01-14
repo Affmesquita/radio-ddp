@@ -1,0 +1,14 @@
+140125
+
+/usr/local/nginx/conf/nginx.conf ou /etc/nginx/nginx.conf
+
+/etc/nginx/nginx.conf: Este é o arquivo de configuração padrão para o Nginx quando ele é instalado usando um gerenciador de pacotes (como apt no Ubuntu). Ele geralmente é a versão que está sendo gerenciada pelo sistema, e pode estar rodando como um serviço do sistema.
+
+
+/usr/local/nginx/conf/nginx.conf: Este é o arquivo de configuração para a versão do Nginx que você compilou a partir do código-fonte. Quando você compila o Nginx manualmente, ele é instalado nesse diretório por padrão.
+
+nginx
+  add_header 'Access-Control-Allow-Origin' '*';
+  add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+  add_header 'Access-Control-Allow-Headers' 'Content-Type';
+em que parte exatamente eu coloco esses codigos
