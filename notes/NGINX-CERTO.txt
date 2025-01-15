@@ -12,3 +12,201 @@ nginx
   add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
   add_header 'Access-Control-Allow-Headers' 'Content-Type';
 em que parte exatamente eu coloco esses codigos
+
+
+rtmp {
+ server {
+        listen 1935;
+        chunk_size 4096;
+
+        application live {
+            live on;
+            interleave on;
+            record off;
+            hls on;
+            hls_path /tmp/hls;
+            hls_fragment 15s;
+            hls_playlist_length 60;
+        }
+    }
+}
+
+http {
+        server {
+           listen 8080;
+
+           location / {
+               root /usr/share/nginx/html;
+               index index.html index.htm;
+
+               add_header 'Access-Control-Allow-Origin' '*';
+               add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+               add_header 'Access-Control-Allow-Headers' 'Content-Type';
+           }
+
+           location /live {
+               types {
+                   application/vnd.apple.mpegurl m3u8; arquivos .m3u8
+                   video/mp2t ts;
+               }
+               alias /tmp/hls;
+               add_header Cache-Control no-cache;
+                add_header 'Access-Control-Allow-Origin' '*';
+           }
+       }
+} 
+
+
+
+explicação com o server do nginx não atualizado
+
+
+
+pode me lancar um relatorio de como configurar o nginx com rtmp e todas as configurações
+Answer :
+
+
+
+Claro! Aqui está um guia passo a passo para configurar o Nginx com o módulo RTMP, incluindo a configuração para HLS (HTTP Live Streaming) e CORS (Cross-Origin Resource Sharing). Este guia inclui todos os passos necessários, desde a instalação até a configuração e testes.
+
+Relatório de Configuração do Nginx com RTMP e HLS
+1. Instalação do Nginx com Módulo RTMP
+Primeiro, você precisa instalar o Nginx com o módulo RTMP. Se você estiver usando uma distribuição baseada em Debian (como Ubuntu), siga estas etapas:
+
+Instalar Dependências:
+
+bash
+
+
+sudo apt-get update
+sudo apt-get install -y build-essential libpcre3 libpcre3-dev libssl-dev zlib1g-dev
+Baixar e Compilar o Nginx com o Módulo RTMP:
+
+bash
+
+
+# Baixar a versão do Nginx
+wget http://nginx.org/download/nginx-1.23.4.tar.gz # Substitua pela versão mais recente
+tar -zxvf nginx-1.23.4.tar.gz
+cd nginx-1.23.4
+
+# Baixar o módulo RTMP
+git clone https://github.com/arut/nginx-rtmp-module.git
+
+# Compilar o Nginx com o módulo RTMP
+./configure --with-http_ssl_module --add-module=nginx-rtmp-module
+make
+sudo make install
+2. Configuração do Nginx
+Após a instalação, você precisa configurar o Nginx para habilitar o RTMP e HLS. Abra o arquivo de configuração do Nginx, que geralmente está localizado em /usr/local/nginx/conf/nginx.conf ou /etc/nginx/nginx.conf, dependendo de onde o Nginx foi instalado.
+
+Exemplo de Configuração:
+
+
+
+nginx
+rtmp {
+    server {
+        listen 1935;
+        chunk_size 4096;
+
+        application live {
+            live on;
+            interleave on;
+            record off;
+
+            # HLS Configuration
+            hls on;
+            hls_path /tmp/hls;  # Verifique se este diretório existe e tem permissões corretas
+            hls_fragment 15s;
+            hls_playlist_length 60;  # Duração do playlist HLS
+        }
+    }
+}
+
+http {
+    server {
+        listen 8080;  # Porta HTTP para servir o HLS
+        location /live {
+            # Serve os arquivos HLS gerados
+            root /tmp;  # O diretório onde os arquivos HLS estão localizados
+            add_header 'Access-Control-Allow-Origin' '*';  # Permitir CORS
+        }
+    }
+}
+3. Criar o Diretório HLS
+Certifique-se de que o diretório onde os arquivos HLS serão armazenados existe e tem as permissões corretas. Execute os seguintes comandos:
+
+bash
+
+
+sudo mkdir -p /tmp/hls
+sudo chown -R www-data:www-data /tmp/hls  # Ajuste conforme o usuário que está executando o Nginx
+4. Reiniciar o Nginx
+Depois de fazer as alterações na configuração, reinicie o Nginx para aplicar as mudanças:
+
+bash
+
+
+sudo /usr/local/nginx/sbin/nginx -s reload  # ou use sudo systemctl restart nginx se estiver instalado via apt
+5. Transmitindo com OBS Studio
+Abra o OBS Studio.
+Vá para "Configurações" > "Stream".
+Selecione "Custom Streaming Server".
+Configure a URL como rtmp://localhost:1935/live e a chave como radio_ddp.
+Clique em "OK" e comece a transmitir.
+6. Testando o Stream HLS
+Após iniciar a transmissão, você deve conseguir acessar o stream HLS. A URL deve ser:
+
+
+
+http://localhost:8080/live/radio_ddp.m3u8
+Tente abrir essa URL em um navegador. Se você configurou tudo corretamente, deve ver o arquivo .m3u8.
+
+7. Player de Vídeo
+Para reproduzir o stream HLS em uma página web, você pode usar HLS.js ou Video.js. Aqui está um exemplo básico usando HLS.js:
+
+html
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <title>Live Stream</title>
+</head>
+<body>
+    <video id="meu-video" class="video-js" controls preload="auto" width="640" height="264"></video>
+
+    <script>
+        const video = document.getElementById('meu-video');
+        const videoSrc = 'http://localhost:8080/live/radio_ddp.m3u8';
+
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
+            });
+        }
+    </script>
+</body>
+</html>
+Resumo
+Instalação do Nginx: Instale o Nginx com o módulo RTMP.
+Configuração do Nginx: Configure o Nginx para habilitar RTMP e HLS.
+Diretório HLS: Crie e configure o diretório para armazenar os arquivos HLS.
+Reinicie o Nginx: Reinicie o servidor para aplicar as alterações.
+Transmissão com OBS: Use o OBS Studio para transmitir o vídeo.
+Teste o Stream HLS: Acesse a URL HLS no navegador.
+Player de Vídeo: Use HLS.js ou Video.js para reproduzir o stream em uma página web.
+Se você seguir essas etapas, deverá conseguir configurar o Nginx com RTMP e HLS corretamente. Se tiver mais dúvidas ou precisar de ajuda, sinta-se à vontade para perguntar!

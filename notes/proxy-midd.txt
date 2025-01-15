@@ -1,0 +1,41 @@
+Sim, para usar o http-proxy-middleware em um projeto Node.js, você precisa instalá-lo via npm. O http-proxy-middleware é uma biblioteca que permite criar um middleware de proxy para redirecionar solicitações HTTP em um servidor Express, e você deve instalá-lo antes de poder usá-lo.
+
+Como instalar
+Você pode instalar o http-proxy-middleware usando o seguinte comando no terminal, dentro do diretório do seu projeto:
+
+bash
+
+
+npm install http-proxy-middleware
+Exemplo de uso
+Após a instalação, você pode usar o http-proxy-middleware em seu código da seguinte forma:
+
+javascript
+
+
+const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+const app = express();
+const PORT = 3001; // Porta do servidor proxy
+
+// Configuração do proxy para o servidor RTMP
+app.use('/live', createProxyMiddleware({
+    target: 'http://localhost:1935', // URL do servidor RTMP
+    changeOrigin: true,
+    pathRewrite: {
+        '^/live': '/live', // Reescreve o caminho se necessário
+    },
+}));
+
+app.listen(PORT, () => {
+    console.log(`Servidor proxy rodando em http://localhost:${PORT}`);
+});
+Resolvendo o problema de CORS
+Após configurar o proxy, você poderá acessar seu servidor RTMP através do proxy em http://localhost:3001/live/radio_ddp, o que deve resolver o problema de CORS que você está enfrentando.
+
+Resumo
+Instale o http-proxy-middleware com npm install http-proxy-middleware.
+Configure o middleware no seu servidor Express para redirecionar as solicitações para o servidor RTMP.
+Teste o acesso ao fluxo através do novo endpoint do proxy.
+Se você tiver mais dúvidas ou precisar de mais informações sobre como configurar, fique à vontade para perguntar!

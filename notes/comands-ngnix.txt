@@ -1,4 +1,4 @@
-sudo systemctl start nginx 
+     
 
 sudo systemctl status nginx
 
@@ -25,4 +25,5 @@ LINKS
 
 rtmp://localhost:1935/live chave radio_ddp
 
-http://localhost:8080/live/radio_ddp.m3u8
+
+rtmp://localhost:1935/live/radio_ddp 

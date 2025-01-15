@@ -176,6 +176,7 @@ rtmp {
             hls on;
             hls_path /tmp/hls;
             hls_fragment 15s;
+            hls_playlist_length 60;
         }
     }
 }
@@ -196,6 +197,7 @@ http {
                }
                alias /tmp/hls;
                 add_header Cache-Control no-cache;
+                add_header 'Access-Control-Allow-Origin' '*';
            }
        }
 
