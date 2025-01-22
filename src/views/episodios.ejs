@@ -19,11 +19,11 @@
                 <div class="card" style="background-image: url('<%= episodio.imgUrl %>');">
                     <div class="card-text">
                         <h2><%= episodio.titulo %></h2>
-                        <p><%= episodio.descricao %></p>
                     </div>
                     <div class="card-img-link">
                         <img class="img" src="<%= episodio.imgUrl %>" style="display: none;" alt="Imagem do episódio">
                         <a href="/episodio/<%= episodio._id %>">Assistir Episódio</a>
+                        <p>Data de Criação: <%= episodio.dataCriacao.toLocaleDateString() %></p>
                     </div>
                 </div>
             <% }) %>
@@ -33,5 +33,3 @@
     <%- include('partials/footer') %>
 </body>
 </html>
-  
-

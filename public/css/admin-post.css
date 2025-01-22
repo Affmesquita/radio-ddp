@@ -132,3 +132,8 @@ button {
     margin-top: 100px;
 }
 
+#episodios-list {
+    display: flex;
+    flex-direction: column-reverse;
+}
+

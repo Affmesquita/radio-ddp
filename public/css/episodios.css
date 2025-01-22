@@ -57,6 +57,9 @@ html, body {
 }
 
 .card {
+    width: 500px;
+    height: 300px;
+
     border: 1px solid #dddddd3f;
     border-radius: 8px;
 
@@ -71,7 +74,7 @@ html, body {
 
     margin: 10px;
 
-    flex: 1 1 calc(30% - 20px);
+   
 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     
@@ -89,14 +92,19 @@ html, body {
     text-align: center;
     margin: auto;
     margin-top: 10px;
+
+    white-space: pre-wrap;
 }
 .card-text p {
     font-size: 75%;
 }
 .card-img-link {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: baseline;
+    align-self: center;
+    
 }
 
 .img {
@@ -126,6 +134,8 @@ footer {
     align-items: center;
 
     color: white;
+
+    white-space: pre-wrap;
 }
 
 .card-ep p {

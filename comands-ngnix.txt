@@ -27,3 +27,6 @@ rtmp://localhost:1935/live chave radio_ddp
 
 
 rtmp://localhost:1935/live/radio_ddp 
+
+
+http://localhost:8080/live/radio_ddp.m3u8 (link correto, acertando o cors da certo)
