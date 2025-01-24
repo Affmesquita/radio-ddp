@@ -1,0 +1,31 @@
+Parabéns! O contêiner Docker do MongoDB foi baixado e iniciado com sucesso. Agora sua instância do MongoDB está rodando no VPS dentro de um contêiner Docker.
+
+Próximos Passos
+Verifique se o MongoDB está rodando : Use o comando abaixo para verificar os contêineres ativos:
+
+sudo docker ps
+Você verá algo assim:
+
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                      NAMES
+92fa07f1438d   mongo:latest   "docker-entrypoint.s…"   X seconds ago    Up X seconds    0.0.0.0:27017->27017/tcp   mongodb
+Isso confirma que o MongoDB está rodando na porta 27017.
+
+Conecte sua aplicação ao MongoDB : Atualize o URI de conexão no seu código para usar o MongoDB no contêiner Docker:
+const mongoose = require('mongoose');
+
+const uri = 'mongodb://localhost:27017/nome_do_banco';
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Conectado ao MongoDB!'))
+  .catch(err => console.error('Erro ao conectar ao MongoDB:', err));
+Gerencie o contêiner MongoDB :
+Para o contêiner :
+
+sudo docker stop mongodb
+Reiniciar o contêiner :
+
+sudo docker start mongodb
+Removendo o contêiner (se necessário) :
+
+sudo docker rm -f mongodb
+Persistência de Dados : Como você usou o volume /data/db:/data/db, os dados do MongoDB serão armazenados no VPS, mesmo que o contêiner seja reiniciado ou removido. Certifique-se de que o diretório /data/dbtenha as permissões corretas.
+Agora sua aplicação pode usar o MongoDB hospedado no contêiner Docker sem problemas de dependência! Se precisar de mais ajuda, é só avisar. 🚀

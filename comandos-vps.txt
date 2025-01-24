@@ -1,0 +1,24 @@
+ssh root@147.93.69.212
+76UN-CVPi(Wd6&ID6dD-
+
+
+
+atualizar app 
+
+scp -r "C:/Users/MESQUITA/Documents/GitHub/radio-ddp" root@147.93.69.212:/home/root/
+
+scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@147.93.69.212:/home/root/
+
+
+
+cd /home/root/radio-ddp
+
+
+No PowerShell ou CMD :
+
+scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@147.93.69.212:/home/root/
+
+
+No Git Bash ou WSL :
+
+scp -r "/c/Users/MESQUITA/Documents/GitHub/radio-ddp" root@147.93.69.212:/home/root/
