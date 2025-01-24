@@ -22,3 +22,9 @@ scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@147.93.69.212:/home/r
 No Git Bash ou WSL :
 
 scp -r "/c/Users/MESQUITA/Documents/GitHub/radio-ddp" root@147.93.69.212:/home/root/
+
+
+
+
+
+http://147.93.69.212:3000
