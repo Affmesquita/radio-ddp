@@ -14,3 +14,7 @@ async function connectToDatabase() {
 
 // Exporta a função de conexão
 module.exports = { connectToDatabase };
+
+/*
+const uri = "mongodb+srv://affonsomesquita:<db_password>@ddp.abvyc.mongodb.net/?retryWrites=true&w=majority&appName=DDP"; // Substitua "nome_do_banco" pelo nome do seu banco 
+// */ 

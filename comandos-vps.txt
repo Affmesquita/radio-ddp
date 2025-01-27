@@ -3,6 +3,23 @@ ssh root@147.93.69.212
 
 
 
+
+
+
+
+
+cd /home/root/radio-ddp
+
+
+
+docker start 92fa07f1438d
+
+docker update --restart unless-stopped 92fa07f1438d
+
+
+
+
+
 atualizar app 
 
 scp -r "C:/Users/MESQUITA/Documents/GitHub/radio-ddp" root@147.93.69.212:/home/root/

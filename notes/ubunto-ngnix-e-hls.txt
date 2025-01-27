@@ -141,12 +141,57 @@ http {
     }
 }
 
+server {
+    server_name radios.ddp www.radios.ddp;
 
-   rtmp://localhost/live
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+
+
+server {
+        listen 8080;  
+        
+        location / {
+            root /home/usuario/GitHub/radio-ddp/public;
+            index index.html index.htm; 
+        }
+        
+        location /live {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            root /tmp/hls;  
+        }
+    }
+
+
+
+rtmp://localhost/live
 
    iniciar p NGINX:: ////////////////////////////////////////////////
 
    sudo systemctl start nginx
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -270,6 +315,61 @@ http {
 #               proxy      on;
 #       }
 #}
+
+
+
+
+server {
+        listen 8080;  
+        server_name radios.ddp www.radios.ddp;
+
+        location / {
+            root /home/usuario/GitHub/radio-ddp/public;
+            index index.html index.htm; 
+            proxy_pass http://localhost:3000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+        location /live {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            root /tmp/hls;  
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -565,3 +665,80 @@ Com a configuração atual, você deve ser capaz de acessar seus arquivos HLS at
 rtmp://localhost:1935/live chave radio_ddp
 
 http://localhost:8080/live/radio_ddp.m3u8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+events {
+    worker_connections  1024;
+}
+
+rtmp {
+    server {
+        listen 1935;
+        chunk_size 4096;
+
+        application live {
+            live on;
+            interleave on;
+            record off;
+
+            # Configurações HLS
+            hls on;
+            hls_path /tmp/hls;
+            hls_fragment 15s;
+        }
+    }
+}
+
+http {
+
+        server {
+        listen 8080;
+        server_name radios.ddp www.radios.ddp;
+
+        location / {
+            root /home/usuario/GitHub/radio-ddp/public;
+            index index.html index.htm;
+            proxy_pass http://localhost:3000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+        location /live {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            root /tmp/hls;
+        }
+    }
+}    

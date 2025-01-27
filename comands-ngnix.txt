@@ -49,6 +49,23 @@ http://localhost:8080/live/radio_ddp.m3u8 (link correto, acertando o cors da cer
 
 
 
+root@srv704679:/home/root/radio-ddp/nginx-1.25.2#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-49-generic x86_64)
