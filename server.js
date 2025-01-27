@@ -34,7 +34,7 @@ async function startServer() {
     await connectToDatabase() // Conecta ao MongoDB
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
-      console.log(`SERVER DDP ON http://localhost:3000/home`)
+      console.log(`SERVER DDP ON http://localhost:3000/`)
     })
 }
   
