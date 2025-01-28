@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const uri = "mongodb+srv://affonsomesquita:c5VhoKyNCuz3hNZA@ddp.abvyc.mongodb.net/?retryWrites=true&w=majority&appName=DDP"; // Substitua "nome_do_banco" pelo nome do seu banco
+const uri = "mongodb+srv://affonsomesquita:c5VhoKyNCuz3hNZA@ddp.abvyc.mongodb.net/meubanco?retryWrites=true&w=majority"; // Substitua "nome_do_banco" pelo nome do seu banco
 
 // Função para conectar ao banco de dados
 async function connectToDatabase() {

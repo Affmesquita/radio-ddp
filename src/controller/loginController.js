@@ -23,10 +23,10 @@ const loginController = {
         })
     },
     logout: (req, res) => {
-        // Remove o cookie do token
-        res.cookie('token', '', { expires: new Date(0) });
-        // Redireciona para a página de login
-        res.redirect('/login');
+        // Limpa o cookie do token
+        res.clearCookie('token');
+        // Redireciona para a página de login ou outra página
+        return res.redirect('/login');
     }
 }
 
