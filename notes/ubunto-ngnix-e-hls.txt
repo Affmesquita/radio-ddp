@@ -317,7 +317,24 @@ http {
 #}
 
 
-280125 {
+280125/29 {
+
+rtmp {
+ server {
+        listen 1935;
+        chunk_size 4096;
+
+        application live {
+            live on;
+            interleave on;
+            record off;
+            hls on;
+            hls_path /tmp/hls;
+            hls_fragment 15s;
+            hls_playlist_length 60;
+        }
+    }
+}    
 
 server {
         listen 8080;  
