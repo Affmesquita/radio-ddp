@@ -1,6 +1,6 @@
      
 
-sudo systemctl status nginx
+    sudo systemctl status nginx
 
 sudo /usr/local/nginx/sbin/nginx -t   ver se a conf certa
 
@@ -12,6 +12,8 @@ sudo systemctl stop nginx
 sudo nano /etc/nginx/nginx.conf
 
 sudo nano /usr/local/nginx/conf/nginx.conf
+sudo nano /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-enabled/default
 
 sudo chmod -R 755 /tmp/hls
 (Verificação de Permissões: Certifique-se de que o Nginx tem permissão para escrever na pasta /tmp/hls. Você pode fazer isso executando um comando como)

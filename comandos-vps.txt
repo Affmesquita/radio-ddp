@@ -1,7 +1,7 @@
 ssh root@147.93.69.212
 76UN-CVPi(Wd6&ID6dD-
 
-
+sudo nano /etc/nginx/sites-available/radioddp
 
 
 147.93.69.212
@@ -56,8 +56,19 @@ http://147.93.69.212:3000
 
 
 
+ips 
+root@srv704679:/home/root/radio-ddp# hostname -I 
+147.93.69.212 172.17.0.1 2a02:4780:14:36d4::1
+
+
+147.93.69.212: Este é o endereço IP público do seu servidor, que deve ser usado para configurar os registros DNS.
+
+172.17.0.1: Este é um endereço IP privado, geralmente associado a uma rede interna ou a um contêiner Docker.
+
+2a02:4780:14:36d4::1: Este é um endereço IPv6, que pode ser usado se você estiver configurando suporte para IPv6
 
 
 
-
-
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
