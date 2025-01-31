@@ -1,6 +1,6 @@
      
 
-    sudo systemctl status nginx
+sudo systemctl status nginx
 
 sudo /usr/local/nginx/sbin/nginx -t   ver se a conf certa
 

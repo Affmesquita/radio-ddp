@@ -72,3 +72,10 @@ root@srv704679:/home/root/radio-ddp# hostname -I
 server {
         listen 80 default_server;
         listen [::]:80 default_server;
+
+
+
+
+
+
+sudo certbot certonly --manual --preferred-challenges dns -d "www.radioddp.com" -d "radioddp.com"

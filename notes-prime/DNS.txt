@@ -1,0 +1,46 @@
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/www.radioddp.com/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/www.radioddp.com/privkey.pem
+This certificate expires on 2025-05-01.
+These files will be updated when the certificate renews.
+
+NEXT STEPS:
+- This certificate will not be renewed automatically. Autorenewal of --manual certificates requires the use of an authentication hook script (--manual-auth-hook) but one was not provided. To renew this certificate, repeat this same certbot command before the certificate's expiry date.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+If you like Certbot, please consider supporting our work by:
+ * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+ * Donating to EFF:                    https://eff.org/donate-le
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    ATENÇÃO 
+
+Parabéns, Affonso! O certificado SSL foi gerado com sucesso para o domínio www.radioddp.come radioddp.com. Aqui estão os próximos passos importantes:
+
+Configurar o certificado no Nginx : Certifique-se de configurar o Nginx para usar o certificado gerado. No arquivo de configuração do seu site, adicione ou edite as linhas:
+
+server {
+    listen 443 ssl;
+    server_name www.radioddp.com radioddp.com;
+
+    ssl_certificate /etc/letsencrypt/live/www.radioddp.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/www.radioddp.com/privkey.pem;
+}
+Manual de renovação : Como o certificado foi gerado manualmente, ele não será renovado automaticamente . Antes de 01/05/2025, você precisará repetir o comando Certbot para renovar o certificado.
+
+Automatizar no futuro : Para evitar renovações manuais, você pode configurar um script de autenticação usando o parâmetro --manual-auth-hookou usar outro método de validação (como HTTP) para automação.
+
+
+
+
+/etc/nginx/sites-available/radioddp.com
+
+sudo ln -s /etc/nginx/sites-available/radioddp.com /etc/nginx/sites-enabled/
+
+
+
+
+
+root@srv704679:~# certbot --nginx -d radioddp.com -d www.radioddp.com
+
+quando estou usando root@DESKTOP-MESQUITA:~# o nginx esta funcionando, mas quando faço o ssh e estou no root@srv704679:~# o nginx não esta funcionando. o que fazer? 
