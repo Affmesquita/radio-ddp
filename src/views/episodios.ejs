@@ -21,9 +21,11 @@
                         <h2><%= episodio.titulo %></h2>
                     </div>
                     <div class="card-img-link">
-                        <img class="img" src="<%= episodio.imgUrl %>" style="display: none;" alt="Imagem do episódio">
+                        
                         <a href="/episodio/<%= episodio._id %>">Assistir Episódio</a>
+
                         <p>Data de Criação: <%= episodio.dataCriacao.toLocaleDateString() %></p>
+                        
                     </div>
                 </div>
             <% }) %>
