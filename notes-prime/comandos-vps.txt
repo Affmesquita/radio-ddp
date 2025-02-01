@@ -46,7 +46,7 @@ scp -r "/c/Users/MESQUITA/Documents/GitHub/radio-ddp" root@147.93.69.212:/home/r
 
 
 http://147.93.69.212:3000
-
+http://147.93.69.212:8080/live/playlist.m3u8
 
 
 

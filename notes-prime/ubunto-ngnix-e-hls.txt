@@ -318,7 +318,7 @@ http {
 #}
 
 
-280125/29 {
+280125/29 { USEI ESSA DIA 010225
 
 rtmp {
  server {
@@ -339,7 +339,7 @@ rtmp {
 
 server {
         listen 8080;  
-        server_name radios.ddp www.radios.ddp;
+        server_name radioddp.com www.radioddp.com;
 
         location / {
             root /home/usuario/GitHub/radio-ddp/public;

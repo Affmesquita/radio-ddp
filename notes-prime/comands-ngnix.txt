@@ -12,7 +12,11 @@ sudo systemctl stop nginx
 sudo nano /etc/nginx/nginx.conf
 
 sudo nano /usr/local/nginx/conf/nginx.conf
+
+
 sudo nano /etc/nginx/sites-available/default
+
+
 sudo rm /etc/nginx/sites-enabled/default
 
 sudo chmod -R 755 /tmp/hls
@@ -20,7 +24,7 @@ sudo chmod -R 755 /tmp/hls
 
 sudo systemctl restart nginx
 
-ls /tmp/hls
+ls /tmp/hls //  ls -l /tmp/hls
 
 /usr/local/nginx/sbin/nginx -V
 
@@ -52,7 +56,7 @@ sudo /usr/local/nginx/sbin/nginx -t
 
 
 
-
+rtmp://147.93.69.212/live
 
 
 
@@ -76,14 +80,7 @@ Balanceamento de Carga : Distribui o tráfego entre vários servidores, garantin
 
 SSL e Segurança : Facilita a configuração de HTTPS e protege seu projeto contra ataques comuns, como DDoS.
 
-
-
-
-
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-49-generic x86_64)
 
@@ -121,7 +118,29 @@ sudo /usr/local/nginx/sbin/nginx -t
 
 
 
+   
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   codigos
 
 
 server {
