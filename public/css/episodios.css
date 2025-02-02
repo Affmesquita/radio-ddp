@@ -67,7 +67,9 @@ html, body {
     justify-content: space-between;
 
     background-color: rgba(0, 0, 0, 0.288);
+    background-size: cover;
     background-position: center;
+
 
     color: brown;
     text-shadow: 0.5px 0.5px 0.5px black;
@@ -106,6 +108,7 @@ html, body {
 .card-img-link {
     display: flex;
     flex-direction: column;
+    align-items: end;
 
 }
 
