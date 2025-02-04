@@ -13,6 +13,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "ffmpeg-static": "^4.4.1",
+    "fs": "^0.0.1-security",
     "http-proxy-middleware": "^3.0.3",
     "jsonwebtoken": "^9.0.2",
     "method-override": "^3.0.0",

@@ -1,6 +1,8 @@
-     
+sudo systemctl start nginx     
 
 sudo systemctl status nginx
+
+sudo systemctl restart nginx
 
 sudo /usr/local/nginx/sbin/nginx -t   ver se a conf certa
 
@@ -22,9 +24,15 @@ sudo rm /etc/nginx/sites-enabled/default
 sudo chmod -R 755 /tmp/hls
 (Verificação de Permissões: Certifique-se de que o Nginx tem permissão para escrever na pasta /tmp/hls. Você pode fazer isso executando um comando como)
 
-sudo systemctl restart nginx
+
 
 ls /tmp/hls //  ls -l /tmp/hls
+
+{
+sudo mkdir -p /tmp/hls
+sudo chown -R www-data:www-data /tmp/hls
+sudo chmod 755 /tmp/hls
+}
 
 /usr/local/nginx/sbin/nginx -V
 
@@ -130,6 +138,39 @@ sudo /usr/local/nginx/sbin/nginx -t
 
 
 
+PROBLEMAS DE PORTA ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+
+
+sudo lsof -i :80
+sudo lsof -i :8080
+sudo lsof -i :1935
+
+sudo systemctl stop nginx
+
+sudo kill <PID>
+
+sudo systemctl start nginx
+
+sudo systemctl status nginx
+
+sudo nginx -t
+Logs do Nginx: Se houver problemas, verifique os logs novamente:
+bash
+
+sudo tail -n 50 /var/log/nginx/error.log
+
+
+Observações Finais
+Se você ainda estiver tendo problemas após seguir esses passos, forneça as saídas dos comandos que você executou para que eu possa ajudar a diagnosticar mais a fundo. É importante garantir que apenas uma instância do Nginx esteja tentando usar as mesmas portas.
+
+
+
+
+
+
+
+
 
 
 
@@ -143,7 +184,11 @@ sudo /usr/local/nginx/sbin/nginx -t
    codigos
 
 
-server {
+ontrol-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+        types {
+            application/vnd.server {
     listen 80;
     server_name radioddp.com www.radioddp.com;
 
@@ -313,11 +358,7 @@ server {
     }
 
     location /live {
-        add_header 'Access-Control-Allow-Origin' '*';
-        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
-        types {
-            application/vnd.apple.mpegurl m3u8;
+        add_header 'Access-Capple.mpegurl m3u8;
             video/mp2t ts;
         }
         root /tmp/hls;  
@@ -494,3 +535,174 @@ server {
 
 
 }
+
+
+030225
+
+        server {
+           listen 8080;
+
+           location / {
+               root /usr/share/nginx/html;
+               index index.html index.htm;
+
+               add_header 'Access-Control-Allow-Origin' '*';
+               add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+               add_header 'Access-Control-Allow-Headers' 'Content-Type';
+           }
+
+           location /live {
+               types {
+                   application/vnd.apple.mpegurl m3u8; arquivos .m3u8
+                   video/mp2t ts;
+               }
+               alias /tmp/hls;
+               add_header Cache-Control no-cache;
+               add_header 'Access-Control-Allow-Origin' '*';
+           }
+       }
+
+
+
+
+
+       server {
+    listen 8080;
+    server_name radios.ddp www.radios.ddp;
+
+    # Configuração para o diretório raiz
+    location / {
+        root /home/usuario/GitHub/radio-ddp/public;  # Caminho para os arquivos estáticos
+        index index.html index.htm;
+        proxy_pass http://localhost:3000;  # Encaminha requisições para o servidor Node.js
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # Configuração para o caminho /live
+    location /live {
+        add_header 'Access-Control-Allow-Origin' '*';  # Permite CORS
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+        
+        types {
+            application/vnd.apple.mpegurl m3u8;  # Tipo MIME para arquivos .m3u8
+            video/mp2t ts;                        # Tipo MIME para arquivos .ts
+        }
+        
+        root /tmp/hls;  # Diretório onde os arquivos HLS estão armazenados
+        add_header Cache-Control no-cache;  # Adiciona controle de cache
+    }
+       }
+
+
+
+
+rtmp {
+    server {
+        listen 1935;  
+        chunk_size 4096;
+
+        application live {
+            live on; 
+            interleave on;  
+            record off;  
+         
+            hls on;  
+            hls_path /tmp/hls; 
+            hls_fragment 15s;  
+            hls_playlist_length 60;  
+        }
+    }
+}
+
+
+server {
+        listen 8080;  # Porta para HTTP
+        server_name 147.93.69.212;  
+
+        location /live {
+            types {
+                application/vnd.apple.mpegurl m3u8;  
+                video/mp2t ts;  
+            }
+            alias /tmp/hls;  
+            add_header Cache-Control no-cache;  
+
+            
+            add_header 'Access-Control-Allow-Origin' '*';  
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';  
+            add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';  
+
+           
+            if ($request_method = OPTIONS) {
+                add_header 'Access-Control-Allow-Origin' '*';  
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';  
+                add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';  
+                add_header 'Content-Length' 0;  
+                return 204;  
+            }
+        }
+    }
+
+
+
+
+
+
+
+    server {
+    listen 8080;
+    server_name radioddp.com www.radioddp.com;
+
+    # Configuração para o diretório raiz
+    location / {
+        root /home/usuario/GitHub/radio-ddp/public;
+        index index.html index.htm;
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location /live {
+    types {
+        application/vnd.apple.mpegurl m3u8;
+        video/mp2t ts;
+    }
+    alias /tmp/hls;
+    add_header Cache-Control no-cache;
+    add_header 'Access-Control-Allow-Origin' '*';
+    add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS';
+    add_header 'Access-Control-Allow-Headers' 'Range';
+    add_header 'Access-Control-Expose-Headers' 'Content-Length, Content-Range';
+}
+
+
+
+
+
+ # Configuração para o caminho /live
+    location /live {
+        add_header 'Access-Control-Allow-Origin' '*';  # Permite CORS
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+
+        types {
+            application/vnd.apple.mpegurl m3u8;  # Tipo MIME para arquivos .m3u8
+            video/mp2t ts;                        # Tipo MIME para arquivos .ts
+        }
+
+        root /tmp/hls;  # Diretório onde os arquivos HLS estão armazenados
+        add_header Cache-Control no-cache;  # Adiciona controle de cache
+    }
+
+
+
+
+

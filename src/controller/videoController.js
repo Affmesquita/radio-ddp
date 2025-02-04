@@ -1,5 +1,6 @@
 const Video = require('../models/videoModel')
 const path = require('node:path')
+const fs = require('fs');
 
 
 const episodesController = {
@@ -128,3 +129,24 @@ const episodesController = {
 }
 
 module.exports = episodesController
+
+
+
+
+
+/* 
+deleteEpisode: async (req, res) => {
+        const episodioId = req.params.id // Obtém o ID do episódio a partir da URL
+        try {
+            const resultado = await Video.findByIdAndDelete(episodioId)
+            if (resultado) {
+                res.status(200).send({ message: 'Episódio deletado com sucesso!' })
+            } else {
+                res.status(404).send({ message: 'Episódio não encontrado.' })
+            }
+        } catch (error) {
+            console.error('Erro ao deletar episódio:', error)
+            res.status(500).send({ message: 'Erro ao deletar episódio.' })
+        }
+    },
+*/
