@@ -1,13 +1,13 @@
 ssh root@147.93.69.212
 76UN-CVPi(Wd6&ID6dD-
 
-sudo nano /etc/nginx/sites-available/radioddp
-
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 147.93.69.212
-
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
 cd /home/root/radio-ddp
 
 
@@ -20,28 +20,28 @@ docker update --restart unless-stopped 92fa07f1438d
     PM2
 pm2 list     
 
-
-atualizar app 
-
-scp -r "C:/Users/MESQUITA/Documents/GitHub/radio-ddp" root@147.93.69.212:/home/root/
-
-scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@147.93.69.212:/home/root/
-
-
-
 cd /home/root/radio-ddp
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+cd /var/www/html/
+ls -l
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+atualizar app 
 
 No PowerShell ou CMD :
 
 scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@147.93.69.212:/home/root/
-
+scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@147.93.69.212:/var/www/html/
 
 No Git Bash ou WSL :
 
 scp -r "/c/Users/MESQUITA/Documents/GitHub/radio-ddp" root@147.93.69.212:/home/root/
+scp -r "/c/Users/MESQUITA/Documents/GitHub/radio-ddp" root@147.93.69.212:/var/www/html/
 
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -50,10 +50,7 @@ http://147.93.69.212:8080/live/playlist.m3u8
 
 
 
-
-
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ips 
@@ -67,15 +64,87 @@ root@srv704679:/home/root/radio-ddp# hostname -I
 
 2a02:4780:14:36d4::1: Este é um endereço IPv6, que pode ser usado se você estiver configurando suporte para IPv6
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
 sudo certbot certonly --manual --preferred-challenges dns -d "www.radioddp.com" -d "radioddp.com"
+
+
+
+sudo ln -s /etc/nginx/sites-available/radioddp.com /etc/nginx/sites-enabled/
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Certifique-se de ajustar as permissões depois, se necessário:
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html 
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+050225
+
+root /var/www/html;
+
+
+
+
+sudo nano /etc/nginx/sites-available/radioddp.com
+
+nginx
+server {
+    server_name www.radioddp.com radioddp.com;
+    root /var/www/html;
+    index index.html index.htm index.php;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+
+Verifique o caminho do root: Certifique-se de que o caminho /var/www/html realmente contém os arquivos do seu site. Você pode verificar isso com o comando:
+bash
+
+
+ls -l /var/www/html
+Certifique-se de que existem arquivos como index.html, index.php, ou qualquer outro arquivo que você espera que seja servido.
+
+Verifique a habilitação do site: Confirme se você habilitou o site corretamente. Para isso, você deve ter um link simbólico do arquivo de configuração em sites-available para sites-enabled. Você pode fazer isso com o seguinte comando:
+bash
+
+
+sudo ln -s /etc/nginx/sites-available/radioddp.com /etc/nginx/sites-enabled/
+Depois, verifique se o link foi criado corretamente:
+
+bash
+
+
+ls -l /etc/nginx/sites-enabled/
+Verifique a configuração de escuta: Se você tiver outros blocos de servidor, verifique se não há um bloco que esteja escutando na mesma porta (geralmente a porta 80 para HTTP) e que tenha precedência sobre o seu. O Nginx utiliza o primeiro bloco que corresponde ao nome do servidor.
+
+
+
+
+
+como eu adiciono meus arquivos no /var/www/html ?
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
