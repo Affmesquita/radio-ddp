@@ -33,8 +33,8 @@ app.use(loginRouter)
 async function startServer() {
     await connectToDatabase() // Conecta ao MongoDB
     const PORT = process.env.PORT || 3000
-    app.listen(PORT, () => {
-      console.log(`SERVER DDP ON http://localhost:3000/`)
+    app.listen(PORT, '0.0.0.0',  () => {
+      console.log(`SERVER DDP ON http://147.93.69.212:3000/`)
     })
 }
   

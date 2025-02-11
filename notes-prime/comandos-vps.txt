@@ -23,7 +23,7 @@ pm2 list
 cd /home/root/radio-ddp
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-cd /var/www/html/
+cd /var/www/html/radio-ddp/server.js 
 ls -l
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -44,7 +44,7 @@ scp -r "/c/Users/MESQUITA/Documents/GitHub/radio-ddp" root@147.93.69.212:/var/ww
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+http://147.93.69.212
 http://147.93.69.212:3000
 http://147.93.69.212:8080/live/playlist.m3u8
 
@@ -76,10 +76,10 @@ server {
 
 
 sudo certbot certonly --manual --preferred-challenges dns -d "www.radioddp.com" -d "radioddp.com"
+/////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-sudo ln -s /etc/nginx/sites-available/radioddp.com /etc/nginx/sites-enabled/
+recrie o link simbólico corretamente:
+sudo ln -s /etc/nginx/sites-available/radioddp.conf /etc/nginx/sites-enabled/
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,6 +88,10 @@ Certifique-se de ajustar as permissões depois, se necessário:
 sudo chown -R www-data:www-data /var/www/html
 sudo chmod -R 755 /var/www/html 
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+ver se tem algum link simbolico
+ls -l /etc/nginx/sites-enabled/
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,9 +102,13 @@ sudo chmod -R 755 /var/www/html
 root /var/www/html;
 
 
+Configuração!!!!!]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][[[]]]
+/////////////////////////////////////////////////////////////////////////////////////////////
+sudo nano /etc/nginx/sites-available/radioddp.conf
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 
-sudo nano /etc/nginx/sites-available/radioddp.com
+
 
 nginx
 server {
@@ -114,17 +122,18 @@ server {
 }
 
 Verifique o caminho do root: Certifique-se de que o caminho /var/www/html realmente contém os arquivos do seu site. Você pode verificar isso com o comando:
-bash
-
 
 ls -l /var/www/html
+
+
+
 Certifique-se de que existem arquivos como index.html, index.php, ou qualquer outro arquivo que você espera que seja servido.
 
 Verifique a habilitação do site: Confirme se você habilitou o site corretamente. Para isso, você deve ter um link simbólico do arquivo de configuração em sites-available para sites-enabled. Você pode fazer isso com o seguinte comando:
 bash
 
 
-sudo ln -s /etc/nginx/sites-available/radioddp.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/radioddp.conf /etc/nginx/sites-enabled/
 Depois, verifique se o link foi criado corretamente:
 
 bash
@@ -142,9 +151,132 @@ como eu adiciono meus arquivos no /var/www/html ?
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ls -la /var/www/html/radio-ddp/ 
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
+diff -r /home/root/radio-ddp/ /var/www/html/radio-ddp/
+
+ ls -la /home/root/radio-ddp/ 
+ 
+ Você relatou anteriormente que a aplicação está sendo realizada pelo PM2 com o script /home/root/radio-ddp/server.js. Isso indica que o aplicativo está hospedado no diretório /home/root/radio-ddp/.
+
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+ sudo certbot certonly --manual --preferred-challenges dns -d "www.radioddp.com" -d "radioddp.com"
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+ sudo certbot certonly --manual --preferred-challenges dns -d "*.radioddp.com" -d "radioddp.com"
+Explicação:
+--manual: Indica que você deseja validar o domínio manualmente.
+--preferred-challenges dns: A validação será feita por meio de um registro DNS do tipo TXT.
+-d "*.radioddp.com": Inclui todos os subdomínios (curinga).
+-d "radioddp.com": Inclui o domínio principal.
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+aonde esta o certificado 
+/etc/letsencrypt/live/radioddp.com/
+
+
+verificar se os registros TXT foram propagados corretamente
+nslookup -type=TXT _acme-challenge.radioddp.com
+nslookup -type=TXT _acme-challenge.www.radioddp.com
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+server {
+    listen 80;
+    server_name radioddp.com www.radioddp.com;
+
+    # Redirecionar HTTP para HTTPS
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name radioddp.com www.radioddp.com;
+
+    ssl_certificate /etc/letsencrypt/live/www.radioddp.com/fullchain.pem  
+    ssl_certificate_key /etc/letsencrypt/live/www.radioddp.com/privkey.pem  
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Certificado recebido com sucesso. 
+
+O certificado está salvo em: /etc/letsencrypt/live/ www.radioddp.com/fullchain.pem 
+
+A chave está salva em: /etc/letsencrypt/live/ www.radioddp.com/privkey.pem 
+
+Este certificado expira em 2025-05-11. Esses arquivos serão atualizados quando o certificado for renovado.
+
+PRÓXIMOS PASSOS:
+
+Este certificado não será renovado automaticamente. A renovação automática de certificados --manual requer o uso de um script de hook de autenticação (--manual-auth-hook), mas nenhum foi fornecido. Para renovar este certificado, repita este mesmo comando certbot antes da data de expiração do certificado.
+Se você gosta do Certbot, considere apoiar nosso trabalho:
+
+Doando para ISRG / Let's Encrypt: https://letsencrypt.org/donate
+Doando para a EFF: https://eff.org/donate-le
