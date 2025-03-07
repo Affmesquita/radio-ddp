@@ -24,9 +24,9 @@ const loginController = {
     },
     logout: (req, res) => {
         // Limpa o cookie do token
-        res.clearCookie('token');
+        res.clearCookie('token')
         // Redireciona para a página de login ou outra página
-        return res.redirect('/login');
+        return res.redirect('/login')
     }
 }
 

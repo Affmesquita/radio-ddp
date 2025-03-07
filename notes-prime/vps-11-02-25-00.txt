@@ -2,6 +2,332 @@
 
 /etc/nginx/sites-available/radioddp.conf
 
+ls -la /etc/nginx/sites-available/
+ls -la /etc/nginx/sites-enabled/
+
+ls -la /etc/letsencrypt/live/www.radioddp.com/
+
+
+sudo ufw status
+
+sudo ufw enable   (depois de criar a regra no ufw, use esse comando)
+
+
+
+
+Exemplo – Usando o comando firewall-cmd para adicionar uma regra permanente permitindo tráfego de entrada na porta 443 para HTTPS
+
+sudo firewall-cmd --add-port=443/tcp --permanent
+
+sudo firewall-cmd --reload
+
+sudo firewall-cmd --list-all
+
+
+
+
+sudo nano /etc/iptables/rules.v4
+
+
+sudo firewall-cmd --add-port=1935/tcp --permanent
+
+
+
+
+
+
+root@srv704679:~# sudo firewall-cmd --list-all
+public (default, active)
+  target: default
+  ingress-priority: 0
+  egress-priority: 0
+  icmp-block-inversion: no
+  interfaces:
+  sources:
+  services: dhcpv6-client ssh
+  ports: 443/tcp 8080/tcp 80/tcp
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+
+To                         Action      From
+--                         ------      ----
+22                         ALLOW       Anywhere
+1935                       ALLOW       Anywhere
+80                         ALLOW       Anywhere
+443                        ALLOW       Anywhere
+3000                       ALLOW       Anywhere
+Nginx Full                 ALLOW       Anywhere
+443/tcp                    ALLOW       Anywhere
+8080/tcp                   ALLOW       Anywhere
+22 (v6)                    ALLOW       Anywhere (v6)
+1935 (v6)                  ALLOW       Anywhere (v6)
+80 (v6)                    ALLOW       Anywhere (v6)
+443 (v6)                   ALLOW       Anywhere (v6)
+3000 (v6)                  ALLOW       Anywhere (v6)
+Nginx Full (v6)            ALLOW       Anywhere (v6)
+443/tcp (v6)               ALLOW       Anywhere (v6)
+8080/tcp (v6)              ALLOW       Anywhere (v6)
+
+root@srv704679:~# sudo iptables -L -n
+Chain INPUT (policy DROP)
+target     prot opt source               destination
+ufw-before-logging-input  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-before-input  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-after-input  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-after-logging-input  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-reject-input  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-track-input  0    --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:443
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:443
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:443
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:8080
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:443
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination
+DOCKER-USER  0    --  0.0.0.0/0            0.0.0.0/0
+DOCKER-ISOLATION-STAGE-1  0    --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+DOCKER     0    --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0
+ufw-before-logging-forward  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-before-forward  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-after-forward  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-after-logging-forward  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-reject-forward  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-track-forward  0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+ufw-before-logging-output  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-before-output  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-after-output  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-after-logging-output  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-reject-output  0    --  0.0.0.0/0            0.0.0.0/0
+ufw-track-output  0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain DOCKER (1 references)
+target     prot opt source               destination
+ACCEPT     6    --  0.0.0.0/0            172.17.0.2           tcp dpt:27017
+
+Chain DOCKER-ISOLATION-STAGE-1 (1 references)
+target     prot opt source               destination
+DOCKER-ISOLATION-STAGE-2  0    --  0.0.0.0/0            0.0.0.0/0
+RETURN     0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain DOCKER-ISOLATION-STAGE-2 (1 references)
+target     prot opt source               destination
+DROP       0    --  0.0.0.0/0            0.0.0.0/0
+RETURN     0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain DOCKER-USER (1 references)
+target     prot opt source               destination
+RETURN     0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain ufw-after-forward (1 references)
+target     prot opt source               destination
+
+Chain ufw-after-input (1 references)
+target     prot opt source               destination
+ufw-skip-to-policy-input  17   --  0.0.0.0/0            0.0.0.0/0            udp dpt:137
+ufw-skip-to-policy-input  17   --  0.0.0.0/0            0.0.0.0/0            udp dpt:138
+ufw-skip-to-policy-input  6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:139
+ufw-skip-to-policy-input  6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:445
+ufw-skip-to-policy-input  17   --  0.0.0.0/0            0.0.0.0/0            udp dpt:67
+ufw-skip-to-policy-input  17   --  0.0.0.0/0            0.0.0.0/0            udp dpt:68
+ufw-skip-to-policy-input  0    --  0.0.0.0/0            0.0.0.0/0            ADDRTYPE match dst-type BROADCAST
+
+Chain ufw-after-logging-forward (1 references)
+target     prot opt source               destination
+LOG        0    --  0.0.0.0/0            0.0.0.0/0            limit: avg 3/min burst 10 LOG flags 0 level 4 prefix "[UFW BLOCK] "
+
+Chain ufw-after-logging-input (1 references)
+target     prot opt source               destination
+LOG        0    --  0.0.0.0/0            0.0.0.0/0            limit: avg 3/min burst 10 LOG flags 0 level 4 prefix "[UFW BLOCK] "
+
+Chain ufw-after-logging-output (1 references)
+target     prot opt source               destination
+
+Chain ufw-after-output (1 references)
+target     prot opt source               destination
+
+Chain ufw-before-forward (1 references)
+target     prot opt source               destination
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+ACCEPT     1    --  0.0.0.0/0            0.0.0.0/0            icmptype 3
+ACCEPT     1    --  0.0.0.0/0            0.0.0.0/0            icmptype 11
+ACCEPT     1    --  0.0.0.0/0            0.0.0.0/0            icmptype 12
+ACCEPT     1    --  0.0.0.0/0            0.0.0.0/0            icmptype 8
+ufw-user-forward  0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain ufw-before-input (1 references)
+target     prot opt source               destination
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+ufw-logging-deny  0    --  0.0.0.0/0            0.0.0.0/0            ctstate INVALID
+DROP       0    --  0.0.0.0/0            0.0.0.0/0            ctstate INVALID
+ACCEPT     1    --  0.0.0.0/0            0.0.0.0/0            icmptype 3
+ACCEPT     1    --  0.0.0.0/0            0.0.0.0/0            icmptype 11
+ACCEPT     1    --  0.0.0.0/0            0.0.0.0/0            icmptype 12
+ACCEPT     1    --  0.0.0.0/0            0.0.0.0/0            icmptype 8
+ACCEPT     17   --  0.0.0.0/0            0.0.0.0/0            udp spt:67 dpt:68
+ufw-not-local  0    --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     17   --  0.0.0.0/0            224.0.0.251          udp dpt:5353
+ACCEPT     17   --  0.0.0.0/0            239.255.255.250      udp dpt:1900
+ufw-user-input  0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain ufw-before-logging-forward (1 references)
+target     prot opt source               destination
+
+Chain ufw-before-logging-input (1 references)
+target     prot opt source               destination
+
+Chain ufw-before-logging-output (1 references)
+target     prot opt source               destination
+
+Chain ufw-before-output (1 references)
+target     prot opt source               destination
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+ufw-user-output  0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain ufw-logging-allow (0 references)
+target     prot opt source               destination
+LOG        0    --  0.0.0.0/0            0.0.0.0/0            limit: avg 3/min burst 10 LOG flags 0 level 4 prefix "[UFW ALLOW] "
+
+Chain ufw-logging-deny (2 references)
+target     prot opt source               destination
+RETURN     0    --  0.0.0.0/0            0.0.0.0/0            ctstate INVALID limit: avg 3/min burst 10
+LOG        0    --  0.0.0.0/0            0.0.0.0/0            limit: avg 3/min burst 10 LOG flags 0 level 4 prefix "[UFW BLOCK] "
+
+Chain ufw-not-local (1 references)
+target     prot opt source               destination
+RETURN     0    --  0.0.0.0/0            0.0.0.0/0            ADDRTYPE match dst-type LOCAL
+RETURN     0    --  0.0.0.0/0            0.0.0.0/0            ADDRTYPE match dst-type MULTICAST
+RETURN     0    --  0.0.0.0/0            0.0.0.0/0            ADDRTYPE match dst-type BROADCAST
+ufw-logging-deny  0    --  0.0.0.0/0            0.0.0.0/0            limit: avg 3/min burst 10
+DROP       0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain ufw-reject-forward (1 references)
+target     prot opt source               destination
+
+Chain ufw-reject-input (1 references)
+target     prot opt source               destination
+
+Chain ufw-reject-output (1 references)
+target     prot opt source               destination
+
+Chain ufw-skip-to-policy-forward (0 references)
+target     prot opt source               destination
+DROP       0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain ufw-skip-to-policy-input (7 references)
+target     prot opt source               destination
+DROP       0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain ufw-skip-to-policy-output (0 references)
+target     prot opt source               destination
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain ufw-track-forward (1 references)
+target     prot opt source               destination
+
+Chain ufw-track-input (1 references)
+target     prot opt source               destination
+
+Chain ufw-track-output (1 references)
+target     prot opt source               destination
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            ctstate NEW
+ACCEPT     17   --  0.0.0.0/0            0.0.0.0/0            ctstate NEW
+
+Chain ufw-user-forward (1 references)
+target     prot opt source               destination
+
+Chain ufw-user-input (1 references)
+target     prot opt source               destination
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:22
+ACCEPT     17   --  0.0.0.0/0            0.0.0.0/0            udp dpt:22
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:1935
+ACCEPT     17   --  0.0.0.0/0            0.0.0.0/0            udp dpt:1935
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:80
+ACCEPT     17   --  0.0.0.0/0            0.0.0.0/0            udp dpt:80
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:443
+ACCEPT     17   --  0.0.0.0/0            0.0.0.0/0            udp dpt:443
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:3000
+ACCEPT     17   --  0.0.0.0/0            0.0.0.0/0            udp dpt:3000
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            multiport dports 80,443 /* 'dapp_Nginx%20Full' */
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:443
+ACCEPT     6    --  0.0.0.0/0            0.0.0.0/0            tcp dpt:8080
+
+Chain ufw-user-limit (0 references)
+target     prot opt source               destination
+LOG        0    --  0.0.0.0/0            0.0.0.0/0            limit: avg 3/min burst 5 LOG flags 0 level 4 prefix "[UFW LIMIT BLOCK] "
+REJECT     0    --  0.0.0.0/0            0.0.0.0/0            reject-with icmp-port-unreachable
+
+Chain ufw-user-limit-accept (0 references)
+target     prot opt source               destination
+ACCEPT     0    --  0.0.0.0/0            0.0.0.0/0
+
+Chain ufw-user-logging-forward (0 references)
+target     prot opt source               destination
+
+Chain ufw-user-logging-input (0 references)
+target     prot opt source               destination
+
+Chain ufw-user-logging-output (0 references)
+target     prot opt source               destination
+
+Chain ufw-user-output (1 references)
+target     prot opt source               destination
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -84,5 +410,246 @@ http {
         add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS';  # Métodos permitidos
         add_header 'Access-Control-Allow-Headers' 'Range';  # Cabeçalhos permitidos
         add_header 'Access-Control-Expose-Headers' 'Content-Length, Content-Range';  # Cabeçalhos expostos
+    }
+}
+
+
+
+
+  GNU nano 7.2                                          /etc/nginx/sites-available/radioddp.conf
+
+
+
+
+
+
+server {
+    listen 80;
+    server_name radioddp.com www.radioddp.com;
+
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name www.radioddp.com radioddp.com;
+
+    ssl_certificate /etc/letsencrypt/live/www.radioddp.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/www.radioddp.com/privkey.pem;
+
+    location / {
+        proxy_pass http://147.93.69.212:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+
+
+
+  GNU nano 7.2                                              /usr/local/nginx/conf/nginx.conf
+#user  nobody;
+worker_processes  auto;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/usr/local/nginx/conf/nginx.conf
+events {
+    worker_connections  1024;
+}
+
+rtmp {
+ server {
+        listen 1935;
+        chunk_size 4096;
+
+        application live {
+            live on;
+            interleave on;
+            record off;
+            hls on;
+            hls_path /tmp/hls;
+            hls_fragment 15s;
+            hls_playlist_length 60;
+        }
+    }
+}
+
+http {
+
+       server {
+        listen 8080;
+         server_name radioddp.com www.radioddp.com;
+
+    location / {
+        root /home/usuario/GitHub/radio-ddp/public;
+        index index.html index.htm;
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location /live {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+
+        types {
+            application/vnd.apple.mpegurl m3u8;
+            video/mp2t ts;
+        }
+
+        root /tmp/hls;
+        add_header Cache-Control no-cache;
+    }
+}
+
+
+
+
+
+
+sudo nano /etc/nginx/nginx.conf
+
+
+rtmp {
+    server {
+        listen 1935;
+        chunk_size 4096;
+
+        application live {
+            live on;
+            interleave on;
+            record off;
+
+            hls on;
+            hls_path /tmp/hls;
+            hls_fragment 15s;
+            hls_playlist_length 60;
+        }
+    }
+}
+
+http {
+
+    # Habilitar os sites configurados em sites-enabled
+    include /etc/nginx/sites-enabled/*;
+        server {
+    listen 8080;
+    server_name radioddp.com www.radioddp.com;
+
+    # Configuração para o diretório raiz
+    location / {
+        root /home/usuario/GitHub/radio-ddp/public;
+        index index.html index.htm;
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # Configuração para o caminho /live
+    location /live {
+        alias /tmp/hls;  # Diretório onde os arquivos HLS estão armazenados
+        types {
+            application/vnd.apple.mpegurl m3u8;  # Tipo MIME para arquivos .m3u8
+            video/mp2t ts;                        # Tipo MIME para arquivos .ts
+        }
+        add_header Cache-Control no-cache;  # Adiciona controle de cache
+        add_header 'Access-Control-Allow-Origin' '*';  # Permite CORS
+        add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS';  # Métodos permitidos
+        add_header 'Access-Control-Allow-Headers' 'Range';  # Cabeçalhos permitidos
+        add_header 'Access-Control-Expose-Headers' 'Content-Length, Content-Range';  # Cabeçalhos expostos
+    }
+}
+
+
+sudo nano /etc/nginx/sites-available/radioddp.conf
+
+server {
+    listen 80;
+    server_name radioddp.com www.radioddp.com;
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name www.radioddp.com radioddp.com;
+
+    ssl_certificate /etc/letsencrypt/live/www.radioddp.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/www.radioddp.com/privkey.pem;
+
+    location / {
+        proxy_pass http://147.93.69.212:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
     }
 }
