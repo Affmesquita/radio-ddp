@@ -1,9 +1,24 @@
-ssh root@77.37.68.236
-0WaRqmknmzR#K?yQ.I#l
+ssh root@69.62.103.100
+.9aJ#lEa;i@R&SqqQiY3
+    
 
-/var/www/html/radio-ddp/public/html/index.html
-/var/www/html/radio-ddp/public/html/
-scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@77.37.68.236:/var/www/html/ 
+sudo tail -f /usr/local/nginx/logs/error.log
+
+Cópia
+scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@69.62.103.100:/var/www/
+
+
+
+
+ssh -p 22022 root@162.240.148.197
+BYjVQGp3NDzGL$z
+
+ssh root@77.37.68.236
+(V2dVhQ8bOh80H73xfFS    
+/var/www/radio-ddp/
+/var/www/radio-ddp/public/html/index.html
+/var/www/radio-ddp/public/html/
+scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@77.37.68.236:/var/www/
 
 ssh root@147.93.69.212
 76UN-CVPi(Wd6&ID6dD-

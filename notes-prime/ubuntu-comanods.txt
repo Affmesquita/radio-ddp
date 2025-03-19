@@ -1,0 +1,123 @@
+Dicas para Usar o Ubuntu
+Atualizar o Sistema:
+Mantenha seu sistema sempre atualizado. Você pode usar os seguintes comandos:
+
+bash
+
+
+sudo apt update
+     sudo apt upgrade
+Instalar Software:
+Use o apt para instalar novos programas. Por exemplo, para instalar o git:
+
+bash
+
+
+sudo apt install git
+Gerenciar Pacotes:
+Para remover um pacote:
+
+bash
+
+
+sudo apt remove nome-do-pacote
+Para procurar um pacote:
+bash
+
+
+apt search nome-do-pacote
+Navegação no Terminal:
+Use cd para mudar de diretório:
+
+bash
+
+
+cd /caminho/para/diretorio
+Use ls para listar arquivos e diretórios:
+bash
+
+
+ls -la
+Manipulação de Arquivos:
+Para copiar arquivos:
+
+bash
+
+
+cp arquivo_origem arquivo_destino
+Para mover ou renomear arquivos:
+bash
+
+
+mv arquivo_origem arquivo_destino
+Para remover arquivos:
+bash
+
+
+rm nome-do-arquivo
+Gerenciar Usuários:
+Para adicionar um novo usuário:
+
+bash
+
+
+sudo adduser nome-do-usuario
+Para alterar a senha de um usuário:
+bash
+
+
+sudo passwd nome-do-usuario
+Verificar o Uso de Recursos:
+Para ver o uso de memória e CPU:
+
+bash
+
+
+top
+Para ver o uso de disco:
+bash
+
+
+df -h
+Editar Arquivos:
+Use editores de texto como nano ou vim. Para editar um arquivo com nano:
+
+bash
+
+
+nano nome-do-arquivo
+Acessar o Manual:
+Para ver o manual de um comando, use:
+
+bash
+
+
+man nome-do-comando
+Desligar ou Reiniciar o Sistema:
+Para desligar:
+
+bash
+
+
+sudo shutdown now
+Para reiniciar:
+bash
+
+
+sudo reboot
+Comandos Úteis
+Ver informações do sistema:
+bash
+
+
+uname -a
+Ver a versão do Ubuntu:
+bash
+
+
+lsb_release -a
+Limpar o terminal:
+bash
+
+
+clear

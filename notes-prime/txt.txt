@@ -22,3 +22,197 @@ server {
 
 
  sudo nano [/var/www/html/radio-ddp/public/html/index.html]
+
+
+
+
+
+100325 //////////////////////////(((((((((((((((((((())))))))))))))))))))
+
+
+
+ rtmp {
+    server {
+            listen 1935;
+            chunk_size 4096;
+
+            application live {
+                live on;
+                interleave on;
+                record off;
+                hls on;
+                hls_path /tmp/hls;
+                hls_fragment 15s;
+                hls_playlist_length 60;
+            }
+    }
+}
+
+server {
+    listen 8080;
+    server_name radios.ddp www.radios.ddp;
+
+    # Configuração para o diretório raiz
+    location / {
+        root /home/usuario/GitHub/radio-ddp/public;  
+        index index.html index.htm;
+        proxy_pass http://localhost:3000; 
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # Configuração para o caminho /live
+    location /live {
+        add_header 'Access-Control-Allow-Origin' '*';  # Permite CORS
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+        
+
+        types {
+            application/vnd.apple.mpegurl m3u8;  
+            video/mp2t ts;                       
+        }
+
+        alias /tmp/hls;  # Diretório onde os arquivos HLS estão armazenados
+        add_header Cache-Control no-cache;  # Adiciona controle de cache
+        
+    }
+}
+
+
+120325  ())))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+
+
+http://162.240.148.197:8080
+
+
+
+
+
+
+
+160325
+
+
+server {
+    listen 80;
+    server_name seu_dominio.com;  # Substitua pelo seu domínio ou IP
+    location / {
+        proxy_pass http://localhost:3000;  # Porta onde seu aplicativo Node.js está rodando
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+    location /static {
+        alias /var/www/sua-aplicacao/public;  # Para arquivos estáticos
+    }
+}
+
+
+
+
+liste as pastas aonde eu tenho que colocar os arquivos para que o nginx sirva a minha aplicação corretamente, incluindo os arquivos de configuração
+
+
+
+
+
+()))))))))
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    server {
+        listen 8080;
+        server_name radios.ddp www.radios.ddp;
+
+        # Configuração para o diretório raiz
+        location / {
+            root /home/usuario/GitHub/radio-ddp/public;
+            index index.html index.htm;
+            proxy_pass http://localhost:3000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+        # Configuração para o caminho /live
+        location /live {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept';
+        }
+
+        types {
+            application/vnd.apple.mpegurl m3u8;
+            video/mp2t ts;
+        }
+
+        alias /tmp/hls;
+        add_header Cache-Control no-cache;
+    }
+}       
+
+()))))))))
+
+
+
+
+        server {
+        listen       80;
+        server_name  radioddp.com www.radioddp.com;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+        root   /var/www/radio-ddp/public/html;
+        index  index.html index.htm;
+        try_files $uri $uri/ @node;
+    }
+
+
+    error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /var/www/radio-ddp/public;
+        }
+
+
+180325
+
+
+location / {
+        try_files $uri $uri/ =404;  
+    }
+    # Servindo arquivos CSS
+    location /css {
+        alias /var/www/radio-ddp/public/css;  
+    }
+    # Servindo arquivos JavaScript
+    location /javaScript {
+        alias /var/www/radio-ddp/public/javaScript;  
+    }
+    # Servindo imagens
+    location /image {
+        alias /var/www/radio-ddp/public/image;  
+    }
+    # Proxy para a API
+    location /api {
+        proxy_pass http://localhost:3000;  
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
