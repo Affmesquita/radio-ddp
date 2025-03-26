@@ -216,3 +216,136 @@ location / {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
     }
+
+
+
+
+
+
+    210325
+
+
+    sudo certbot --nginx -d radioddp.com -d www.radioddp.com
+
+
+    240325
+
+     proxy_pass http://localhost:3000;
+
+
+
+     server {
+        listen       80;
+        server_name  radioddp.com www.radioddp.com;
+
+         root /var/www/radio-ddp/public/html;  # O root deve apontar para o diretório 'html'
+    index index.html index.htm;  # Arquivos que o Nginx deve servir como índice
+    location / {
+        try_files $uri $uri/ @app;  # Tenta servir o arquivo ou retorna 404
+    }
+
+        location @app {
+           proxy_pass http://localhost:3000;  # Ajuste para a porta onde sua aplicação está rodando
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection 'upgrade';
+           proxy_set_header Host $host;
+           proxy_cache_bypass $http_upgrade;
+       }
+
+       location /css {
+        alias /var/www/radio-ddp/public/css;  # Aponte para o diretório correto de CSS
+    }
+    location /javaScript {
+        alias /var/www/radio-ddp/public/javaScript;  # Aponte para o diretório correto de JavaScript
+    }
+    location /image {
+        alias /var/www/radio-ddp/public/image;  # Aponte para o diretório correto de imagens
+    }
+    location /fonts {
+        alias /var/www/radio-ddp/public/fonts;  # Aponte para o diretório correto de fontes
+    }
+    location /update-images {
+        alias /var/www/radio-ddp/public/update-images;  # Aponte para o diretório correto de imagens para atualização
+    }
+    location /update-videos {
+        alias /var/www/radio-ddp/public/update-videos;  # Aponte para o diretório correto de vídeos para atualização
+    }
+
+}
+
+
+
+
+
+
+
+250325
+
+server {
+        listen       80;
+        server_name  radioddp.com www.radioddp.com;
+
+        root /var/www/radio-ddp/public/html;  # O root deve apontar para o diretório 'html'
+        index index.html index.htm;  # Arquivos que o Nginx deve servir como índice
+        location / {
+        try_files $uri $uri/ @app;  # Tenta servir o arquivo ou retorna 404
+    }
+
+        location @app {
+           proxy_pass http://localhost:3000;  # Ajuste para a porta onde sua aplicação está rodando
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection 'upgrade';
+           proxy_set_header Host $host;
+           proxy_cache_bypass $http_upgrade;
+       }
+
+    location /css {
+        alias /var/www/radio-ddp/public/css;  # Aponte para o diretório correto de CSS
+    }
+    location /javaScript {
+        alias /var/www/radio-ddp/public/javaScript;  # Aponte para o diretório correto de JavaScript
+    }
+    location /image {
+        alias /var/www/radio-ddp/public/image;  # Aponte para o diretório correto de imagens
+    }
+    location /fonts {
+        alias /var/www/radio-ddp/public/fonts;  # Aponte para o diretório correto de fontes
+    }
+    location /update-images {
+        alias /var/www/radio-ddp/public/update-images;  # Aponte para o diretório correto de imagens para atualização
+    }
+    location /update-videos {
+        alias /var/www/radio-ddp/public/update-videos;  # Aponte para o diretório correto de vídeos para atualização
+    }
+    location /login {
+        proxy_pass http://127.0.0.1:3000/login;  # Direciona as requisições de login para o Node.js
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+
+curl -X POST http://127.0.0.1:3000/login -d "username=diabo&password="
+
+
+
+
+login: (req, res) => {
+        const { password } = req.body
+        bcrypt.compare(password, PASSWORD_HASH, (err, result) => {
+            if (err) {
+                return res.status(500).send('Erro interno do servidor')
+            }
+            if (result) {
+                const token = jwt.sign({ username: 'diabo' }, SECRET_KEY, { expiresIn: '1h' })
+                res.cookie('token', token, { httpOnly: true })
+                return res.redirect('/admin')
+            } else {
+                return res.redirect('/login?error=Credenciais inválidas')
+            }
+        })
+    }
