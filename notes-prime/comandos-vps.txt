@@ -7,7 +7,7 @@ sudo tail -f /usr/local/nginx/logs/error.log
 Cópia
 scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@69.62.103.100:/var/www/
 
-
+/var/www/radio-ddp/public/hls
 
 
 ssh -p 22022 root@162.240.148.197
@@ -24,7 +24,8 @@ ssh root@147.93.69.212
 76UN-CVPi(Wd6&ID6dD-
 
 
-
+Certificate is saved at: /etc/letsencrypt/live/radioddp.com/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/radioddp.com/privkey.pem
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////

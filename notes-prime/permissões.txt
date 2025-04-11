@@ -1,0 +1,15 @@
+sudo chown -R www-data:www-data /var/www/radio-ddp/public
+
+
+# Definir permissões para diretórios
+sudo find /var/www/radio-ddp/public -type d -exec chmod 755 {} \;
+# Definir permissões para arquivos
+sudo find /var/www/radio-ddp/public -type f -exec chmod 644 {} \;
+
+
+ls -l /var/www/radio-ddp/public
+
+
+sudo chown -R www-data:www-data /var/www/radio-ddp
+sudo find /var/www/radio-ddp -type d -exec chmod 755 {} \;
+sudo find /var/www/radio-ddp -type f -exec chmod 644 {} \;
