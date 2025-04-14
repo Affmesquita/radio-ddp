@@ -147,3 +147,7 @@ dist
 
 /public/update-images/
 /public/update-videos/
+
+ecosystem.config.js
+
+notes-prime

@@ -1,3 +1,4 @@
+const loginRouter = require('./src/routers/loginRoutes')
 const express = require('express')
 const path = require('node:path')
 const staticRoutes = require('./src/routers/staticRoutes')
@@ -5,7 +6,6 @@ const liveRoutes = require('./src/routers/liveRoutes')
 const videoRouter = require('./src/routers/videoRoutes')
 const { connectToDatabase } = require('./src/config/db')
 const methodOverride = require('method-override')
-const loginRouter = require('./src/routers/loginRoutes')
 const cookieParser = require('cookie-parser')
 
 const app = express()

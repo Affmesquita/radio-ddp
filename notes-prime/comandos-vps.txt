@@ -1,6 +1,8 @@
 ssh root@69.62.103.100
 .9aJ#lEa;i@R&SqqQiY3
     
+pm2 restart server --update-env
+pm2 logs
 
 sudo tail -f /usr/local/nginx/logs/error.log
 

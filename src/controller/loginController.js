@@ -9,8 +9,12 @@ const loginController = {
     },
     login: (req, res) => {
         const { password } = req.body
+
+    
+
         bcrypt.compare(password, PASSWORD_HASH, (err, result) => {
             if (err) {
+                console.error("Erro no bcrypt.compare:", err)
                 return res.status(500).send('Erro interno do servidor')
             }
             if (result) {

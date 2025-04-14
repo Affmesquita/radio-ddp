@@ -97,17 +97,35 @@ const episodesController = {
     },
 
     deleteEpisode: async (req, res) => {
-        const episodioId = req.params.id // Obtém o ID do episódio a partir da URL
+        const episodioId = req.params.id;
+    
         try {
-            const resultado = await Video.findByIdAndDelete(episodioId)
-            if (resultado) {
-                res.status(200).send({ message: 'Episódio deletado com sucesso!' })
-            } else {
-                res.status(404).send({ message: 'Episódio não encontrado.' })
+            // 1. Busca o episódio
+            const episodio = await Video.findById(episodioId);
+            if (!episodio) {
+                return res.status(404).send({ message: 'Episódio não encontrado.' });
             }
+    
+            // 2. Monta caminhos absolutos dos arquivos
+            const videoPath = path.join(__dirname, `../../public${episodio.videoUrl}`);
+            const imgPath = episodio.imgUrl ? path.join(__dirname, `../../public${episodio.imgUrl}`) : null;
+    
+            // 3. Deleta os arquivos se existirem
+            if (fs.existsSync(videoPath)) {
+                fs.unlinkSync(videoPath);
+            }
+            if (imgPath && fs.existsSync(imgPath)) {
+                fs.unlinkSync(imgPath);
+            }
+    
+            // 4. Deleta o documento do MongoDB
+            await Video.findByIdAndDelete(episodioId);
+    
+            res.status(200).send({ message: 'Episódio e arquivos deletados com sucesso!' });
+    
         } catch (error) {
-            console.error('Erro ao deletar episódio:', error)
-            res.status(500).send({ message: 'Erro ao deletar episódio.' })
+            console.error('Erro ao deletar episódio:', error);
+            res.status(500).send({ message: 'Erro ao deletar episódio.' });
         }
     },
 
