@@ -15,8 +15,8 @@ const app = express()
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'src/views'))
 
-app.use(express.json({ limit: '2048mb' }))
-app.use(express.urlencoded({ extended: true, limit: '2048mb' }))
+app.use(express.json({ limit: '10gb' }));
+app.use(express.urlencoded({ extended: true, limit: '10gb' }));
 app.use(methodOverride('_method'))
 app.use(express.static(path.join('public')))
 app.use(cookieParser())

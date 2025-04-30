@@ -13,7 +13,7 @@ scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@69.62.103.100:/var/ww
 
 
 ssh -p 22022 root@162.240.148.197
-BYjVQGp3NDzGL$z
+BYjVQGp3NDzGL$z 
 
 ssh root@77.37.68.236
 (V2dVhQ8bOh80H73xfFS    
