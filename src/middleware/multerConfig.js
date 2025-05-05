@@ -32,7 +32,7 @@ const fileFilter = (req, file, cb) => {
 
 // Criar a instância do multer com a configuração de armazenamento
 const upload = multer({ storage, fileFilter, 
-    limits: { fileSize: 10 * 1024 * 1024 * 1024 }})
+    limits: { fileSize: 3 * 1024 * 1024 * 1024 }})
 
 // Exportar a instância do multer
 module.exports = upload
