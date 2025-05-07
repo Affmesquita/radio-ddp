@@ -14,7 +14,7 @@ export function sliderFunction() {
             divs[currentIndex].classList.add('active');
             
             if (divs[currentIndex].id === 'div1') {
-                header.style.backgroundImage = "url('/image/microfone-1.jpg')";
+                header.style.backgroundImage = "url('/image/capa')";
             } else if (divs[currentIndex].id === 'div2') {
                 header.style.backgroundImage = "url('/image/slide/IMG_7677.jpg')";
             }
