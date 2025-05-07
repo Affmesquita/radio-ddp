@@ -28,6 +28,7 @@
     width: 100%;
     height: 100%;
     display: block;
+
 }
 
 .slider-container { 
@@ -39,20 +40,22 @@
 } 
 
 .slider-container h1 {
+    color: rgb(163, 0, 0);
     font-family: TT-Bold;
     font-size: 4rem;
-    text-shadow: 1px 1px 1px black;
+    text-shadow: 2px 2px 2px black;
     margin-bottom: 30px;
 }
 .slider-container p {
     font-family: TT-Medium;
     font-size: 1.5rem;
-    text-shadow: 1px 1px 1px black;
+    text-shadow: 2px 2px 2px black;
     margin-bottom: 50px;
 }
 .slider-container a {
     padding: 20px 20px;
-    border: 1px solid red;
+    border: 1px solid rgba(255, 255, 255, 0.466);
+    background-color: black;
 }
 
 .header-input {
@@ -85,4 +88,8 @@
 }
 #div2 a:hover {
     color: black;
+}
+
+#div1 {
+    background-position: center;
 }
