@@ -1,7 +1,7 @@
 const express = require('express')
 const episodesController = require('../controller/videoController')
 const videoRouter = express.Router()
-const upload = require("../middleware/multerConfig")
+const { upload } = require("../middleware/uploadS3")
 const authMiddleware = require('../middleware/loginMiddleware')
 
 

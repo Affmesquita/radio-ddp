@@ -8,6 +8,7 @@ const { connectToDatabase } = require('./src/config/db')
 const methodOverride = require('method-override')
 const cookieParser = require('cookie-parser')
 
+
 const app = express()
 
 
@@ -15,8 +16,8 @@ const app = express()
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'src/views'))
 
-app.use(express.json({ limit: '10gb' }));
-app.use(express.urlencoded({ extended: true, limit: '10gb' }));
+app.use(express.json({ limit: '3gb' }));
+app.use(express.urlencoded({ extended: true, limit: '3gb' }));
 app.use(methodOverride('_method'))
 app.use(express.static(path.join('public')))
 app.use(cookieParser())
@@ -26,6 +27,7 @@ app.use(liveRoutes)
 app.use(staticRoutes)
 app.use(videoRouter)
 app.use(loginRouter)
+
 
 
 

@@ -18,8 +18,13 @@ const episodesController = {
     postVideo: async (req, res) => {
         try {
 
-            const videoUrl = `/update-videos/${req.files['video'][0].filename}`; // Caminho relativo do vídeo
-            const imgUrl = req.files['img'] ? `/update-images/${req.files['img'][0].filename}` : null // Caminho relativo da imagem
+            /*const videoUrl = `/update-videos/${req.files['video'][0].filename}`; // Caminho relativo do vídeo
+            const imgUrl = req.files['img'] ? `/update-images/${req.files['img'][0].filename}` : null // Caminho relativo da imagem*/
+
+            const videoUrl = req.files['video'][0].location;
+            const imgUrl = req.files['img'] ? req.files['img'][0].location : null;
+
+
 
             const novoVideo = new Video({
                 titulo: req.body.titulo,
