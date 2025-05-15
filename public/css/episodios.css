@@ -168,3 +168,9 @@ footer {
     
 }
 
+@media (max-width:  520px) {
+    .card {
+        width: 70%;
+        margin: auto;
+    }
+}
