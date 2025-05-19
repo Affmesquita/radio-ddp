@@ -43,13 +43,13 @@
     color: rgb(163, 0, 0);
     font-family: TT-Bold;
     font-size: 4rem;
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 3px 3px 4px black;
     margin-bottom: 30px;
 }
 .slider-container p {
     font-family: TT-Medium;
     font-size: 1.5rem;
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 2px 2px 2px rgb(255, 255, 255);
     margin-bottom: 50px;
 }
 .slider-container a {
@@ -91,5 +91,7 @@
 }
 
 #div1 {
+    color: black;
+    font-weight: bold;
     background-position: center;
 }
