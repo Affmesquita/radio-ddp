@@ -1,17 +1,15 @@
 const multer = require('multer');
 const multerS3 = require('multer-s3');
-const { S3Client } = require('@aws-sdk/client-s3');
+const AWS = require('aws-sdk');
 const dotenv = require('dotenv');
 const mime = require('mime-types');
 
 dotenv.config();
 
-const s3 = new S3Client({
+const s3 = new AWS.S3({
   region: process.env.AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  }
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
 const upload = multer({
@@ -30,8 +28,8 @@ const upload = multer({
       const filename = Date.now().toString() + '-' + file.originalname;
       cb(null, filename);
     },
-    limits: { fileSize: 3 * 1024 * 1024 * 1024 }
-  })
+  }),
+  limits: { fileSize: 3 * 1024 * 1024 * 1024 }
 });
 
 module.exports = { upload };

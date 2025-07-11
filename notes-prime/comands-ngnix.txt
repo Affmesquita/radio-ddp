@@ -4,17 +4,34 @@ sudo systemctl status nginx
 
 sudo systemctl restart nginx
 
+sudo systemctl restart nginx-rtmp
+
+sudo systemctl start nginx-rtmp <<<
+sudo systemctl stop nginx-rtmp <<<
+sudo systemctl status nginx-rtmp <<<
+sudo systemctl enable nginx-rtmp <<<
+sudo systemctl disable nginx-rtmp <<<
+sudo systemctl reload nginx-rtmp <<<
+sudo systemctl restart nginx-rtmp
+
+
+
 sudo /usr/local/nginx/sbin/nginx -t   ver se a conf certa
 
 sudo systemctl enable nginx 
 (Esse comando garante que o Nginx seja iniciado automaticamente toda vez que o sistema for reiniciado.)
 
 sudo systemctl stop nginx
+
+nano /etc/systemd/system/nginx.service <<
           
-sudo nano /etc/nginx/nginx.conf
+sudo nano /etc/nginx/nginx.conf <<
+ <<
+sudo nano /usr/local/nginx/conf/nginx.conf 
 
-sudo nano /usr/local/nginx/conf/nginx.conf
+cat /usr/local/nginx/conf/nginx.conf <
 
+/etc/letsencrypt/renewal/radioddp.com.conf  <<
 sudo nano /etc/nginx/sites-available/default *** sudo nano /etc/nginx/sites-available/radioddp *** sudo ln -s /etc/nginx/sites-available/radioddp /etc/nginx/sites-enabled/
 
 sudo rm /etc/nginx/sites-enabled/default

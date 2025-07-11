@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const loginRouter = require('./src/routers/loginRoutes')
 const express = require('express')
 const path = require('node:path')
@@ -19,7 +21,7 @@ app.set('views', path.join(__dirname, 'src/views'))
 app.use(express.json({ limit: '3gb' }));
 app.use(express.urlencoded({ extended: true, limit: '3gb' }));
 app.use(methodOverride('_method'))
-app.use(express.static(path.join('public')))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieParser())
 
 // ROTAS

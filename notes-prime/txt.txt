@@ -30,7 +30,7 @@ server {
 100325 //////////////////////////(((((((((((((((((((())))))))))))))))))))
 
 
-
+           <<
  rtmp {
     server {
             listen 1935;
@@ -123,7 +123,7 @@ liste as pastas aonde eu tenho que colocar os arquivos para que o nginx sirva a 
 
 
 
-()))))))))
+()))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
 
 
 http {
@@ -445,3 +445,113 @@ server {
 
 
         pm2 start server.js --watch
+
+
+
+
+
+
+
+        110625 ())))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+
+
+
+
+        http {
+    sendfile on;
+        tcp_nopush on;
+        types_hash_max_size 2048;
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+        gzip on;
+        include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/sites-enabled/*;
+
+    # Redireciona todo HTTP (porta 80) para HTTPS (porta 443)
+    server {
+        listen 80;
+        server_name radioddp.com www.radioddp.com;
+
+        return 301 https://$host$request_uri;
+    }
+
+    # Servidor HTTPS principal
+    server {
+        listen 443 ssl http2;
+        server_name radioddp.com www.radioddp.com;
+
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_ciphers 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384';
+        ssl_prefer_server_ciphers on;
+        ssl_session_cache shared:SSL:10m;
+        ssl_session_timeout 10m;
+        ssl_stapling on;
+        ssl_stapling_verify on;
+
+        ssl_certificate /etc/letsencrypt/live/radioddp.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/radioddp.com/privkey.pem;
+
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+        root /var/www/radio-ddp/public/html;
+        index index.html index.htm;
+
+        # Assets estáticos com cache longo
+        location /css/ {
+            alias /var/www/radio-ddp/public/css/;
+            expires 30d;
+            access_log off;
+        }
+        location /javaScript/ {
+            alias /var/www/radio-ddp/public/javaScript/;
+            expires 30d;
+            access_log off;
+        }
+        location /image/ {
+            alias /var/www/radio-ddp/public/image/;
+            expires 30d;
+            access_log off;
+        }
+        location /fonts/ {
+            alias /var/www/radio-ddp/public/fonts/;
+            expires 30d;
+            access_log off;
+        }
+        location /update-images/ {
+            alias /var/www/radio-ddp/public/update-images/;
+            expires 30d;
+            access_log off;
+        }
+        location /update-videos/ {
+            alias /var/www/radio-ddp/public/update-videos/;
+            expires 30d;
+            access_log off;
+        }
+
+        # Página /login proxada para Node.js
+        location /login {
+            proxy_pass http://127.0.0.1:3000/login;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+        # Fallback geral para app Node.js
+        location / {
+            try_files $uri $uri/ @app;
+        }
+        location @app {
+            proxy_pass http://127.0.0.1:3000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+    }
+}

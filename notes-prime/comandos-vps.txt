@@ -1,5 +1,9 @@
 ssh root@69.62.103.100
-.9aJ#lEa;i@R&SqqQiY3
+
+.wE+zegwUpycIXsLdh3K
+
+onlineSR99
+
     
 pm2 restart server --update-env
 pm2 logs
@@ -11,6 +15,9 @@ scp -r "C:\Users\MESQUITA\Documents\GitHub\radio-ddp" root@69.62.103.100:/var/ww
 
 /var/www/radio-ddp/public/hls
 
+nano package.json
+
+sudo nano /root/.cloudflare.ini <>
 
 ssh -p 22022 root@162.240.148.197
 BYjVQGp3NDzGL$z 

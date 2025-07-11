@@ -153,3 +153,5 @@ ecosystem.config.js
 notes-prime
 
 comandos-vps.txt
+
+node_modules/
