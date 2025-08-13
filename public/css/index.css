@@ -80,56 +80,9 @@ main {
     border-color: brown;
 }
 
-/*/////////////////////////////////*/
-
-.noticie-conteiner {
-    width: 100%;
-    height: 400px;
-
-    font-size: 10px;
-
-    display: flex;
-    flex-wrap: wrap;
-
-    color: white;
-}
-.noticie-conteiner h1 {
-    font-family: TT-Bold;
-}
-.noticie-conteiner p {
-    font-family: TT-Medium;
-}
-
-.notice-item {
-    width: 200px;
-    height: 300px;
-
-    margin: 2px;
-
-    border: 1px solid white;
-    transition: 0.5s;
-}
-.notice-item:hover {
-    transform: scale(1.1);
-}
-.notice-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-}
-
-.notice-item:first-child {
-    width: 500px;
-    height: 300px;
-    flex: 2;
-}
-
-.plusnews{
-    display: none;
-}
 
 /*/////////////////////////////////*/
+
 
 .ep-card {
     width: 700px;
