@@ -1,35 +1,41 @@
 const multer = require('multer');
-const multerS3 = require('multer-s3');
-const AWS = require('aws-sdk');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const dotenv = require('dotenv');
 const mime = require('mime-types');
 
 dotenv.config();
 
-const s3 = new AWS.S3({
+// Cliente S3 (v3)
+const s3 = new S3Client({
   region: process.env.AWS_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
 });
 
+// Multer em memória
 const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: process.env.AWS_BUCKET_NAME,
-    acl: 'public-read',
-    contentType: (req, file, cb) => {
-      const contentType = mime.lookup(file.originalname) || 'application/octet-stream';
-      cb(null, contentType);
-    },
-    metadata: (req, file, cb) => {
-      cb(null, { fieldName: file.fieldname });
-    },
-    key: (req, file, cb) => {
-      const filename = Date.now().toString() + '-' + file.originalname;
-      cb(null, filename);
-    },
-  }),
-  limits: { fileSize: 3 * 1024 * 1024 * 1024 }
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 3 * 1024 * 1024 * 1024 }, // 3GB
 });
 
-module.exports = { upload };
+// Função para enviar ao S3
+async function uploadFileToS3(file) {
+  const fileName = `${Date.now()}-${file.originalname}`;
+  const contentType = mime.lookup(file.originalname) || 'application/octet-stream';
+
+  const params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: fileName,
+    Body: file.buffer,
+    ContentType: contentType,
+    ACL: 'public-read',
+  };
+
+  await s3.send(new PutObjectCommand(params));
+
+  return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
+}
+
+module.exports = { upload, uploadFileToS3 };
