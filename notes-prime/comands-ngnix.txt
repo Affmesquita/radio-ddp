@@ -49,6 +49,24 @@ sudo chown -R www-data:www-data /tmp/hls
 sudo chmod 755 /tmp/hls
 }
 
+
+
+
+
+server {
+        listen 80;
+        server_name radioddp.com www.radioddp.com;
+
+        return 301 https://$host$request_uri;
+    }
+
+
+
+
+
+
+
+
 /usr/local/nginx/sbin/nginx -V
 
   TESTE

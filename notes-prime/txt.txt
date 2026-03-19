@@ -480,7 +480,7 @@ server {
 
     # Servidor HTTPS principal
     server {
-        listen 443 ssl http2;
+        listen 443 ssl;
         server_name radioddp.com www.radioddp.com;
 
         ssl_protocols TLSv1.2 TLSv1.3;
